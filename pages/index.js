@@ -130,11 +130,11 @@ export default function Home() {
               <span className={styles.hiddenXs}>All rights reserved.</span>{" "}
               <a
                 style={{ color: "#666" }}
-                href="https://vercel.com/"
+                href="https://github.com/horahora/personal-site"
                 target="_blank"
                 rel="noreferrer"
               >
-                Hosted by Vercel.
+                View git repository.
               </a>
             </p>
             {/*<p className={styles.copyright"><span>© 2013-2018 Hora Hora.</span> <span className={styles.hidden-xs">All rights reserved.</span> <span className={styles.hidden-xs">Designed in China.</span></p> */}
