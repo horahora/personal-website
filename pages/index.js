@@ -27,13 +27,11 @@ const portfolioListAppendEmpty = [
   }),
 ];
 
-console.log(portfolioListAppendEmpty);
-
 export default function Home() {
   const handRef = React.createRef();
 
   useEffect(() => {
-    console.log(handRef.current);
+    // console.log(handRef.current);
     handRef.current.classList.add(styles.transparent);
     window.addEventListener(
       "scroll",
