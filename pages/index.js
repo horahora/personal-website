@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Card from "../components/card";
+import Link from "next/link";
 import styles from "./Home.module.css";
 import React, { useEffect } from "react";
 
@@ -46,7 +47,7 @@ export default function Home() {
       },
       { passive: false }
     );
-  }, []);
+  }, [handRef]);
 
   return (
     <>
@@ -60,9 +61,11 @@ export default function Home() {
 
       <div className={styles.pageWrapper}>
         <header className={styles.globalHeader}>
-          <a href="/">
-            <h1>Hora Hora</h1>
-          </a>
+          <Link href="/">
+            <a>
+              <h1>Hora Hora</h1>
+            </a>
+          </Link>
         </header>
         <main className={styles.portfolio}>
           <ul className={styles.container}>
@@ -129,6 +132,7 @@ export default function Home() {
                 style={{ color: "#666" }}
                 href="https://vercel.com/"
                 target="_blank"
+                rel="noreferrer"
               >
                 Hosted by Vercel.
               </a>
