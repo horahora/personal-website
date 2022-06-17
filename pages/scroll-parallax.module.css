@@ -1,0 +1,37 @@
+.pageRoot {
+  background-image: linear-gradient(#add5d8, #f8f8e5);
+}
+
+.section {
+  overflow: hidden;
+}
+
+.sectionContent {
+  margin-left: auto;
+  margin-right: auto;
+  width: 980px;
+}
+
+@media only screen and (min-width: 1441px) {
+  .sectionContent {
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+  }
+}
+
+@media only screen and (max-width: 1068px) {
+  .sectionContent {
+    margin-left: auto;
+    margin-right: auto;
+    width: 692px;
+  }
+}
+
+@media only screen and (max-width: 734px) {
+  .sectionContent {
+    margin-left: auto;
+    margin-right: auto;
+    width: 87.5%;
+  }
+}

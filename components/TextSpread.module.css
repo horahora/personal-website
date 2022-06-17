@@ -1,0 +1,25 @@
+.component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.text {
+  font-size: 72px;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  color: #357d92;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+@media only screen and (max-width: 734px) {
+  .text {
+    font-size: 34px;
+  }
+}
+
+.letter {
+  display: inline-block;
+}

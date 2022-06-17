@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import Card from "../components/card";
+import Card from "../components/Card";
 import Link from "next/link";
 import styles from "./Home.module.css";
 import React, { useEffect } from "react";
@@ -12,6 +12,14 @@ const portfolioList = [
     srcset: "/images/item-photography@2x.jpg 2x",
     alt: "摄影作品",
     isolated: true,
+  },
+  {
+    href: "/scroll-parallax",
+    src: "/images/item-scroll-parallax.png",
+    srcset:
+      "/images/item-scroll-parallax@2x.png 2x, /images/item-scroll-parallax@3x.png 3x",
+    alt: "视差滚动",
+    isolated: false,
   },
   // {
   //   href: "/likeblack",
@@ -38,14 +46,15 @@ export default function Home() {
       "scroll",
       function () {
         if (
+          handRef.current &&
           handRef.current.getBoundingClientRect().top +
             handRef.current.offsetHeight / 3 <
-          window.innerHeight
+            window.innerHeight
         ) {
           handRef.current.classList.add(styles.handAnimation);
         }
       },
-      { passive: false }
+      { passive: true }
     );
   }, [handRef]);
 

@@ -37,13 +37,6 @@ body {
   margin: 0;
   font-size: 15px;
   line-height: 1.5;
-  background: #f0f0f0 url(/images/noise.png) 50% 0;
-  background-image: image-set(
-    url(/images/noise.png) 1x,
-    url(/images/noise@2x.png) 2x
-  );
-  cursor: default;
-  user-select: none;
 }
 
 /*也可以在body上定义，然后其他的用herit*/
