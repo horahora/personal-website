@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import Card from "../components/Card";
+import Card from "../components/Card.js";
 import Link from "next/link";
 import styles from "./Home.module.css";
 import React, { useEffect } from "react";
