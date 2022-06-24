@@ -1,5 +1,6 @@
 .pageRoot {
   background-image: linear-gradient(#add5d8, #f8f8e5);
+  overflow: hidden;
 }
 
 .section {

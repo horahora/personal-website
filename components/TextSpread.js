@@ -10,6 +10,7 @@ export default function TextSpread({ text }) {
             key={i}
             translateX={[0, 100 * (i - (text.length - 1) / 2)]}
             className={styles.letter}
+            shouldAlwaysCompleteAnimation={true}
           >
             {letter}
           </Parallax>
