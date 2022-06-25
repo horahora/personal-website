@@ -18,6 +18,13 @@
   margin-right: auto;
 }
 
+@supports (padding: max(0px)) {
+  .container {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+}
+
 .container:before,
 .container:after {
   content: "";
@@ -198,6 +205,12 @@
   .container {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  @supports (padding: max(0px)) {
+    .container {
+      padding-left: max(10px, env(safe-area-inset-left));
+      padding-right: max(10px, env(safe-area-inset-right));
+    }
   }
 
   .globalFooter {

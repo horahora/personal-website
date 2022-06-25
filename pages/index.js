@@ -41,31 +41,47 @@ export default function Home() {
 
   useEffect(() => {
     // console.log(handRef.current);
-    handRef.current.classList.add(styles.transparent);
-    window.addEventListener(
-      "scroll",
-      function () {
-        if (
-          handRef.current &&
-          handRef.current.getBoundingClientRect().top +
-            handRef.current.offsetHeight / 3 <
-            window.innerHeight
-        ) {
-          handRef.current.classList.add(styles.handAnimation);
+    // handRef.current.classList.add(styles.transparent);
+    // window.addEventListener(
+    //   "scroll",
+    //   function () {
+    //     if (
+    //       handRef.current &&
+    //       handRef.current.getBoundingClientRect().top +
+    //         handRef.current.offsetHeight / 3 <
+    //         window.innerHeight
+    //     ) {
+    //       handRef.current.classList.add(styles.handAnimation);
+    //     }
+    //   },
+    //   { passive: true }
+    // );
+    if (!!window.IntersectionObserver) {
+      handRef.current.classList.add(styles.transparent);
+      const observer = new IntersectionObserver(
+        (entrys, observer) => {
+          entrys.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const elem = entry.target;
+              elem.classList.add(styles.handAnimation);
+              observer.unobserve(elem);
+            }
+          });
+        },
+        {
+          threshold: 0.3,
         }
-      },
-      { passive: true }
-    );
+      );
+      observer.observe(handRef.current);
+    }
   }, [handRef]);
 
   return (
     <>
       <Head>
-        <meta charset="utf-8" />
         <title>Hora Hora</title>
         <meta name="description" content="这里是 仇俊斌 的个人作品集" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#f0f0f0" />
       </Head>
 
       <div className={styles.pageWrapper}>

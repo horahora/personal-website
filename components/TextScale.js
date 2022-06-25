@@ -14,7 +14,12 @@ export default function TextScale() {
           X
         </Parallax>
       </span>
-      <div className={styles.textScroll}>Scroll↓</div>
+
+      <div className={styles.textScroll}>
+        <Parallax opacity={[1, 0]} shouldAlwaysCompleteAnimation={true}>
+          Scroll↓
+        </Parallax>
+      </div>
     </div>
   );
 }
