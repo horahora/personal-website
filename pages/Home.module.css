@@ -11,28 +11,18 @@
 }
 
 .container {
-  width: 970px;
-  padding-left: 12px;
-  padding-right: 12px;
+  max-width: 970px;
+  padding-left: 15px;
+  padding-right: 15px;
   margin-left: auto;
   margin-right: auto;
 }
 
 @supports (padding: max(0px)) {
   .container {
-    padding-left: max(12px, env(safe-area-inset-left));
-    padding-right: max(12px, env(safe-area-inset-right));
+    padding-left: max(15px, env(safe-area-inset-left));
+    padding-right: max(15px, env(safe-area-inset-right));
   }
-}
-
-.container:before,
-.container:after {
-  content: "";
-  display: table;
-}
-
-.container:after {
-  clear: both;
 }
 
 .globalHeader a {
@@ -57,91 +47,27 @@
 }
 
 .portfolio {
-  padding-bottom: 30px;
+  padding-bottom: 60px;
 }
 
 .portfolio .container {
-  width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  /* 30 / 1000 = 0.03 */
 }
 
-.aboutMe {
-  position: relative;
-  height: 476px;
-  overflow: hidden;
-}
-
-.aboutMe .content {
-  position: absolute;
-  left: 50%;
-  width: 360px;
-  height: 200px;
-  margin-left: -217px;
-  padding: 88px 859px 188px 37px;
-  line-height: 1.2;
-  background: url(/images/hand_with_card_horizontal.png) no-repeat;
-  background-image: image-set(
-    url(/images/hand_with_card_horizontal.png) 1x,
-    url(/images/hand_with_card_horizontal@2x.png) 2x
-  );
-}
-
-.aboutMe .content.transparent {
-  opacity: 0;
-}
-
-.aboutMe .content.handAnimation {
-  opacity: 1;
-  transform-origin: 150% 110%;
-  animation: hand-slide-in 0.8s ease-out backwards;
-  animation-delay: 0.05s;
-  backface-visibility: hidden;
-}
-
-@keyframes hand-slide-in {
-  0% {
-    z-index: 10000;
-    transform: translate3d(0, 60px, 0) rotateZ(-30deg);
-  }
-  100% {
-    z-index: 10000;
+@media screen and (max-width: 1000px) {
+  .portfolio .container {
+    gap: 15px;
   }
 }
 
-.aboutMe .content .avatar {
-  position: absolute;
-  margin: 26px 0 0 -11px;
-  clip: rect(0 125px 150px 25px);
-}
-
-.aboutMe .content .textWrapper {
-  margin-left: 125px;
-}
-
-.aboutMe .content h1 {
-  font-size: 34px;
-  font-weight: normal;
-  margin: 26px 0 26px;
-  color: #555;
-}
-
-.aboutMe .content ul li {
-  margin: 10px 0;
-  font-size: 16px;
-}
-
-.aboutMe .content .label {
-  display: inline-block;
-  min-width: 2em;
-  margin-right: 7px;
-}
-
-.aboutMe .content .emailAddress {
-  color: #444;
-}
-
-.aboutMe .content .emailAddress:hover,
-.aboutMe .content .emailAddress:focus {
-  color: #111;
+/* 大于等于768px，维持4列 */
+@media screen and (max-width: 767px) {
+  .portfolio .container {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
 }
 
 .globalFooter {
@@ -193,26 +119,7 @@
   color: #666;
 }
 
-@media only screen {
-  .container,
-  .portfolio .container {
-    width: auto;
-    max-width: 970px;
-  }
-}
-
 @media screen and (max-width: 720px) {
-  .container {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  @supports (padding: max(0px)) {
-    .container {
-      padding-left: max(10px, env(safe-area-inset-left));
-      padding-right: max(10px, env(safe-area-inset-right));
-    }
-  }
-
   .globalFooter {
     bottom: 30px;
   }
@@ -220,70 +127,6 @@
 
 /*此断点是根据2列时计算 item 200px * 2 + 间距 40px*/
 @media screen and (max-width: 440px) {
-  .aboutMe {
-    height: 444px;
-  }
-
-  .aboutMe .content {
-    width: 200px;
-    height: 360px;
-    margin-left: -124px;
-    padding: 8px 276px 76px 24px;
-    background: url(/images/hand_with_card_vertical.png) no-repeat;
-    background-image: image-set(
-      url(/images/hand_with_card_vertical.png) 1x,
-      url(/images/hand_with_card_vertical@2x.png) 2x
-    );
-  }
-
-  .aboutMe .content.handAnimation {
-    transform-origin: 110% 150%;
-  }
-
-  @keyframes hand-slide-in {
-    0% {
-      z-index: 10000;
-      transform: translate3d(0, 140px, 0) rotateZ(-40deg);
-    }
-    100% {
-      z-index: 10000;
-    }
-  }
-
-  .aboutMe .content .avatar {
-    clip: rect(10px, 150px, 110px, 0);
-    margin: 4px 0 0 26px;
-  }
-
-  .aboutMe .content .textWrapper {
-    margin: 125px auto 0;
-    height: 236px;
-    color: #444;
-    writing-mode: vertical-rl;
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    justify-content: center;
-  }
-
-  .aboutMe .content h1 {
-    margin: 0 0 0 10px;
-  }
-
-  .aboutMe .content ul {
-    margin: 0;
-  }
-
-  .aboutMe .content ul li {
-    margin: 0 8px;
-  }
-
-  .aboutMe .content ul li .label {
-    margin: 0 0 8px;
-    min-width: 0;
-    min-height: 2em;
-  }
-
   .globalFooter {
     bottom: 20px;
   }
