@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Card from "../components/Card";
 import AboutMe from "../components/AboutMe";
+import AppFooter from "../components/AppFooter";
 import Link from "next/link";
 import styles from "./Home.module.css";
 
@@ -69,28 +70,7 @@ export default function Home() {
           </ul>
         </main>
         <AboutMe />
-        <footer className={styles.globalFooter}>
-          <div className={styles.container}>
-            {/*<ul className={styles.langToggle">
-            <li><a className={styles.current" href="/">中文</a></li>
-            <li><a href="/jp.html">日本語</a></li>
-          </ul>
-  */}
-            <p className={`${styles.copyright} text-carved`}>
-              <span>© {new Date().getFullYear()} Hora Hora.</span>{" "}
-              <span className={styles.hiddenXs}>All rights reserved.</span>{" "}
-              <a
-                style={{ color: "#666" }}
-                href="https://github.com/horahora/personal-site"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View git repository.
-              </a>
-            </p>
-            {/*<p className={styles.copyright"><span>© 2013-2018 Hora Hora.</span> <span className={styles.hidden-xs">All rights reserved.</span> <span className={styles.hidden-xs">Designed in China.</span></p> */}
-          </div>
-        </footer>
+        <AppFooter />
       </div>
     </>
   );

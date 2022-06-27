@@ -1,0 +1,66 @@
+.appFooter {
+  line-height: 1.2;
+  text-align: center;
+}
+
+.appFooter {
+  position: absolute;
+  width: 100%;
+  bottom: 24px;
+  text-align: left;
+}
+
+/* .appFooter .langToggle {
+  margin-bottom: 14px;
+}
+
+.appFooter .langToggle li {
+  display: inline;
+  margin-right: 5px;
+}
+
+.appFooter .langToggle a {
+  color: #666;
+  font-size: 12px;
+  padding: 3px 12px;
+  border-radius: 4px;
+}
+
+.appFooter .langToggle a:hover,
+.appFooter ul.langToggle a:focus {
+  color: #222;
+}
+
+.appFooter .langToggle a.current {
+  color: #555;
+  background: #dadada;
+  background: rgba(0, 0, 0, 0.08);
+  cursor: default;
+  text-shadow: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px rgba(255, 255, 255, 0.7);
+} */
+
+.appFooter .copyright {
+  margin: 0;
+  font-size: 12px;
+  font-family: Verdana, sans-serif;
+  color: #666;
+}
+
+/*此断点是根据2列时计算 item 200px * 2 + 间距 40px*/
+@media screen and (max-width: 440px) {
+  .appFooter {
+    bottom: 20px;
+  }
+
+  /* .appFooter .copyright {
+    display: none;
+  }*/
+  .appFooter .copyright span {
+    display: block;
+    margin-top: 4px;
+  }
+  .appFooter .copyright .hiddenXs {
+    display: none;
+  }
+}

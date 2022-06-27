@@ -163,16 +163,6 @@ figure {
   pointer-events: none;
 }
 
-.clearfix:before,
-.clearfix:after {
-  content: "";
-  display: table;
-}
-
-.clearfix:after {
-  clear: both;
-}
-
 .text-carved {
   text-shadow: 0 1px rgba(255, 255, 255, 0.8);
 }
