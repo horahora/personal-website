@@ -1,0 +1,18 @@
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.allow-select {
+  cursor: auto;
+  user-select: text;
+}
+
+.disable-hover {
+  pointer-events: none;
+}
+
+.text-carved {
+  text-shadow: 0 1px rgba(255, 255, 255, 0.8);
+}

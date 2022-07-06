@@ -73,6 +73,9 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
   /* 30 / 1000 = 0.03 */
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 @media screen and (max-width: 1000px) {
