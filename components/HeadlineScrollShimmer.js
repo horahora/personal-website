@@ -1,10 +1,25 @@
-import { useState } from "react";
-import { Parallax } from "react-scroll-parallax";
+import { useState, useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./HeadlineScrollShimmer.module.css";
 import classNames from "classnames";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function HeadlineScrollShimmer({ children }) {
   const [progress, setProgress] = useState(0);
+  const scrollTriggerRef = useRef();
+
+  useLayoutEffect(() => {
+    ScrollTrigger.create({
+      trigger: scrollTriggerRef.current,
+      scrub: 0.5,
+      // markers: true,
+      onUpdate(self) {
+        setProgress(self.progress);
+      },
+    });
+  }, []);
 
   return (
     <div
@@ -12,13 +27,9 @@ export default function HeadlineScrollShimmer({ children }) {
         styles.typographyHeadlineStandalone,
         styles.enhanceXp
       )}
+      style={{ minHeight: "35vh" }}
     >
-      <Parallax
-        onProgressChange={(progress) => {
-          // console.log(progress);
-          setProgress(progress);
-        }}
-      >
+      <div ref={scrollTriggerRef}>
         <p
           className={styles.headlineGradient}
           style={{
@@ -27,7 +38,7 @@ export default function HeadlineScrollShimmer({ children }) {
         >
           {children}
         </p>
-      </Parallax>
+      </div>
     </div>
   );
 }

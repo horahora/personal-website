@@ -14,12 +14,12 @@
     sans-serif;
 }
 
-.typographyHeadlineStandalone:lang(ja) {
+/* .typographyHeadlineStandalone:lang(ja) {
   letter-spacing: 0em;
   font-family: SF Pro JP, SF Pro Display, SF Pro Icons, Hiragino Kaku Gothic Pro,
     ヒラギノ角ゴ Pro W3, メイリオ, Meiryo, ＭＳ Ｐゴシック, Helvetica Neue,
     Helvetica, Arial, sans-serif;
-}
+} */
 
 .typographyHeadlineStandalone:lang(zh) {
   letter-spacing: 0em;

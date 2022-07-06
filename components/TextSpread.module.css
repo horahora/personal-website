@@ -14,9 +14,9 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-@media only screen and (max-width: 734px) {
+@media screen and (max-width: 734px) {
   .text {
-    font-size: 34px;
+    font-size: 40px;
   }
 }
 

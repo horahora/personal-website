@@ -1,19 +1,34 @@
-import { Parallax } from "react-scroll-parallax";
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./TextSpread.module.css";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function TextSpread({ text }) {
+  const textRef = useRef();
+  const q = gsap.utils.selector(textRef);
+
+  useLayoutEffect(() => {
+    q(".letter").forEach((letter, i, a) => {
+      gsap.to(letter, {
+        xPercent: 130 * (i - (a.length - 1) / 2),
+        scrollTrigger: {
+          trigger: textRef.current,
+          scrub: 0.5,
+          // markers: true,
+        },
+      });
+    });
+  }, []);
+
   return (
     <div className={styles.component}>
-      <span className={styles.text}>
+      <span className={styles.text} ref={textRef}>
         {text.split("").map((letter, i) => (
-          <Parallax
-            key={i}
-            translateX={[0, 100 * (i - (text.length - 1) / 2)]}
-            className={styles.letter}
-            shouldAlwaysCompleteAnimation={true}
-          >
+          <span key={i} className={`${styles.letter} letter`}>
             {letter}
-          </Parallax>
+          </span>
         ))}
       </span>
     </div>
