@@ -1,7 +1,7 @@
 import { useLayoutEffect, useEffect, useRef } from "react";
 
 import styles from "./TextScale.module.css";
-import { gsap } from "gsap/dist/gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);

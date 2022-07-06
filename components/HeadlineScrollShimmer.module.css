@@ -1,7 +1,9 @@
 .typographyHeadlineStandalone {
-  --headline-gradient-start: #237cab;
-  --headline-gradient-end: #0bcbd9;
-  --headline-gradient-shimmer: #5ee5ef;
+  --headline-gradient-start: hsl(20deg 76% 40%);
+  --headline-gradient-end: hsl(20deg 100% 42%);
+  --headline-gradient-shimmer: hsl(20deg 94% 67%);
+
+  /* original */
   /* --headline-gradient-start: #194bb5; // hsl(221, 76, 40)
   --headline-gradient-end: #009de4; // hsl(199, 100, 45)
   --headline-gradient-shimmer: #5ac8fa; // hsl(199, 94, 67) */

@@ -1,6 +1,6 @@
 .component {
-  /* position: relative;
-  min-height: 85vh; */
+  /* position: relative; */
+  min-height: 50vh;
   display: flex;
   justify-content: center;
   /* align-items: center; */
@@ -14,9 +14,10 @@
   text-align: center;
   font-size: 100px;
   font-weight: 800;
-  color: #357d92;
+  color: var(--primary-color);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   /* writing-mode: vertical-rl; */
+  pointer-events: none;
 }
 
 .letter {
@@ -30,6 +31,6 @@
   right: 0;
   text-align: center;
   font-size: 24px;
-  color: #357d92;
+  color: var(--primary-color);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }

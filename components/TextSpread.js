@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap/dist/gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./TextSpread.module.css";
 
