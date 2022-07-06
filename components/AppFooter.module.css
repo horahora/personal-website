@@ -40,11 +40,13 @@
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px rgba(255, 255, 255, 0.7);
 } */
 
-.appFooter .copyright {
+.copyright {
   margin: 0;
   font-size: 12px;
   font-family: Verdana, sans-serif;
   color: #666;
+  /* text-carved */
+  text-shadow: 0 1px rgba(255, 255, 255, 0.8);
 }
 
 /*此断点是根据2列时计算 item 200px * 2 + 间距 40px*/
@@ -56,11 +58,11 @@
   /* .appFooter .copyright {
     display: none;
   }*/
-  .appFooter .copyright span {
+  .copyright span {
     display: block;
     margin-top: 4px;
   }
-  .appFooter .copyright .hiddenXs {
+  .copyright .hiddenXs {
     display: none;
   }
 }

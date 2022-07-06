@@ -10,7 +10,7 @@ export default function AppFooter() {
         <li><a href="/jp.html">日本語</a></li>
       </ul>
 */}
-        <p className={`${styles.copyright} text-carved`}>
+        <p className={styles.copyright}>
           <span>© {new Date().getFullYear()} Hora Hora.</span>{" "}
           <span className={styles.hiddenXs}>All rights reserved.</span>{" "}
           <a

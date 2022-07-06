@@ -10,6 +10,24 @@
   user-select: none;
 }
 
+.pageWrapper ::selection {
+  color: #062617;
+  background: rgba(145, 242, 194, 0.4);
+  text-shadow: none;
+}
+
+.pageWrapper a {
+  color: #00b85e;
+  outline: none;
+  text-decoration: none;
+}
+
+.pageWrapper a:hover,
+.pageWrapper a:focus {
+  color: #078c4b;
+  text-decoration: underline;
+}
+
 .container {
   max-width: 970px;
   padding-left: 15px;
@@ -63,9 +81,34 @@
   }
 }
 
-/* 大于等于768px，维持4列 */
+/* 3列 */
 @media screen and (max-width: 767px) {
   .portfolio .container {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 2列 */
+@media screen and (max-width: 600px) {
+  .portfolio .container {
+    grid-template-columns: repeat(2, 1fr);
+    animation: slide-in 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+    will-change: transform;
+  }
+}
+
+/* 1列 */
+@media screen and (max-width: 400px) {
+  .portfolio .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translate3d(0, 80vh, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
   }
 }

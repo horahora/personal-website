@@ -76,10 +76,10 @@
   backface-visibility: hidden;
 }
 
-.item .paper.animated,
+/* .item .paper.animated,
 .item .shadow.animated {
   animation: none !important;
-}
+} */
 
 /*
 .item .paper:hover + .shadow,
@@ -216,7 +216,7 @@
   } */
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 767px) {
   /* .item:nth-child(1n) {
     width: 31.333%;
     margin: 0 3% 3% 0;
@@ -328,15 +328,23 @@
   }
 }
 
-@media screen and (max-width: 596px) {
+/* 2列 */
+@media screen and (max-width: 600px) {
   .item .paper,
   .item .shadow {
     animation: none;
   }
+  .item:nth-last-child(-n + 4) {
+    display: none;
+  }
 }
 
-/*此断点是根据2列时计算 item 200px * 2 + 间距 40px*/
-@media screen and (max-width: 440px) {
+/* 1列 */
+@media screen and (max-width: 400px) {
+  .item:nth-last-child(-n + 8) {
+    display: none;
+  }
+
   .item:nth-child(1n) {
     /* width: 47.5%;
     margin: 0 5% 5% 0; */

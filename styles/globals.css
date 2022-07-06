@@ -6,27 +6,6 @@
   width: device-width;
 }
 
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-main,
-nav,
-section,
-summary {
-  display: block;
-}
-
-audio,
-canvas,
-video {
-  display: inline-block;
-}
-
 html {
   min-width: 320px;
   -webkit-text-size-adjust: 100%;
@@ -53,13 +32,13 @@ textarea {
 }
 
 /*考虑用:lang*/
-body.jp,
+/* body.jp,
 body.jp button,
 body.jp input,
 body.jp select,
 body.jp textarea {
   font-family: "Hiragino Kaku Gothic Pro", "Meiryo UI", "MS PGothic", sans-serif;
-}
+} */
 
 button,
 input,
@@ -86,24 +65,6 @@ input[type="submit"] {
 
 button[disabled] {
   cursor: default;
-}
-
-::selection {
-  color: #062617;
-  background: rgba(145, 242, 194, 0.4);
-  text-shadow: none;
-}
-
-a {
-  color: #00b85e;
-  outline: none;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  color: #078c4b;
-  text-decoration: underline;
 }
 
 a img {
@@ -161,8 +122,4 @@ figure {
 
 .disable-hover {
   pointer-events: none;
-}
-
-.text-carved {
-  text-shadow: 0 1px rgba(255, 255, 255, 0.8);
 }

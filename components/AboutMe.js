@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
-  const handRef = React.createRef();
+  const handRef = useRef();
 
   useEffect(() => {
     // console.log(handRef.current);
@@ -39,7 +39,7 @@ export default function AboutMe() {
       );
       observer.observe(handRef.current);
     }
-  }, [handRef]);
+  }, []);
 
   return (
     <section className={styles.aboutMe}>
