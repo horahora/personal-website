@@ -155,6 +155,12 @@
   cursor: pointer;
 }
 
+@supports (padding: max(0px)) {
+  .dialogClose {
+    padding-right: max(8px, env(safe-area-inset-right));
+  }
+}
+
 .photoSwiper {
   --swiper-theme-color: rgba(255, 255, 255, 1);
   width: 100%;
