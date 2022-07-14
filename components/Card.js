@@ -13,7 +13,7 @@ export default function Card({ href, src, srcset, alt, placeholder }) {
     <li className={styles.item}>
       <Link href={href}>
         <a className={styles.paper}>
-          <img src={src} srcSet={srcset} alt={alt} />
+          <img src={src} srcSet={srcset} width="300" height="300" alt={alt} />
         </a>
       </Link>
       {/*<Tilt

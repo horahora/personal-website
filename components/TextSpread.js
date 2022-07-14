@@ -12,7 +12,7 @@ export default function TextSpread({ text }) {
   useLayoutEffect(() => {
     q(".letter").forEach((letter, i, a) => {
       gsap.to(letter, {
-        xPercent: 130 * (i - (a.length - 1) / 2),
+        x: 50 * (i - (a.length - 1) / 2),
         scrollTrigger: {
           trigger: textRef.current,
           scrub: 0.5,
