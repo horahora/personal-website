@@ -4,26 +4,32 @@
   width: device-width;
 }
 
+:root {
+  --color-link: #0076d1;
+  --color-gold: #ccaf6b;
+}
+
 html {
   min-width: 320px;
+  scroll-behavior: smooth;
 }
 
 body {
+  font-family: "PingFangSC", sans-serif;
   font-size: 15px;
   /* line-height: 1.5; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color: #444;
 }
 
-/*也可以在body上定义，然后其他的用herit*/
-body,
 button,
 input,
 select,
 textarea {
-  color: #444;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  font-family: "PingFangSC", sans-serif;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 /*考虑用:lang*/
@@ -35,14 +41,45 @@ body.jp textarea {
   font-family: "Hiragino Kaku Gothic Pro", "Meiryo UI", "MS PGothic", sans-serif;
 } */
 
-h1,
+/* h1,
 h2,
 h3 {
   font-family: "PingFangSC", "Microsoft YaHei", "SimHei", sans-serif;
-}
+} */
 
 p {
   margin: 0 0 10px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-link);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+a:focus {
+  /* Provide a fallback style for browsers
+	 that don't support :focus-visible */
+  outline: none;
+  /* background: lightgrey; */
+}
+
+a:focus:not(:focus-visible) {
+  /* Remove the focus indicator on mouse-focus for browsers
+	 that do support :focus-visible */
+  /* background: transparent; */
+}
+
+a:focus-visible {
+  /* Draw a very noticeable focus style for
+	 keyboard-focus on browsers that do support
+	 :focus-visible */
+  /* outline: 1px solid black; */
+  /* background: transparent; */
 }
 
 /* ul,
@@ -54,19 +91,4 @@ ol {
 
 textarea {
   resize: vertical;
-}
-
-.img-responsive {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.allow-select {
-  cursor: auto;
-  user-select: text;
-}
-
-.disable-hover {
-  pointer-events: none;
 }

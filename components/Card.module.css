@@ -34,6 +34,19 @@
   backface-visibility: hidden;
 }
 
+.item .paper:active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.item .paper:empty::after {
+  display: none;
+}
+
 @media screen and (min--moz-device-pixel-ratio: 0) {
   .item .paper {
     outline: 1px solid transparent;
@@ -57,7 +70,7 @@
 .item img {
   vertical-align: top;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .item .shadow {

@@ -10,9 +10,9 @@ const portfolioList = [
   {
     href: "/photography",
     src: "/images/item-photography.jpg",
-    srcset: "/images/item-photography@2x.jpg 2x",
+    srcset:
+      "/images/item-photography@2x.jpg 2x, /images/item-photography@3x.jpg 3x",
     alt: "摄影作品",
-    isolated: true,
   },
   {
     href: "/scroll-parallax",
@@ -20,7 +20,6 @@ const portfolioList = [
     srcset:
       "/images/item-scroll-parallax@2x.png 2x, /images/item-scroll-parallax@3x.png 3x",
     alt: "视差滚动",
-    isolated: false,
   },
   // {
   //   href: "/likeblack",
@@ -63,7 +62,6 @@ export default function Home() {
                 alt={item.alt}
                 srcset={item.srcset}
                 placeholder={item.placeholder}
-                isolated={item.isolated}
                 key={i}
               />
             ))}

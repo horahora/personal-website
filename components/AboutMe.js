@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import styles from "./AboutMe.module.css";
+import utilStyles from "../styles/utils.module.css";
 
 export default function AboutMe() {
   const handRef = useRef();
@@ -43,7 +44,10 @@ export default function AboutMe() {
 
   return (
     <section className={styles.aboutMe}>
-      <div className={`${styles.content} allow-select`} ref={handRef}>
+      <div
+        className={`${styles.content} ${utilStyles.allowSelect}`}
+        ref={handRef}
+      >
         <img
           className={styles.avatar}
           src="/images/avatar.jpg"

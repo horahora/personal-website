@@ -95,8 +95,8 @@
 @media screen and (max-width: 600px) {
   .portfolio .container {
     grid-template-columns: repeat(2, 1fr);
-    animation: slide-in 0.4s cubic-bezier(0.33, 1, 0.68, 1);
-    will-change: transform;
+    /* animation: slide-in 0.4s cubic-bezier(0.33, 1, 0.68, 1); */
+    /* will-change: transform; */
   }
 }
 

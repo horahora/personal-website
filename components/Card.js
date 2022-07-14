@@ -3,14 +3,7 @@ import Link from "next/link";
 // import Tilt from "react-parallax-tilt";
 import styles from "./Card.module.css";
 
-export default function Card({
-  href,
-  src,
-  srcset,
-  alt,
-  placeholder,
-  isolated,
-}) {
+export default function Card({ href, src, srcset, alt, placeholder }) {
   return placeholder ? (
     <li className={styles.item}>
       <a className={styles.paper}></a>
@@ -18,17 +11,11 @@ export default function Card({
     </li>
   ) : (
     <li className={styles.item}>
-      {isolated ? (
-        <a href={`${href}.html`} className={styles.paper}>
-          <img src={src} srcSet={srcset} width="200" height="200" alt={alt} />
+      <Link href={href}>
+        <a className={styles.paper}>
+          <img src={src} srcSet={srcset} alt={alt} />
         </a>
-      ) : (
-        <Link href={href}>
-          <a className={styles.paper}>
-            <img src={src} srcSet={srcset} width="200" height="200" alt={alt} />
-          </a>
-        </Link>
-      )}
+      </Link>
       {/*<Tilt
         tiltMaxAngleX={5}
         tiltMaxAngleY={0}
