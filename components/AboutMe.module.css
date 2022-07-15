@@ -2,9 +2,21 @@
   position: relative;
   height: 476px;
   overflow: hidden;
+  color: #444;
 }
 
-.content {
+.aboutMe a {
+  color: inherit;
+}
+
+.aboutMe a:hover,
+.aboutMe a:focus {
+  color: #111;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 1px;
+}
+
+.inner {
   position: absolute;
   left: 50%;
   width: 360px;
@@ -19,11 +31,11 @@
   );
 }
 
-.content.transparent {
+.inner.transparent {
   opacity: 0;
 }
 
-.content.handAnimation {
+.inner.handAnimation {
   opacity: 1;
   transform-origin: 150% 110%;
   animation: hand-slide-in 0.8s ease-out backwards;
@@ -41,20 +53,27 @@
   }
 }
 
+.content {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 15px 0 15px 15px;
+  width: inherit;
+  height: inherit;
+}
+
 .content .avatar {
-  position: absolute;
-  margin: 26px 0 0 -11px;
-  clip: rect(0 125px 150px 25px);
+  vertical-align: middle;
 }
 
 .content .textWrapper {
-  margin-left: 125px;
+  margin-left: 15px;
 }
 
 .content h1 {
   font-size: 34px;
-  font-weight: normal;
-  margin: 26px 0 26px;
+  font-weight: 400;
+  margin: 10px 0 25px;
   color: #555;
 }
 
@@ -64,33 +83,23 @@
   list-style: none;
 }
 
-.content ul li {
+.content li {
+  display: flex;
+  align-items: center;
   margin: 10px 0;
   font-size: 16px;
 }
 
-.content .label {
-  display: inline-block;
-  min-width: 2em;
-  margin-right: 7px;
+.content .icon {
+  margin-right: 10px;
 }
 
-.content .emailAddress {
-  color: #444;
-}
-
-.content .emailAddress:hover,
-.content .emailAddress:focus {
-  color: #111;
-}
-
-/*此断点是根据2列时计算 item 200px * 2 + 间距 40px*/
 @media screen and (max-width: 440px) {
   .aboutMe {
     height: 444px;
   }
 
-  .content {
+  .inner {
     width: 200px;
     height: 360px;
     margin-left: -124px;
@@ -102,7 +111,7 @@
     );
   }
 
-  .content.handAnimation {
+  .inner.handAnimation {
     transform-origin: 110% 150%;
   }
 
@@ -116,37 +125,25 @@
     }
   }
 
-  .content .avatar {
-    clip: rect(10px, 150px, 110px, 0);
-    margin: 4px 0 0 26px;
+  .content {
+    flex-direction: column;
+    padding: 15px 15px 0;
   }
 
   .content .textWrapper {
-    margin: 125px auto 0;
-    height: 236px;
-    color: #444;
     writing-mode: vertical-rl;
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    justify-content: center;
+    margin: 15px 0 0;
   }
 
   .content h1 {
-    margin: 0 0 0 10px;
+    margin: 0 10px 0 25px;
   }
 
-  .content ul {
-    margin: 0;
+  .content li {
+    margin: 0 10px;
   }
 
-  .content ul li {
-    margin: 0 8px;
-  }
-
-  .content ul li .label {
-    margin: 0 0 8px;
-    min-width: 0;
-    min-height: 2em;
+  .content li .icon {
+    margin: 0 0 10px;
   }
 }

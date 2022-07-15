@@ -1,9 +1,5 @@
 @import "normalize.css";
 
-@viewport {
-  width: device-width;
-}
-
 :root {
   --color-link: #0076d1;
   --color-gold: #ccaf6b;
