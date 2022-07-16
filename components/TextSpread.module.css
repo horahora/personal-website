@@ -20,6 +20,12 @@
   }
 }
 
+@media screen and (max-width: 500px) {
+  .text {
+    font-size: 30px;
+  }
+}
+
 .letter {
   display: inline-block;
 }

@@ -17,15 +17,13 @@
 }
 
 .pageWrapper a {
-  color: #00b85e;
+  /* color: #00b85e; */
   outline: none;
-  text-decoration: none;
 }
 
 .pageWrapper a:hover,
 .pageWrapper a:focus {
-  color: #078c4b;
-  text-decoration: underline;
+  /* color: #078c4b; */
 }
 
 .container {

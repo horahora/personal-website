@@ -45,11 +45,8 @@ export default function AboutMe() {
 
   return (
     <section className={styles.aboutMe}>
-      <div
-        className={`${styles.inner} ${utilStyles.allowSelect}`}
-        ref={handRef}
-      >
-        <div className={styles.content}>
+      <div className={styles.inner} ref={handRef}>
+        <div className={`${styles.content} ${utilStyles.allowSelect}`}>
           <picture>
             <source
               srcSet="/images/avatar-landscape.jpg, /images/avatar-landscape@2x.jpg 2x, /images/avatar-landscape@3x.jpg 3x"
