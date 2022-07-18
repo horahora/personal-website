@@ -9,16 +9,16 @@ import styles from "./Home.module.css";
 const portfolioList = [
   {
     href: "/photography",
-    src: "/images/item-photography.jpg",
+    src: "/images/work-photography.jpg",
     srcset:
-      "/images/item-photography@2x.jpg 2x, /images/item-photography@3x.jpg 3x",
+      "/images/work-photography@2x.jpg 2x, /images/work-photography@3x.jpg 3x",
     alt: "摄影作品",
   },
   {
     href: "/scroll-parallax",
-    src: "/images/item-scroll-parallax.png",
+    src: "/images/work-scroll-parallax.png",
     srcset:
-      "/images/item-scroll-parallax@2x.png 2x, /images/item-scroll-parallax@3x.png 3x",
+      "/images/work-scroll-parallax@2x.png 2x, /images/work-scroll-parallax@3x.png 3x",
     alt: "视差滚动",
   },
   // {

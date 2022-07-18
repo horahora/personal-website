@@ -66,15 +66,31 @@
 }
 
 .photoItem {
-  aspect-ratio: 1 / 1;
+  position: relative;
+  /* aspect-ratio: 1 / 1; */
+}
+
+.photoItem::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
 }
 
 .photoItem img {
+  position: absolute;
+  left: 0;
+  top: 0;
   object-fit: contain;
   width: 100%;
   height: 100%;
   vertical-align: middle;
+  /* opacity: 0;
+  transition: 0.4s; */
 }
+
+/* .photoItem img.loaded {
+  opacity: 1;
+} */
 
 @media (max-width: 767px) {
   .photographyList {
@@ -140,8 +156,8 @@
   opacity: 0;
 }
 
-.dialogTitle {
-}
+/* .dialogTitle {
+} */
 
 .dialogClose {
   position: absolute;
@@ -149,7 +165,7 @@
   height: inherit;
   display: flex;
   align-items: center;
-  padding: 0 8px;
+  padding: 0 10px;
   color: #fff;
   background-color: transparent;
   cursor: pointer;
@@ -172,9 +188,9 @@
 .photoSwiper :global(.swiper-button-next) {
   background-color: rgba(27, 27, 27, 0.8);
   backdrop-filter: saturate(180%) blur(20px);
-  width: 32px;
-  height: 52px;
-  border-radius: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   transition: 0.3s;
 }
 
@@ -187,5 +203,5 @@
 
 .photoSwiper :global(.swiper-button-prev)::after,
 .photoSwiper :global(.swiper-button-next)::after {
-  font-size: 26px;
+  font-size: 20px;
 }

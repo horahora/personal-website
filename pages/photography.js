@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import styles from "./photography.module.css";
 import { Xmark } from "framework7-icons/react";
 import classNames from "classnames";
+import { gsap } from "gsap";
 
 const baseUrl = "/images/photography";
 
@@ -80,6 +81,11 @@ export default function Photography() {
 
   const dialogRef = useRef();
 
+  // const handleThumbnailLoad = (e) => {
+  //   console.log(e.target.complete);
+  //   e.target.classList.add([styles.loaded]);
+  // };
+
   const handleThumbnailClick = (e, index) => {
     e.preventDefault();
     setActiveIndex(index);
@@ -103,11 +109,11 @@ export default function Photography() {
 
   const handleSwiperClick = (swiper, e) => {
     setIsToolbarVisible(!isToolbarVisible);
-    // [swiper.navigation.$prevEl[0], swiper.navigation.$nextEl[0]].forEach(
-    //   (elem) => {
-    //     elem.classList.toggle("swiper-button-hidden", isToolbarVisible);
-    //   }
-    // );
+    [swiper.navigation.$prevEl[0], swiper.navigation.$nextEl[0]].forEach(
+      (elem) => {
+        elem.classList.toggle("swiper-button-hidden", isToolbarVisible);
+      }
+    );
   };
 
   return (
@@ -122,7 +128,12 @@ export default function Photography() {
               href={photo.href}
               onClick={(e) => handleThumbnailClick(e, index)}
             >
-              <img src={photo.thumbnail} />
+              <img
+                src={photo.thumbnail}
+                onLoad={(e) => {
+                  // handleThumbnailLoad(e);
+                }}
+              />
             </a>
           </div>
         ))}
@@ -153,12 +164,15 @@ export default function Photography() {
             modules={[Zoom, Lazy, Navigation, Keyboard]}
             lazy
             zoom
-            navigation={{ hideOnClick: true }}
+            navigation
             keyboard
             spaceBetween={20}
             onSlideChange={() => console.log("slide change")}
             onActiveIndexChange={(swiper) => handleActiveIndexChange(swiper)}
             onClick={handleSwiperClick}
+            onZoomChange={() => {
+              setIsToolbarVisible(false);
+            }}
             className={styles.photoSwiper}
           >
             {photoListData.map((photo) => (

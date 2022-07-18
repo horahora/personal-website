@@ -1,13 +1,12 @@
 .appFooter {
-  line-height: 1.2;
-  text-align: center;
-}
-
-.appFooter {
   position: absolute;
   width: 100%;
   bottom: 24px;
-  text-align: left;
+  line-height: 1.2;
+}
+
+.appFooter a {
+  color: #666;
 }
 
 /* .appFooter .langToggle {
@@ -58,7 +57,7 @@
   /* .appFooter .copyright {
     display: none;
   }*/
-  .copyright span {
+  .copyright .extra {
     display: block;
     margin-top: 4px;
   }

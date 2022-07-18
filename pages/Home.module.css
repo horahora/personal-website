@@ -1,4 +1,5 @@
 .pageWrapper {
+  --color-accent: #00b85e;
   position: relative;
   overflow: hidden;
   background: #f0f0f0 url(/images/noise.png) 50% 0;
@@ -18,12 +19,13 @@
 
 .pageWrapper a {
   /* color: #00b85e; */
-  outline: none;
+  /* outline: none; */
 }
 
 .pageWrapper a:hover,
 .pageWrapper a:focus {
   /* color: #078c4b; */
+  color: #000;
 }
 
 .container {

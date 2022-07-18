@@ -15,7 +15,7 @@ export default function AboutMe() {
     //     if (
     //       handRef.current &&
     //       handRef.current.getBoundingClientRect().top +
-    //         handRef.current.offsetHeight / 3 <
+    //         handRef.current.offsetHeight / 4 <
     //         window.innerHeight
     //     ) {
     //       handRef.current.classList.add(styles.handAnimation);
@@ -36,7 +36,7 @@ export default function AboutMe() {
           });
         },
         {
-          threshold: 0.3,
+          threshold: 0.25,
         }
       );
       observer.observe(handRef.current);

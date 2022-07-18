@@ -14,10 +14,10 @@ export default function AppFooter() {
           <span>© {new Date().getFullYear()} Hora Hora.</span>{" "}
           <span className={styles.hiddenXs}>All rights reserved.</span>{" "}
           <a
-            style={{ color: "#666" }}
             href="https://github.com/horahora/personal-site"
             target="_blank"
             rel="noreferrer"
+            className={styles.extra}
           >
             View git repository.
           </a>

@@ -1,8 +1,11 @@
 @import "normalize.css";
 
 :root {
-  --color-link: #0076d1;
+  --color-accent: #0076d1;
+  --color-link: var(--color-link);
   --color-gold: #ccaf6b;
+
+  /* palette */
 }
 
 html {
@@ -25,6 +28,15 @@ select,
 textarea {
   font-family: inherit;
   font-size: inherit;
+}
+
+input[type="checkbox"],
+input[type="radio"],
+progress,
+select,
+datalist,
+input[type="range"] {
+  accent-color: var(--color-accent);
 }
 
 /*考虑用:lang*/
@@ -59,7 +71,8 @@ a:hover {
 a:focus {
   /* Provide a fallback style for browsers
 	 that don't support :focus-visible */
-  outline: none;
+  /* outline: none; */
+  /* text-decoration: underline; */
   /* background: lightgrey; */
 }
 
@@ -67,13 +80,14 @@ a:focus:not(:focus-visible) {
   /* Remove the focus indicator on mouse-focus for browsers
 	 that do support :focus-visible */
   /* background: transparent; */
+  /* outline: 1px solid black; */
 }
 
 a:focus-visible {
   /* Draw a very noticeable focus style for
 	 keyboard-focus on browsers that do support
 	 :focus-visible */
-  /* outline: 1px solid black; */
+  outline-color: var(--color-accent);
   /* background: transparent; */
 }
 
