@@ -8,7 +8,6 @@ import "swiper/css/navigation";
 import styles from "./photography.module.css";
 import { Xmark } from "framework7-icons/react";
 import classNames from "classnames";
-import { gsap } from "gsap";
 
 const baseUrl = "/images/photography";
 
@@ -81,11 +80,6 @@ export default function Photography() {
 
   const dialogRef = useRef();
 
-  // const handleThumbnailLoad = (e) => {
-  //   console.log(e.target.complete);
-  //   e.target.classList.add([styles.loaded]);
-  // };
-
   const handleThumbnailClick = (e, index) => {
     e.preventDefault();
     setActiveIndex(index);
@@ -128,12 +122,7 @@ export default function Photography() {
               href={photo.href}
               onClick={(e) => handleThumbnailClick(e, index)}
             >
-              <img
-                src={photo.thumbnail}
-                onLoad={(e) => {
-                  // handleThumbnailLoad(e);
-                }}
-              />
+              <img src={photo.thumbnail} />
             </a>
           </div>
         ))}

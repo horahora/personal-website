@@ -12,12 +12,18 @@
   margin-right: auto;
   display: inline-block;
   text-align: center;
-  font-size: 100px;
+  font-size: 150px;
   font-weight: 800;
   color: var(--primary-color);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   /* writing-mode: vertical-rl; */
   pointer-events: none;
+}
+
+@media only screen and (max-width: 734px) {
+  .text {
+    font-size: 100px;
+  }
 }
 
 .letter {

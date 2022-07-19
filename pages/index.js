@@ -21,6 +21,12 @@ const portfolioList = [
       "/images/work-scroll-parallax@2x.png 2x, /images/work-scroll-parallax@3x.png 3x",
     alt: "视差滚动",
   },
+  {
+    href: "/waves",
+    src: "/images/work-waves.png",
+    srcset: "/images/work-waves@2x.png 2x, /images/work-waves@3x.png 3x",
+    alt: "波浪动画",
+  },
   // {
   //   href: "/likeblack",
   //   src: "/images/item_black.png",

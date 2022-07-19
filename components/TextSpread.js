@@ -11,6 +11,7 @@ export default function TextSpread({ text }) {
 
   useLayoutEffect(() => {
     q(".letter").forEach((letter, i, a) => {
+      // TODO: 小屏断点水平位移小一点
       gsap.to(letter, {
         x: 50 * (i - (a.length - 1) / 2),
         scrollTrigger: {
