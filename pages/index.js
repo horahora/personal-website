@@ -27,6 +27,12 @@ const portfolioList = [
     srcset: "/images/work-waves@2x.png 2x, /images/work-waves@3x.png 3x",
     alt: "波浪动画",
   },
+  {
+    href: "/eyes",
+    src: "/images/work-eyes.png",
+    srcset: "/images/work-eyes@2x.png 2x, /images/work-eyes@3x.png 3x",
+    alt: "眼睛",
+  },
   // {
   //   href: "/likeblack",
   //   src: "/images/item_black.png",
