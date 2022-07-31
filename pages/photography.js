@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Zoom, Lazy, Navigation, Keyboard } from "swiper";
@@ -111,68 +112,77 @@ export default function Photography() {
   };
 
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <h1 className={styles.pageTitle}>仇俊斌的摄影作品集</h1>
-      </div>
-      <div className={`${styles.photographyList} ${styles.container}`}>
-        {photoListData.map((photo, index) => (
-          <div className={styles.photoItem} key={photo.thumbnail}>
+    <>
+      <Head>
+        <title>仇俊斌的摄影作品集 - Hora Hora</title>
+      </Head>
+
+      <div className={styles.page}>
+        <div className={styles.container}>
+          <h1 className={styles.pageTitle}>仇俊斌的摄影作品集</h1>
+        </div>
+        <div className={`${styles.photographyList} ${styles.container}`}>
+          {photoListData.map((photo, index) => (
+            <div className={styles.photoItem} key={photo.thumbnail}>
+              <a
+                href={photo.href}
+                onClick={(e) => handleThumbnailClick(e, index)}
+              >
+                <img src={photo.thumbnail} />
+              </a>
+            </div>
+          ))}
+        </div>
+        <div className={`${styles.copyright} ${styles.container}`}>
+          {`© ${new Date().getFullYear()} Hora Hora. All rights reserved.`}
+        </div>
+        <dialog
+          ref={dialogRef}
+          className={styles.dialog}
+          onClose={handleDialogClose}
+        >
+          <div
+            className={classNames(styles.dialogToolbar, {
+              [styles.dialogToolbarHidden]: !isToolbarVisible,
+            })}
+          >
+            <div className={styles.dialogTitle}>{`${activeIndex + 1} / ${
+              photoListData.length
+            }`}</div>
             <a
-              href={photo.href}
-              onClick={(e) => handleThumbnailClick(e, index)}
+              className={styles.dialogClose}
+              onClick={handleDialogCloseBtnClick}
             >
-              <img src={photo.thumbnail} />
+              <Xmark width="20" height="20" />
             </a>
           </div>
-        ))}
+          {activeIndex !== null && (
+            <Swiper
+              initialSlide={activeIndex}
+              modules={[Zoom, Lazy, Navigation, Keyboard]}
+              lazy
+              zoom
+              navigation
+              keyboard
+              spaceBetween={20}
+              onSlideChange={() => console.log("slide change")}
+              onActiveIndexChange={(swiper) => handleActiveIndexChange(swiper)}
+              onClick={handleSwiperClick}
+              onZoomChange={() => {
+                setIsToolbarVisible(false);
+              }}
+              className={styles.photoSwiper}
+            >
+              {photoListData.map((photo) => (
+                <SwiperSlide key={photo.thumbnail} zoom>
+                  <img data-src={photo.href} className="swiper-lazy" />
+                  <div className="swiper-lazy-preloader"></div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
+        </dialog>
       </div>
-      <div className={`${styles.copyright} ${styles.container}`}>
-        {`© ${new Date().getFullYear()} Hora Hora. All rights reserved.`}
-      </div>
-      <dialog
-        ref={dialogRef}
-        className={styles.dialog}
-        onClose={handleDialogClose}
-      >
-        <div
-          className={classNames(styles.dialogToolbar, {
-            [styles.dialogToolbarHidden]: !isToolbarVisible,
-          })}
-        >
-          <div className={styles.dialogTitle}>{`${activeIndex + 1} / ${
-            photoListData.length
-          }`}</div>
-          <a className={styles.dialogClose} onClick={handleDialogCloseBtnClick}>
-            <Xmark width="20" height="20" />
-          </a>
-        </div>
-        {activeIndex !== null && (
-          <Swiper
-            initialSlide={activeIndex}
-            modules={[Zoom, Lazy, Navigation, Keyboard]}
-            lazy
-            zoom
-            navigation
-            keyboard
-            spaceBetween={20}
-            onSlideChange={() => console.log("slide change")}
-            onActiveIndexChange={(swiper) => handleActiveIndexChange(swiper)}
-            onClick={handleSwiperClick}
-            onZoomChange={() => {
-              setIsToolbarVisible(false);
-            }}
-            className={styles.photoSwiper}
-          >
-            {photoListData.map((photo) => (
-              <SwiperSlide key={photo.thumbnail} zoom>
-                <img data-src={photo.href} className="swiper-lazy" />
-                <div className="swiper-lazy-preloader"></div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        )}
-      </dialog>
-    </div>
+    </>
   );
 }
