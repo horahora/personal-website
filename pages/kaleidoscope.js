@@ -8,43 +8,34 @@ gsap.registerPlugin(Observer);
 
 export default function Kaleidoscope() {
   const pageRef = useRef();
+  let velocity = 0;
 
   useLayoutEffect(() => {
-    let velocity = 0;
     pageRef.current.addEventListener("touchmove", (e) => {
       e.preventDefault();
     });
     Observer.create({
       target: pageRef.current,
-      // tolerance: 5,
+      tolerance: 5,
       preventDefault: true,
-      // onDrag(self) {
-      //   // console.log(self.event.type, self.deltaY, self.y);
-      // },
       onChange(self) {
-        console.log(self.velocityY);
+        console.log(self.velocityX, self.velocityY, self.isDragging);
         if (
           Math.abs(self.velocityY) > Math.abs(velocity) ||
           (self.deltaY < 0 && velocity > 0) ||
           (self.deltaY > 0 && velocity < 0) ||
           self.isDragging
         ) {
-          velocity = self.velocityY * (self.isDragging ? 10 : 1);
+          gsap.killTweensOf(pageRef.current);
+          velocity =
+            (Math.abs(self.velocityX) > Math.abs(self.velocityY)
+              ? self.velocityX
+              : self.velocityY) * (self.isDragging ? 10 : 1);
         }
-      },
-      onMove(self) {
-        // console.log(self.event.preventDefault());
-        // console.log(self.deltaX, self.deltaY);
-        // gsap.to(pageRef.current, {
-        //   "--rotation": `+=${self.deltaY}`,
-        //   duration: 2,
-        //   ease: "power4.out",
-        // });
       },
     });
 
     gsap.ticker.add((time, deltaTime) => {
-      console.log("deltaTime", deltaTime);
       if (Math.abs(velocity) < 50) {
         velocity = 0;
         return;
@@ -54,21 +45,27 @@ export default function Kaleidoscope() {
       gsap.set(pageRef.current, { "--rotation": `+=${adjustedVelocity}` });
       velocity *= 0.96;
     });
+
+    gsap.to(pageRef.current, {
+      "--rotation": `+=${gsap.utils.random(70, 110)}`,
+      duration: 1.5,
+      ease: "power4.out",
+    });
   }, []);
 
-  const handleMouseMove = (e) => {
-    console.log(e.movementX, e.movementY);
-    setRotation(
-      // (prevRotation) => (prevRotation += e.movementX)
-      (prevRotation) =>
-        Math.sqrt(e.movementX ** 2 + e.movementY ** 2) *
-        (e.movementY - e.movementX)
-    );
-  };
+  // const handleMouseMove = (e) => {
+  //   console.log(e.movementX, e.movementY);
+  //   setRotation(
+  //     // (prevRotation) => (prevRotation += e.movementX)
+  //     (prevRotation) =>
+  //       Math.sqrt(e.movementX ** 2 + e.movementY ** 2) *
+  //       (e.movementY - e.movementX)
+  //   );
+  // };
   return (
     <>
       <Head>
-        <title>eyes X eyes X eyes - Hora Hora</title>
+        <title>Kaleidoscope - Hora Hora</title>
         <meta name="theme-color" content="#000" />
       </Head>
 

@@ -6,6 +6,9 @@ import AppFooter from "../components/AppFooter";
 import Link from "next/link";
 import styles from "./Home.module.css";
 
+// TODO: 币圈分析图表、svg交互（包含路径移动画出字）、漫画作品、插画作品、跟随指针移动方向的3D物体、万花筒、3列逆向滚动、高斯模糊径向渐变的UI
+// 一些元素： 7. 下拉滚动逐帧动画（动画元素要自己重新画）. 小游戏. webgl ？， 6. 用p5.js做动态眼睛，live2D
+
 const portfolioList = [
   {
     href: "/photography",
@@ -32,6 +35,12 @@ const portfolioList = [
     src: "/images/work-eyes.png",
     srcset: "/images/work-eyes@2x.png 2x, /images/work-eyes@3x.png 3x",
     alt: "眼睛",
+  },
+  {
+    href: "/kaleidoscope",
+    src: "/images/work-kaleidoscope.jpg",
+    srcset: "/images/work-kaleidoscope.jpg 2x",
+    alt: "万花筒",
   },
   // {
   //   href: "/likeblack",
