@@ -342,7 +342,7 @@
 
 /* 1列 */
 @media screen and (max-width: 400px) {
-  .item:nth-last-child(-n + 8) {
+  .item:nth-last-child(-n + 7) {
     display: none;
   }
 
