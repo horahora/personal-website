@@ -78,13 +78,12 @@ const photoListData = [
 export default function Photography() {
   const [activeIndex, setActiveIndex] = useState(null);
   const [isToolbarVisible, setIsToolbarVisible] = useState(true);
-
-  const dialogRef = useRef();
+  const [isDialogVisible, setIsDialogVisible] = useState(false);
 
   const handleThumbnailClick = (e, index) => {
     e.preventDefault();
     setActiveIndex(index);
-    dialogRef.current.showModal();
+    setIsDialogVisible(true);
     // document.body.style.overflow = "hidden";
   };
 
@@ -95,11 +94,7 @@ export default function Photography() {
 
   const handleDialogClose = () => {
     setActiveIndex(null);
-  };
-
-  const handleDialogCloseBtnClick = () => {
-    dialogRef.current.close();
-    setActiveIndex(null);
+    setIsDialogVisible(false);
   };
 
   const handleSwiperClick = (swiper, e) => {
@@ -110,6 +105,27 @@ export default function Photography() {
       }
     );
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      // console.log(event.key);
+      // console.log(isDialogVisible);
+      if (isDialogVisible && event.key === "Escape") {
+        event.preventDefault();
+        handleDialogClose();
+      }
+    };
+
+    if (isDialogVisible) {
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      window.removeEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isDialogVisible]);
 
   return (
     <>
@@ -136,10 +152,11 @@ export default function Photography() {
         <div className={`${styles.copyright} ${styles.container}`}>
           {`© ${new Date().getFullYear()} Hora Hora. All rights reserved.`}
         </div>
-        <dialog
-          ref={dialogRef}
-          className={styles.dialog}
-          onClose={handleDialogClose}
+
+        <div
+          className={classNames(styles.dialog, {
+            [styles.show]: isDialogVisible,
+          })}
         >
           <div
             className={classNames(styles.dialogToolbar, {
@@ -149,10 +166,7 @@ export default function Photography() {
             <div className={styles.dialogTitle}>{`${activeIndex + 1} / ${
               photoListData.length
             }`}</div>
-            <a
-              className={styles.dialogClose}
-              onClick={handleDialogCloseBtnClick}
-            >
+            <a className={styles.dialogClose} onClick={handleDialogClose}>
               <Xmark width="20" height="20" />
             </a>
           </div>
@@ -181,7 +195,7 @@ export default function Photography() {
               ))}
             </Swiper>
           )}
-        </dialog>
+        </div>
       </div>
     </>
   );

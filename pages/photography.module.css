@@ -114,15 +114,19 @@
 } */
 
 .dialog {
-  padding: 0;
-  border: 0;
-  width: 100vw;
-  height: 100vh;
-  max-width: 100vw;
-  max-height: 100vh;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   user-select: none;
   background-color: #000;
   animation: photo-browser-in 0.4s;
+}
+
+.dialog.show {
+  display: block;
 }
 
 .dialogToolbar {
