@@ -122,11 +122,18 @@
   height: 100%;
   user-select: none;
   background-color: #000;
+  /* opacity: 0; */
+  /* pointer-events: none; */
+}
+
+.dialog.in {
+  display: block;
   animation: photo-browser-in 0.4s;
 }
 
-.dialog.show {
+.dialog.out {
   display: block;
+  animation: photo-browser-out 0.4s;
 }
 
 .dialogToolbar {

@@ -79,12 +79,15 @@ export default function Photography() {
   const [activeIndex, setActiveIndex] = useState(null);
   const [isToolbarVisible, setIsToolbarVisible] = useState(true);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
+  const dialogRef = useRef();
 
   const handleThumbnailClick = (e, index) => {
     e.preventDefault();
     setActiveIndex(index);
     setIsDialogVisible(true);
+    setIsToolbarVisible(true);
     // document.body.style.overflow = "hidden";
+    dialogRef.current.classList.add([styles.in]);
   };
 
   const handleActiveIndexChange = (swiper) => {
@@ -93,8 +96,19 @@ export default function Photography() {
   };
 
   const handleDialogClose = () => {
-    setActiveIndex(null);
-    setIsDialogVisible(false);
+    dialogRef.current.addEventListener(
+      "animationend",
+      () => {
+        dialogRef.current.classList.remove([styles.out]);
+        setActiveIndex(null);
+        setIsDialogVisible(false);
+      },
+      {
+        once: true,
+      }
+    );
+    dialogRef.current.classList.remove([styles.in]);
+    dialogRef.current.classList.add([styles.out]);
   };
 
   const handleSwiperClick = (swiper, e) => {
@@ -108,8 +122,6 @@ export default function Photography() {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      // console.log(event.key);
-      // console.log(isDialogVisible);
       if (isDialogVisible && event.key === "Escape") {
         event.preventDefault();
         handleDialogClose();
@@ -153,11 +165,7 @@ export default function Photography() {
           {`© ${new Date().getFullYear()} Hora Hora. All rights reserved.`}
         </div>
 
-        <div
-          className={classNames(styles.dialog, {
-            [styles.show]: isDialogVisible,
-          })}
-        >
+        <div ref={dialogRef} className={styles.dialog}>
           <div
             className={classNames(styles.dialogToolbar, {
               [styles.dialogToolbarHidden]: !isToolbarVisible,
