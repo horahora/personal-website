@@ -1,9 +1,9 @@
 /* 等边三角形的高 = tan60° * 0.5 */
-/* √3/2 = 0.866 */
+/* √3/2 = 0.866025403784439 */
 
 .page {
   /* --tile-length: 26vmin; */
-  --tile-length: 19.2455735vmin;
+  --tile-length: 18vmin;
   --rotation: 0deg;
   /* --animation-duration: 8s; */
   height: 100vh;
@@ -13,72 +13,151 @@
   background: black;
   user-select: none;
   /* overscroll-behavior: none; */
+  position: relative;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle closest-side at center,
+    transparent 60%,
+    black 120%
+  );
+  /* background: radial-gradient(circle at center, transparent 25%, black 60%); */
 }
 
 .kaleidoscope {
   position: relative;
-  width: calc(6 * 0.866 * var(--tile-length));
+  width: calc(6 * 0.8660254 * var(--tile-length));
   /* height: 135.096vmin; */
-  height: 100vmin;
+  height: 93.5307432vmin;
   transform: rotate(var(--rotation)) translate3d(0, 0, 0);
   /* transition: transform 0.1s linear; */
 
   /* animation: rotation var(--animation-duration) linear infinite; */
   /* border-radius: 9999px; */
-  overflow: hidden;
+  /* overflow: hidden; */
+  animation: fade-in 1s;
 }
 
-.kaleidoscope::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  background: radial-gradient(circle at center, transparent 25%, black 60%);
-  z-index: 10;
-  opacity: 1;
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .container {
   position: absolute;
+  inset: 0;
+  margin: auto;
   width: calc(2 * var(--tile-length));
   height: calc(2 * var(--tile-length));
   border-radius: 50%;
   overflow: hidden;
-  transform: translate(calc(var(--tile-length) * -0.134), -50%);
-}
-
-.container:nth-child(1) {
-  top: 50%;
-  left: 0%;
+  /* transform: translate(calc(var(--tile-length) * -0.134), -50%); */
+  /* filter: brightness(1.1); */
 }
 
 .container:nth-child(2) {
-  top: 50%;
-  left: calc(2 * calc(var(--tile-length) * 0.866));
+  transform: translate(calc(1.7320508 * var(--tile-length)));
 }
 
 .container:nth-child(3) {
-  top: 50%;
-  left: calc(4 * calc(var(--tile-length) * 0.866));
+  transform: rotate(60deg) translate(calc(1.7320508 * var(--tile-length)))
+    rotate(-60deg);
 }
 
 .container:nth-child(4) {
-  top: calc(50% - calc(1.5 * var(--tile-length)));
-  left: calc(var(--tile-length) * 0.866);
+  transform: rotate(120deg) translate(calc(1.7320508 * var(--tile-length)))
+    rotate(-120deg);
 }
 
 .container:nth-child(5) {
-  top: calc(50% - calc(1.5 * var(--tile-length)));
-  left: calc(3 * var(--tile-length) * 0.866);
+  transform: rotate(180deg) translate(calc(1.7320508 * var(--tile-length)))
+    rotate(-180deg);
 }
 
 .container:nth-child(6) {
-  top: calc(50% + calc(1.5 * var(--tile-length)));
-  left: calc(var(--tile-length) * 0.866);
+  transform: rotate(240deg) translate(calc(1.7320508 * var(--tile-length)))
+    rotate(-240deg);
 }
 
 .container:nth-child(7) {
-  top: calc(50% + calc(1.5 * var(--tile-length)));
-  left: calc(3 * var(--tile-length) * 0.866);
+  transform: rotate(300deg) translate(calc(1.7320508 * var(--tile-length)))
+    rotate(-300deg);
+}
+
+.container:nth-child(8) {
+  transform: rotate(30deg) translate(calc(3 * var(--tile-length)))
+    rotate(-30deg);
+}
+
+.container:nth-child(9) {
+  transform: rotate(60deg) translate(calc(3.4641016 * var(--tile-length)))
+    rotate(-60deg);
+}
+
+.container:nth-child(10) {
+  transform: rotate(90deg) translate(calc(3 * var(--tile-length)))
+    rotate(-90deg);
+}
+
+.container:nth-child(11) {
+  transform: rotate(120deg) translate(calc(3.4641016 * var(--tile-length)))
+    rotate(-120deg);
+}
+
+.container:nth-child(12) {
+  transform: rotate(150deg) translate(calc(3 * var(--tile-length)))
+    rotate(-150deg);
+}
+
+.container:nth-child(13) {
+  transform: rotate(180deg) translate(calc(3.4641016 * var(--tile-length)))
+    rotate(-180deg);
+}
+
+.container:nth-child(14) {
+  transform: rotate(210deg) translate(calc(3 * var(--tile-length)))
+    rotate(-210deg);
+}
+
+.container:nth-child(15) {
+  transform: rotate(240deg) translate(calc(3.4641016 * var(--tile-length)))
+    rotate(-240deg);
+}
+
+.container:nth-child(16) {
+  transform: rotate(270deg) translate(calc(3 * var(--tile-length)))
+    rotate(-270deg);
+}
+
+.container:nth-child(17) {
+  transform: rotate(300deg) translate(calc(3.4641016 * var(--tile-length)))
+    rotate(-300deg);
+}
+
+.container:nth-child(18) {
+  transform: rotate(330deg) translate(calc(3 * var(--tile-length)))
+    rotate(-330deg);
+}
+
+.container:nth-child(19) {
+  transform: rotate(360deg) translate(calc(3.4641016 * var(--tile-length)))
+    rotate(-360deg);
+}
+
+.container:nth-child(n + 2) {
+  filter: brightness(0.85);
+}
+
+.container:nth-child(n + 8) {
+  filter: brightness(0.55);
 }
 
 /* @keyframes rotation {
