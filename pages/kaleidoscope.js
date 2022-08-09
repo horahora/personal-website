@@ -11,9 +11,9 @@ export default function Kaleidoscope() {
   let velocity = 0;
 
   useLayoutEffect(() => {
-    pageRef.current.addEventListener("touchmove", (e) => {
-      e.preventDefault();
-    });
+    // pageRef.current.addEventListener("touchmove", (e) => {
+    //   e.preventDefault();
+    // });
     Observer.create({
       target: pageRef.current,
       tolerance: 5,

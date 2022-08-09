@@ -209,12 +209,11 @@
 }
 
 .texture {
+  /* 对素材的要求：透光、高光、小、多、留一定的空白透光感 */
   position: absolute;
   height: calc(1.75 * var(--tile-length));
   width: calc(1.75 * var(--tile-length));
-  /* background-image: url(https://zupimages.net/up/21/39/6p27.png); */
   background-image: url(/images/kaleidoscope-material.jpg);
-
   background-size: 100%;
   /* transition: transform 0.1s linear; */
   transform: rotate(var(--rotation)) translate3d(0, 0, 0);

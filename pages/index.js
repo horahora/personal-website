@@ -39,7 +39,8 @@ const portfolioList = [
   {
     href: "/kaleidoscope",
     src: "/images/work-kaleidoscope.jpg",
-    srcset: "/images/work-kaleidoscope.jpg 2x",
+    srcset:
+      "/images/work-kaleidoscope@2x.jpg 2x, /images/work-kaleidoscope@3x.jpg 3x",
     alt: "万花筒",
   },
   // {
@@ -63,7 +64,7 @@ export default function Home() {
       <Head>
         <title>Hora Hora</title>
         <meta name="description" content="这里是 仇俊斌 的个人作品集" />
-        <meta name="theme-color" content="#f0f0f0" />
+        <meta name="theme-color" content="hsl(0deg 0% 91%)" />
       </Head>
 
       <div className={styles.pageWrapper}>

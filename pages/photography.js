@@ -187,6 +187,7 @@ export default function Photography() {
               navigation
               keyboard
               spaceBetween={20}
+              simulateTouch={false}
               onSlideChange={() => console.log("slide change")}
               onActiveIndexChange={(swiper) => handleActiveIndexChange(swiper)}
               onClick={handleSwiperClick}
