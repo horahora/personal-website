@@ -25,6 +25,13 @@ const portfolioList = [
     alt: "视差滚动",
   },
   {
+    href: "/kaleidoscope",
+    src: "/images/work-kaleidoscope.jpg",
+    srcset:
+      "/images/work-kaleidoscope@2x.jpg 2x, /images/work-kaleidoscope@3x.jpg 3x",
+    alt: "万花筒",
+  },
+  {
     href: "/waves",
     src: "/images/work-waves.png",
     srcset: "/images/work-waves@2x.png 2x, /images/work-waves@3x.png 3x",
@@ -36,13 +43,7 @@ const portfolioList = [
     srcset: "/images/work-eyes@2x.png 2x, /images/work-eyes@3x.png 3x",
     alt: "眼睛",
   },
-  {
-    href: "/kaleidoscope",
-    src: "/images/work-kaleidoscope.jpg",
-    srcset:
-      "/images/work-kaleidoscope@2x.jpg 2x, /images/work-kaleidoscope@3x.jpg 3x",
-    alt: "万花筒",
-  },
+
   // {
   //   href: "/likeblack",
   //   src: "/images/item_black.png",

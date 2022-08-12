@@ -5,7 +5,7 @@ export default function Waves() {
     <>
       <div className={styles.header}>
         <div className={styles.innerHeader}>
-          <h1 className={styles.title}>Waves Animation</h1>
+          <h1 className={styles.title}>Waves</h1>
         </div>
         <div>
           <svg
