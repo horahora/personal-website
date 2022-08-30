@@ -14,7 +14,7 @@ export default function AppFooter() {
           <span>© {new Date().getFullYear()} Hora Hora.</span>{" "}
           <span className={styles.hiddenXs}>All rights reserved.</span>{" "}
           <a
-            href="https://github.com/horahora/personal-site"
+            href="https://github.com/horahora/personal-website"
             target="_blank"
             rel="noreferrer"
             className={styles.extra}

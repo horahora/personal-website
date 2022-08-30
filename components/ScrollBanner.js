@@ -37,7 +37,7 @@ export default function ScrollBanner() {
         <div
           className={`${styles.banner} banner`}
           style={{
-            marginBottom: "10vw",
+            marginBottom: "10vmax",
             transform: "translateX(-50vw) rotate(26deg)",
           }}
         >
@@ -46,25 +46,25 @@ export default function ScrollBanner() {
             data-from-x-percent="50"
             data-to-x-percent="-50"
           >
-            {new Array(6).fill("CAUTION!!").join("")}
+            {"CAUTION!!".repeat(6)}
           </div>
         </div>
         <div
           className={`${styles.banner} banner`}
-          style={{ marginBottom: "6vw" }}
+          style={{ marginBottom: "6vmax" }}
         >
           <div
             className={`${styles.text} text`}
             data-from-x-percent="-100"
             data-to-x-percent="0"
           >
-            {new Array(3).fill("CAUTION!!").join("")}
+            {"CAUTION!!".repeat(3)}
           </div>
         </div>
         <div
           className={`${styles.banner} banner`}
           style={{
-            marginBottom: "4vw",
+            marginBottom: "4vmax",
             transform: "rotate(9deg)",
           }}
         >
@@ -73,13 +73,13 @@ export default function ScrollBanner() {
             data-from-x-percent="50"
             data-to-x-percent="-50"
           >
-            {new Array(5).fill("CAUTION!!").join("")}
+            {"CAUTION!!".repeat(5)}
           </div>
         </div>
         <div
           className={`${styles.banner} banner`}
           style={{
-            transform: "translateX(-50vw) rotate(-19deg)",
+            transform: "translateX(-50vmax) rotate(-19deg)",
           }}
         >
           <div
@@ -87,21 +87,21 @@ export default function ScrollBanner() {
             data-from-x-percent="-100"
             data-to-x-percent="0"
           >
-            {new Array(6).fill("CAUTION!!").join("")}
+            {"CAUTION!!".repeat(6)}
           </div>
         </div>
         <div
           className={`${styles.banner} banner`}
           style={{
-            transform: "translateX(-10vw) rotate(3deg)",
+            transform: "translateX(-10vmax) rotate(3deg)",
           }}
         >
           <div
             className={`${styles.text} text`}
             data-from-x-percent="50"
-            data-to-x-percent="-50"
+            data-to-x-percent="-90"
           >
-            {new Array(2).fill("CAUTION!!").join("")}
+            {"CAUTION!!".repeat(2)}
           </div>
         </div>
       </div>

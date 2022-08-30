@@ -48,7 +48,7 @@
 
 @media only screen and (max-width: 734px) {
   .typographyHeadlineStandalone {
-    font-size: 48px;
+    font-size: 58px;
     line-height: 1.0834933333;
     font-weight: 600;
     letter-spacing: -0.003em;
@@ -72,8 +72,8 @@
     var(--headline-gradient-start),
     var(--headline-gradient-end)
   );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-clip: text;
   padding-bottom: 0.1em;
   /* margin-bottom: -0.1em; */
   margin-bottom: 1em;

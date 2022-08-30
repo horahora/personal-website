@@ -13,8 +13,11 @@ export default function HeadlineScrollShimmer({ children }) {
   useLayoutEffect(() => {
     ScrollTrigger.create({
       trigger: scrollTriggerRef.current,
+      start: "center center",
+      end: "bottom top",
       scrub: 0.5,
-      // markers: true,
+      pin: true,
+      markers: true,
       onUpdate(self) {
         setProgress(self.progress);
       },
