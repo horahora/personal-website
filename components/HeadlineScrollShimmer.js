@@ -17,7 +17,7 @@ export default function HeadlineScrollShimmer({ children }) {
       end: "bottom top",
       scrub: 0.5,
       pin: true,
-      markers: true,
+      // markers: true,
       onUpdate(self) {
         setProgress(self.progress);
       },

@@ -48,7 +48,7 @@
 
 @media only screen and (max-width: 734px) {
   .typographyHeadlineStandalone {
-    font-size: 58px;
+    font-size: 68px;
     line-height: 1.0834933333;
     font-weight: 600;
     letter-spacing: -0.003em;
@@ -76,7 +76,8 @@
   background-clip: text;
   padding-bottom: 0.1em;
   /* margin-bottom: -0.1em; */
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
+  margin: 1em 0;
 }
 
 .enhanceXp .headlineGradient {
