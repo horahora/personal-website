@@ -71,9 +71,7 @@ export default function Home() {
       <div className={styles.pageWrapper}>
         <header className={styles.globalHeader}>
           <Link href="/">
-            <a>
-              <h1>Hora Hora</h1>
-            </a>
+            <h1>Hora Hora</h1>
           </Link>
         </header>
         <main className={styles.portfolio}>

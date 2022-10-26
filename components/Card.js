@@ -11,10 +11,8 @@ export default function Card({ href, src, srcset, alt, placeholder }) {
     </li>
   ) : (
     <li className={styles.item}>
-      <Link href={href}>
-        <a className={styles.paper}>
-          <img src={src} srcSet={srcset} width="300" height="300" alt={alt} />
-        </a>
+      <Link href={href} className={styles.paper}>
+        <img src={src} srcSet={srcset} width="300" height="300" alt={alt} />
       </Link>
       {/*<Tilt
         tiltMaxAngleX={5}
