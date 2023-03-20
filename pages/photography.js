@@ -93,7 +93,7 @@ export default function Photography() {
     setActiveIndex(index);
     setIsDialogVisible(true);
     setIsToolbarVisible(true);
-    // document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
     dialogRef.current.classList.add([styles.in]);
   };
 
@@ -116,6 +116,7 @@ export default function Photography() {
     );
     dialogRef.current.classList.remove([styles.in]);
     dialogRef.current.classList.add([styles.out]);
+    document.body.style.overflow = "unset";
   };
 
   const handleSwiperClick = (swiper, e) => {
