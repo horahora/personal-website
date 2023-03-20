@@ -12,17 +12,17 @@
     "atropos": "^1.0.2",
     "classnames": "^2.3.2",
     "framework7-icons": "^5.0.5",
-    "gsap": "^3.11.0",
-    "next": "^13.0.0",
+    "gsap": "^3.11.5",
+    "next": "^13.2.4",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-parallax-tilt": "^1.7.42",
-    "swiper": "^8.3.2"
+    "swiper": "^9.1.1"
   },
   "devDependencies": {
-    "eslint": "^8.26.0",
-    "eslint-config-next": "^13.0.0",
-    "prettier": "^2.7.1"
+    "eslint": "^8.36.0",
+    "eslint-config-next": "^13.2.4",
+    "prettier": "^2.8.5"
   }
 }
