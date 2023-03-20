@@ -98,7 +98,7 @@ export default function Photography() {
   };
 
   const handleActiveIndexChange = (swiper) => {
-    console.log(swiper);
+    // console.log(swiper);
     setActiveIndex(swiper.activeIndex);
   };
 
@@ -119,13 +119,10 @@ export default function Photography() {
   };
 
   const handleSwiperClick = (swiper, e) => {
-    console.log("swiper lick");
     setIsToolbarVisible(!isToolbarVisible);
-    [swiper.navigation.$prevEl[0], swiper.navigation.$nextEl[0]].forEach(
-      (elem) => {
-        elem.classList.toggle("swiper-button-hidden", isToolbarVisible);
-      }
-    );
+    [swiper.navigation.prevEl, swiper.navigation.nextEl].forEach((elem) => {
+      elem.classList.toggle("swiper-button-hidden", isToolbarVisible);
+    });
   };
 
   useEffect(() => {
@@ -194,7 +191,7 @@ export default function Photography() {
               navigation
               keyboard
               spaceBetween={20}
-              simulateTouch={false}
+              simulateTouch={true}
               onSlideChange={() => console.log("slide change")}
               onActiveIndexChange={(swiper) => handleActiveIndexChange(swiper)}
               onClick={handleSwiperClick}
