@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Zoom, Lazy, Navigation, Keyboard } from "swiper";
 import "swiper/css";
 import "swiper/css/zoom";
-import "swiper/css/lazy";
 import "swiper/css/navigation";
 import styles from "./photography.module.css";
 import { Xmark } from "framework7-icons/react";
@@ -13,6 +12,14 @@ import classNames from "classnames";
 const baseUrl = "/images/photography";
 
 const photoListData = [
+  {
+    href: `${baseUrl}/000043.jpeg`,
+    thumbnail: `${baseUrl}/000043-thumbnail.jpeg`,
+  },
+  {
+    href: `${baseUrl}/000051.jpeg`,
+    thumbnail: `${baseUrl}/000051-thumbnail.jpeg`,
+  },
   {
     href: `${baseUrl}/L1004931.jpeg`,
     thumbnail: `${baseUrl}/L1004931-thumbnail.jpeg`,
@@ -112,6 +119,7 @@ export default function Photography() {
   };
 
   const handleSwiperClick = (swiper, e) => {
+    console.log("swiper lick");
     setIsToolbarVisible(!isToolbarVisible);
     [swiper.navigation.$prevEl[0], swiper.navigation.$nextEl[0]].forEach(
       (elem) => {
@@ -181,8 +189,7 @@ export default function Photography() {
           {activeIndex !== null && (
             <Swiper
               initialSlide={activeIndex}
-              modules={[Zoom, Lazy, Navigation, Keyboard]}
-              lazy
+              modules={[Zoom, Navigation, Keyboard]}
               zoom
               navigation
               keyboard
@@ -198,7 +205,7 @@ export default function Photography() {
             >
               {photoListData.map((photo) => (
                 <SwiperSlide key={photo.thumbnail} zoom>
-                  <img data-src={photo.href} className="swiper-lazy" />
+                  <img src={photo.href} loading="lazy" />
                   <div className="swiper-lazy-preloader"></div>
                 </SwiperSlide>
               ))}
