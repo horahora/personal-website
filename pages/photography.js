@@ -13,10 +13,6 @@ const baseUrl = "/images/photography";
 
 const photoListData = [
   {
-    href: `${baseUrl}/000043.jpeg`,
-    thumbnail: `${baseUrl}/000043-thumbnail.jpeg`,
-  },
-  {
     href: `${baseUrl}/000051.jpeg`,
     thumbnail: `${baseUrl}/000051-thumbnail.jpeg`,
   },
