@@ -1,4 +1,6 @@
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
+import { useIsomorphicLayoutEffect } from "../helpers/isomorphicEffect";
+
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./SlideToCenter.module.css";
@@ -7,34 +9,37 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SlideToCenter() {
   const slideContainerRef = useRef();
-  const q = gsap.utils.selector(slideContainerRef);
 
-  useLayoutEffect(() => {
-    q(".slider").forEach((item, i) => {
-      gsap.fromTo(
-        item,
-        {
-          x(index, target) {
-            //function-based value: will get called once for each target the first time the tween renders
-            return target.dataset.fromX;
+  useIsomorphicLayoutEffect(() => {
+    const ctx = gsap.context((self) => {
+      self.selector(".slider").forEach((item, i) => {
+        gsap.fromTo(
+          item,
+          {
+            x(index, target) {
+              //function-based value: will get called once for each target the first time the tween renders
+              return target.dataset.fromX;
+            },
+            y(index, target) {
+              return target.dataset.fromY;
+            },
           },
-          y(index, target) {
-            return target.dataset.fromY;
-          },
-        },
-        {
-          x: 0,
-          y: 0,
-          scrollTrigger: {
-            trigger: item,
-            start: "top bottom",
-            end: "top center",
-            scrub: 0.5,
-            // markers: true,
-          },
-        }
-      );
-    });
+          {
+            x: 0,
+            y: 0,
+            scrollTrigger: {
+              trigger: item,
+              start: "top bottom",
+              end: "top center",
+              scrub: 0.5,
+              // markers: true,
+            },
+          }
+        );
+      });
+    }, slideContainerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (

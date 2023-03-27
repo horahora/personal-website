@@ -26,9 +26,9 @@ export default function ScrollParallax({ bannerTextList }) {
         <ScrollBanner />
         <div style={{ height: "30vh" }}></div>
         <HeadlineScrollShimmer>
-          滚动，
+          滚动
           <br />
-          闪烁文字。
+          闪烁文字
         </HeadlineScrollShimmer>
         <SlideToCenter />
         <TextSpread text="\Spread/" />

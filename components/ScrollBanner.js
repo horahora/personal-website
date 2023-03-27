@@ -1,4 +1,6 @@
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
+import { useIsomorphicLayoutEffect } from "../helpers/isomorphicEffect";
+
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./ScrollBanner.module.css";
@@ -7,28 +9,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ScrollBanner() {
   const scrollTriggerRef = useRef();
-  const q = gsap.utils.selector(scrollTriggerRef);
 
-  useLayoutEffect(() => {
-    q(".banner").forEach((item, i) => {
-      gsap.fromTo(
-        item.querySelector(".text"),
-        {
-          xPercent(index, target) {
-            return target.dataset.fromXPercent;
+  useIsomorphicLayoutEffect(() => {
+    const ctx = gsap.context((self) => {
+      self.selector(".banner").forEach((item, i) => {
+        gsap.fromTo(
+          item.querySelector(".text"),
+          {
+            xPercent(index, target) {
+              return target.dataset.fromXPercent;
+            },
           },
-        },
-        {
-          xPercent(index, target) {
-            return target.dataset.toXPercent;
-          },
-          scrollTrigger: {
-            trigger: item,
-            scrub: 2,
-          },
-        }
-      );
-    });
+          {
+            xPercent(index, target) {
+              return target.dataset.toXPercent;
+            },
+            scrollTrigger: {
+              trigger: item,
+              scrub: 2,
+            },
+          }
+        );
+      });
+    }, scrollTriggerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (

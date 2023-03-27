@@ -1,4 +1,5 @@
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
+import { useIsomorphicLayoutEffect } from "../helpers/isomorphicEffect";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./TextSpread.module.css";
@@ -7,20 +8,23 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function TextSpread({ text }) {
   const textRef = useRef();
-  const q = gsap.utils.selector(textRef);
 
-  useLayoutEffect(() => {
-    q(".letter").forEach((letter, i, a) => {
-      // TODO: 小屏断点水平位移小一点
-      gsap.to(letter, {
-        x: 50 * (i - (a.length - 1) / 2),
-        scrollTrigger: {
-          trigger: textRef.current,
-          scrub: 0.5,
-          // markers: true,
-        },
+  useIsomorphicLayoutEffect(() => {
+    const ctx = gsap.context((self) => {
+      self.selector(".letter").forEach((letter, i, a) => {
+        // TODO: 小屏断点水平位移小一点
+        gsap.to(letter, {
+          x: 50 * (i - (a.length - 1) / 2),
+          scrollTrigger: {
+            trigger: textRef.current,
+            scrub: 0.5,
+            // markers: true,
+          },
+        });
       });
-    });
+    }, textRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
