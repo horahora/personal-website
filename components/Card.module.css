@@ -93,6 +93,19 @@
   will-change: transform;
 }
 
+/* .item .paper,
+.item .shadow {
+  transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+}
+
+.item:hover .paper {
+  transform: scale3d(1.005, 1.005, 1.01);
+}
+
+.item:hover .shadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+} */
+
 /* .item .paper.animated,
 .item .shadow.animated {
   animation: none !important;
