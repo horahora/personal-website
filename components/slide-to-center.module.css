@@ -1,0 +1,22 @@
+.component {
+  min-height: 75vh;
+  /* overflow-x: hidden; */
+}
+
+.slideWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, min(300px, calc(50% - 5px)));
+  justify-content: center;
+  gap: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.component img {
+  width: 100%;
+  height: auto;
+}
+
+.bottom {
+  grid-column: 1 / 3;
+}

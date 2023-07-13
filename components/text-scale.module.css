@@ -1,0 +1,44 @@
+.component {
+  /* position: relative; */
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.text {
+  margin-top: 35vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 45vh;
+  display: inline-block;
+  text-align: center;
+  font-size: 150px;
+  line-height: 1;
+  font-weight: 800;
+  color: var(--primary-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  /* writing-mode: vertical-rl; */
+  pointer-events: none;
+}
+
+@media only screen and (max-width: 734px) {
+  .text {
+    font-size: 100px;
+  }
+}
+
+.letter {
+  display: inline-block;
+}
+
+.textScroll {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 24px;
+  color: var(--primary-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}

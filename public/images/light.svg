@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 183.01 183.01">
+  <defs>
+    <radialGradient id="a" cx="91.51" cy="91.51" r="91.51" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".37" stop-color="#fffffe" stop-opacity=".99"/>
+      <stop offset=".51" stop-color="#fffefc" stop-opacity=".97"/>
+      <stop offset=".6" stop-color="#fffef8" stop-opacity=".92"/>
+      <stop offset=".68" stop-color="#fffdf3" stop-opacity=".85"/>
+      <stop offset=".75" stop-color="#fffbec" stop-opacity=".77"/>
+      <stop offset=".8" stop-color="#fff9e3" stop-opacity=".66"/>
+      <stop offset=".86" stop-color="#fff7d9" stop-opacity=".53"/>
+      <stop offset=".91" stop-color="#fff5cd" stop-opacity=".39"/>
+      <stop offset=".95" stop-color="#fff2bf" stop-opacity=".22"/>
+      <stop offset=".99" stop-color="#ffefb0" stop-opacity=".04"/>
+      <stop offset="1" stop-color="#ffeead" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="91.51" cy="91.51" r="91.51" style="fill:url(#a)"/>
+</svg>

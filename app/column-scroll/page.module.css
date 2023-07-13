@@ -1,0 +1,30 @@
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 33.33vw);
+  justify-items: center;
+}
+
+.columns figure {
+  width: 27vw;
+}
+
+.columns img {
+  width: 100%;
+}
+
+.column {
+}
+
+.columnWrapper {
+}
+
+.cube {
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  inset: 0;
+  margin: auto;
+  background-color: peru;
+  perspective: 1000px;
+  border-radius: 10px;
+}

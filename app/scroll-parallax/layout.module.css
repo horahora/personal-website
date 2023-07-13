@@ -1,0 +1,6 @@
+.pageRoot {
+  /* background-image: linear-gradient(#add5d8, #f8f8e5); */
+  overflow: hidden;
+  --primary-color: #cf5012;
+  background-color: #edf1e5;
+}

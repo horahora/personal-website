@@ -1,0 +1,69 @@
+.swiper {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper img {
+  width: inherit;
+  height: inherit;
+}
+
+.swiperScroller {
+  display: flex;
+  gap: 20px;
+  width: inherit;
+  height: inherit;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* for Firefox */
+  overscroll-behavior: none;
+  will-change: scroll-position;
+}
+
+.swiperScroller::-webkit-scrollbar {
+  display: none;
+}
+
+.swiperScroller section {
+  width: inherit;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.pagination a {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.pagination .active {
+  background-color: #fff;
+}
+
+.swiperButtonPrev,
+.swiperButtonNext {
+  position: absolute;
+}
+
+.swiperButtonPrev {
+  left: 10px;
+}
+
+.swiperButtonNext {
+  right: 10px;
+}

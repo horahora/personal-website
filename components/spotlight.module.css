@@ -1,0 +1,627 @@
+.main {
+  position: relative;
+  background-color: #000;
+  color: #fff;
+  padding: 109px 0 43px;
+}
+
+.mainLight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 2000px;
+  height: 100%;
+  overflow: hidden;
+}
+.mainLight.isActive .mainLightItem {
+  animation-play-state: running;
+}
+.mainLightItem {
+  position: absolute;
+  margin: auto;
+  background-image: url("/images/light.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 10;
+  pointer-events: none;
+}
+.mainLightItem1 {
+  top: -160px;
+  left: -2380px;
+  right: 0;
+  margin: auto;
+  width: 380px;
+  height: 380px;
+  z-index: 15;
+  mix-blend-mode: overlay;
+  animation: main_light_1 28000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  animation-play-state: paused;
+}
+
+@keyframes main_light_1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(2000px, 380px);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  75% {
+    transform: translate(2000px, 380px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+.mainLightItem1 {
+  opacity: 0.12;
+}
+.mainLightItem2 {
+  top: 0;
+  right: -2380px;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: 680px;
+  height: 680px;
+  z-index: 15;
+  opacity: 0.09;
+  animation: main_light_2 22000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite
+    600ms;
+  animation-play-state: paused;
+}
+@keyframes main_light_2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2380px, 0);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  75% {
+    transform: translate(-2380px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+.mainLightItem3 {
+  bottom: -160px;
+  left: 0;
+  right: -2380px;
+  margin: auto;
+  width: 380px;
+  height: 380px;
+  mix-blend-mode: overlay;
+  animation: main_light_3 28000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  animation-play-state: paused;
+}
+
+@keyframes main_light_3 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2000px, -380px);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  75% {
+    transform: translate(-2000px, -380px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+.mainLightItem3 {
+  opacity: 0.12;
+}
+.mainLightItem4 {
+  top: 0;
+  right: 0;
+  left: -2380px;
+  bottom: -1720px;
+  margin: auto;
+  width: 850px;
+  height: 850px;
+  opacity: 0.07;
+  animation: main_light_4 18000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite
+    1485ms;
+  animation-play-state: paused;
+}
+@keyframes main_light_4 {
+  0% {
+    transform: translate(0, 0);
+  }
+  30% {
+    transform: translate(2380px, -1700px);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  70% {
+    transform: translate(2380px, -1700px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .main {
+    height: 100vw;
+    padding-top: 0;
+  }
+  .main:before {
+    top: 2.2666666667vw;
+  }
+  .main:after {
+    bottom: 2.9333333333vw;
+  }
+
+  .mainLight {
+    max-width: 100%;
+    height: 100%;
+  }
+  .mainLightItem1 {
+    top: -173.3333333333vw;
+    left: -173.3333333333vw;
+    width: 86.6666666667vw;
+    height: 86.6666666667vw;
+    z-index: 15;
+  }
+
+  @keyframes main_light_1 {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(240vw, 360vw);
+    }
+    26% {
+      transform: translate(0, 360vw);
+    }
+    50% {
+      transform: translate(240vw, 0);
+    }
+    51% {
+      transform: translate(0, 0);
+    }
+    75% {
+      transform: translate(240vw, 360vw);
+    }
+    76% {
+      transform: translate(0, 360vw);
+    }
+    99% {
+      transform: translate(240vw, 0);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  .mainLightItem2 {
+    top: -66.6666666667vw;
+    right: -160vw;
+    width: 73.3333333333vw;
+    height: 73.3333333333vw;
+    z-index: 15;
+    opacity: 0.1;
+  }
+
+  @keyframes main_light_2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(-220vw, 0);
+    }
+    50% {
+      transform: translate(0, 0);
+    }
+    75% {
+      transform: translate(-220vw, 0);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  .mainLightItem3 {
+    bottom: -173.3333333333vw;
+    right: -173.3333333333vw;
+    width: 86.6666666667vw;
+    height: 86.6666666667vw;
+  }
+
+  @keyframes main_light_3 {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(-213.3333333333vw, -360vw);
+    }
+    26% {
+      transform: translate(0, -360vw);
+    }
+    50% {
+      transform: translate(-213.3333333333vw, 0);
+    }
+    51% {
+      transform: translate(0, 0);
+    }
+    75% {
+      transform: translate(-213.3333333333vw, -360vw);
+    }
+    76% {
+      transform: translate(0, -360vw);
+    }
+    99% {
+      transform: translate(-213.3333333333vw, 0);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  .mainLightItem4 {
+    top: 0;
+    left: -166.6666666667vw;
+    right: 0;
+    bottom: -66.6666666667vw;
+    margin: auto;
+    width: 85.3333333333vw;
+    height: 85.3333333333vw;
+    opacity: 0.11;
+  }
+
+  @keyframes main_light_4 {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(233.3333333333vw, 0);
+    }
+    50% {
+      transform: translate(0, 0);
+    }
+    75% {
+      transform: translate(233.3333333333vw, 0);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+}
+
+.mainContent {
+  display: flex;
+  justify-content: space-between;
+  width: 1208px;
+  margin: auto;
+  padding-top: 15px;
+}
+.mainContent.isVisible .mainMv {
+  opacity: 1;
+}
+
+.mainMv {
+  width: 613px;
+  height: 630px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 640ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.mainMv img {
+  margin-top: -149px;
+}
+
+@media screen and (max-width: 736px) {
+  .main {
+    padding-bottom: 0;
+  }
+  .mainContent {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding-top: 6vw;
+  }
+  .mainMv {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    height: 140.4vw;
+  }
+  .mainMv:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  .mainMv img {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .main {
+    padding-bottom: 0px;
+    overflow: hidden;
+  }
+
+  .main.isVisible .mainMv {
+    opacity: 1;
+  }
+  .mainContent {
+    position: relative;
+    margin: auto;
+    width: 1000px;
+  }
+  .mainLight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 1280px;
+    height: 100%;
+  }
+
+  .mainLight.isActive .mainLightItem {
+    animation-play-state: running;
+  }
+
+  .mainLight.isActive .mainLightItem2 {
+    opacity: 0.8;
+  }
+
+  .mainLight.isActive .mainLightItem2 {
+    opacity: 0.12;
+  }
+  .mainLightItem {
+    position: absolute;
+    margin: auto;
+    background-image: url("/special/bb100/assets/images2022aw/page/common/light.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .mainLightItem1 {
+    top: -400px;
+    right: -100px;
+    margin: auto;
+    width: 460px;
+    height: 460px;
+    z-index: 15;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    animation: light_1 15000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    animation-play-state: paused;
+  }
+  @keyframes light_1 {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    20% {
+      transform: translate3d(-1000px, 1200px, 0);
+    }
+    50% {
+      transform: translate3d(-1000px, 1200px, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .mainLightItem1 {
+    opacity: 0.12;
+  }
+  .mainLightItem2 {
+    top: 100px;
+    left: -600px;
+    bottom: 0;
+    margin: auto;
+    width: 650px;
+    height: 650px;
+    z-index: 15;
+    opacity: 0;
+    transition: opacity 500ms;
+    mix-blend-mode: overlay;
+    animation: light_2 5000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    animation-play-state: paused;
+  }
+  @keyframes light_2 {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(1800px, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .mainLightItem2 {
+    opacity: 0.12;
+  }
+  .mainLightItem3 {
+    top: -1050px;
+    left: -600px;
+    width: 1050px;
+    height: 1050px;
+    opacity: 0.12;
+    animation: light_3 6000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    animation-play-state: paused;
+  }
+  @keyframes light_3 {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    40% {
+      transform: translate3d(0, 1700px, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .mainLightItem4 {
+    bottom: -900px;
+    right: -370px;
+    width: 850px;
+    height: 850px;
+    opacity: 0.13;
+    animation: light_4 6000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    animation-play-state: paused;
+  }
+  @keyframes light_4 {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    40% {
+      transform: translate3d(0, -1700px, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .mainLightItem5 {
+    top: -1250px;
+    left: -1250px;
+    width: 1250px;
+    height: 1250px;
+    opacity: 0.09;
+    animation: light_5 5000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    animation-play-state: paused;
+  }
+
+  @keyframes light_5 {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(1800px, 1700px, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .mainMv {
+    position: relative;
+    margin: auto;
+    width: 460px;
+    opacity: 0;
+    transition: opacity 1200ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  @media screen and (max-width: 736px) {
+    .mainLight {
+      width: 100%;
+    }
+    .mainLightItem1 {
+      top: -109.3333333333vw;
+      right: -109.3333333333vw;
+      width: 82.6666666667vw;
+      height: 82.6666666667vw;
+      animation: light_1 15000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+      animation-play-state: paused;
+    }
+
+    @keyframes light_1 {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      20% {
+        transform: translate3d(-226.6666666667vw, 266.6666666667vw, 0);
+      }
+      50% {
+        transform: translate3d(-226.6666666667vw, 266.6666666667vw, 0);
+      }
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    .mainLightItem2 {
+      top: 26.6666666667vw;
+      left: -160vw;
+      bottom: 0;
+      width: 149.3333333333vw;
+      height: 149.3333333333vw;
+      animation: light_2 5000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+
+      animation-play-state: paused;
+    }
+
+    @keyframes light_2 {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      50% {
+        transform: translate3d(320vw, 0, 0);
+      }
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    .mainLightItem3 {
+      top: -109.3333333333vw;
+      left: -109.3333333333vw;
+      width: 109.3333333333vw;
+      height: 109.3333333333vw;
+
+      animation: light_3 6000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+
+      animation-play-state: paused;
+    }
+
+    @keyframes light_3 {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      40% {
+        transform: translate3d(162.6666666667vw, 282.6666666667vw, 0);
+      }
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    .mainLightItem5 {
+      top: -69.3333333333vw;
+      left: auto;
+      right: -69.3333333333vw;
+      width: 69.3333333333vw;
+      height: 69.3333333333vw;
+
+      animation: light_5 7000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+
+      animation-play-state: paused;
+    }
+    @keyframes light_5 {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      50% {
+        transform: translate3d(-109.3333333333vw, 242.6666666667vw, 0);
+      }
+    }
+    .mainContent {
+      padding-top: 0.2666666667vw;
+      width: 100%;
+    }
+    .mainMv {
+      margin-top: 0;
+      width: 100%;
+    }
+  }
+}

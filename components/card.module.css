@@ -1,0 +1,380 @@
+.item {
+  position: relative;
+  perspective: 1000px;
+}
+
+.item:nth-child(4n + 1) {
+  perspective-origin: 220.454545% 130%;
+}
+
+.item:nth-child(4n + 2) {
+  perspective-origin: 117.5% 130%;
+}
+
+.item:nth-child(4n + 3) {
+  perspective-origin: -6.8181818% 130%;
+}
+
+.item:nth-child(4n) {
+  perspective-origin: -120.454545% 130%;
+}
+
+.item .paper {
+  display: block;
+  /* aspect-ratio: 1 / 1; */ /* 当前兼容性还太低，先不用 */
+  padding: 10px;
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 1px;
+  transform-origin: 50% 0;
+  animation: fall 1.1s ease-out both;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.item .paper::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.item .paper:active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.item .paper:empty::after {
+  display: none;
+}
+
+@media screen and (min--moz-device-pixel-ratio: 0) {
+  .item .paper {
+    outline: 1px solid transparent;
+  }
+}
+
+/*
+.item a.paper:hover,
+.item a.paper:focus {
+          transform: rotateX(8deg);
+}
+*/
+
+/*
+.touch .item a.paper:hover,
+.touch .item a.paper:focus {
+          transform: rotateX(0);
+}
+*/
+
+.item img {
+  vertical-align: top;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  inset: 0;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.item .shadow {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: 1px;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transform-origin: 50% 0;
+  animation: fall-shadow 1.2s ease-out backwards;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* .item .paper,
+.item .shadow {
+  transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+}
+
+.item:hover .paper {
+  transform: scale3d(1.005, 1.005, 1.01);
+}
+
+.item:hover .shadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+} */
+
+/* .item .paper.animated,
+.item .shadow.animated {
+  animation: none !important;
+} */
+
+/*
+.item .paper:hover + .shadow,
+.item .paper:focus + .shadow {
+  background: rgba(0, 0, 0, 0.25);
+          transform: scale(1, 1.03);
+}
+*/
+
+/* .touch .item .paper:hover + .shadow,
+.touch .item .paper:focus + .shadow {
+  background: rgba(0, 0, 0, 0.35);
+  transform: scale(1);
+} */
+
+.item:nth-child(2) .paper,
+.item:nth-child(2) .shadow,
+.item:nth-child(3) .paper,
+.item:nth-child(3) .shadow {
+  animation-duration: 0.9s;
+  animation-delay: -0.04s;
+}
+
+.item:nth-child(2) .shadow,
+.item:nth-child(3) .shadow {
+  animation-duration: 1s;
+}
+
+.item:nth-child(1) .paper,
+.item:nth-child(1) .shadow,
+.item:nth-child(4) .paper,
+.item:nth-child(4) .shadow {
+  animation-duration: 1.1s;
+  animation-delay: 0;
+}
+
+.item:nth-child(1) .shadow,
+.item:nth-child(4) .shadow {
+  animation-duration: 1.2;
+}
+
+.item:nth-child(6) .paper,
+.item:nth-child(6) .shadow,
+.item:nth-child(7) .paper,
+.item:nth-child(7) .shadow {
+  animation-duration: 0.95s;
+  animation-delay: 0.04;
+}
+
+.item:nth-child(6) .shadow,
+.item:nth-child(7) .shadow {
+  animation-duration: 1.05s;
+}
+
+.item:nth-child(5) .paper,
+.item:nth-child(5) .shadow,
+.item:nth-child(8) .paper,
+.item:nth-child(8) .shadow {
+  animation-duration: 1.15s;
+  animation-delay: 0.06s;
+}
+
+.item:nth-child(5) .shadow,
+.item:nth-child(8) .shadow {
+  animation-duration: 1.25;
+}
+
+.item:nth-child(10) .paper,
+.item:nth-child(10) .shadow,
+.item:nth-child(11) .paper,
+.item:nth-child(11) .shadow {
+  animation-duration: 1s;
+  animation-delay: 0.1;
+}
+
+.item:nth-child(10) .shadow,
+.item:nth-child(11) .shadow {
+  animation-duration: 1.1;
+}
+
+.item:nth-child(9) .paper,
+.item:nth-child(9) .shadow,
+.item:nth-child(12) .paper,
+.item:nth-child(12) .shadow {
+  animation-duration: 1.2s;
+  animation-delay: 0.12s;
+}
+
+.item:nth-child(9) .shadow,
+.item:nth-child(12) .shadow {
+  animation-duration: 1.3;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 20px, 500px) rotateX(50deg);
+  }
+  2% {
+    opacity: 1;
+  }
+  60% {
+    transform: rotateX(8deg);
+  }
+}
+
+@keyframes fall-shadow {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100px, 0) scaleY(1.05);
+  }
+  10% {
+    opacity: 0.1;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  70% {
+    transform: translate3d(0, 0, 0) scaleY(1.03);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .item:nth-child(3n + 1) {
+    perspective-origin: 159.090909% 130%;
+  }
+
+  .item:nth-child(3n + 2) {
+    perspective-origin: 50% 130%;
+  }
+
+  .item:nth-child(3n) {
+    /* margin-right: 0; */
+    perspective-origin: -59.090909% 130%;
+  }
+
+  .item:nth-child(2) .paper,
+  .item:nth-child(2) .shadow {
+    animation-duration: 0.9s;
+    animation-delay: -0.02s;
+  }
+
+  .item:nth-child(2) .shadow {
+    animation-duration: 1s;
+  }
+
+  .item:nth-child(1) .paper,
+  .item:nth-child(1) .shadow,
+  .item:nth-child(3) .paper,
+  .item:nth-child(3) .shadow {
+    animation-duration: 1.1s;
+    animation-delay: 0;
+  }
+
+  .item:nth-child(1) .shadow,
+  .item:nth-child(3) .shadow {
+    animation-duration: 1.2;
+  }
+
+  .item:nth-child(5) .paper,
+  .item:nth-child(5) .shadow {
+    animation-duration: 0.95s;
+    animation-delay: 0.04;
+  }
+
+  .item:nth-child(5) .shadow {
+    animation-duration: 1.05s;
+  }
+
+  .item:nth-child(4) .paper,
+  .item:nth-child(4) .shadow,
+  .item:nth-child(6) .paper,
+  .item:nth-child(6) .shadow {
+    animation-duration: 1.15s;
+    animation-delay: 0.06s;
+  }
+
+  .item:nth-child(4) .shadow,
+  .item:nth-child(6) .shadow {
+    animation-duration: 1.25;
+  }
+
+  .item:nth-child(8) .paper,
+  .item:nth-child(8) .shadow {
+    animation-duration: 1s;
+    animation-delay: 0.1;
+  }
+
+  .item:nth-child(8) .shadow {
+    animation-duration: 1.1;
+  }
+
+  .item:nth-child(7) .paper,
+  .item:nth-child(7) .shadow,
+  .item:nth-child(9) .paper,
+  .item:nth-child(9) .shadow {
+    animation-duration: 1.2s;
+    animation-delay: 0.12s;
+  }
+
+  .item:nth-child(7) .shadow,
+  .item:nth-child(9) .shadow {
+    animation-duration: 1.3;
+  }
+
+  .item:nth-child(11) .paper,
+  .item:nth-child(11) .shadow {
+    animation-duration: 1.15s;
+    animation-delay: 0.16;
+  }
+
+  .item:nth-child(11) .shadow {
+    animation-duration: 1.25;
+  }
+
+  .item:nth-child(10) .paper,
+  .item:nth-child(10) .shadow,
+  .item:nth-child(12) .paper,
+  .item:nth-child(12) .shadow {
+    animation-duration: 1.25s;
+    animation-delay: 0.18s;
+  }
+
+  .item:nth-child(10) .shadow,
+  .item:nth-child(12) .shadow {
+    animation-duration: 1.35;
+  }
+}
+
+/* 2列 */
+@media screen and (max-width: 600px) {
+  .item .paper,
+  .item .shadow {
+    animation: none;
+  }
+  .item:nth-last-child(-n + 4) {
+    display: none;
+  }
+}
+
+/* 1列 */
+@media screen and (max-width: 400px) {
+  .item:nth-last-child(-n + 7) {
+    display: none;
+  }
+
+  .item:nth-child(2n + 1) {
+    perspective-origin: 105% 130%;
+  }
+
+  .item:nth-child(2n) {
+    /* margin-right: 0; */
+    perspective-origin: -5% 130%;
+  }
+
+  /*
+  .item a.paper:hover,
+  .item a.paper:focus {
+            transform: rotateX(0);
+  }
+
+  .item .paper:hover + .shadow,
+  .item .paper:focus + .shadow {
+    background: rgba(0, 0, 0, 0.35);
+            transform: scale(1);
+  }
+*/
+}

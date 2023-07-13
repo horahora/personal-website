@@ -1,0 +1,41 @@
+.page {
+  background-color: hsl(307deg 45% 7%);
+}
+
+.hero {
+  min-height: 90vh;
+  display: grid;
+  place-content: center;
+}
+
+.slideTitle {
+  position: relative;
+  font-size: 9vw;
+  margin: 0;
+  line-height: 1;
+  font-family: sans-serif;
+  /* font-family: shackleton-wide, "Playfair Display", "Calisto MT",
+    "Bookman Old Style", serif; */
+  font-weight: 400;
+  letter-spacing: -0.25vw;
+  color: #fff;
+  height: 10vw;
+  pointer-events: none;
+}
+
+.slideTitleInner {
+  display: block;
+  will-change: transform;
+}
+
+.slideTitleInner:not(:last-child) {
+  position: absolute;
+}
+
+.slideTitleInner:nth-child(1) {
+  color: hsl(348deg 99% 58%);
+}
+
+.slideTitleInner:nth-child(2) {
+  color: hsl(178deg 100% 49%);
+}

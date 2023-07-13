@@ -1,0 +1,23 @@
+.pWrapper {
+  display: inline-block;
+}
+
+.p {
+  margin: 0;
+}
+.p span {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  font: bold 40px/1 "Lucida Grande";
+  border: 2px solid black;
+  margin: -1px;
+  padding: 0 0 2px 0;
+}
+.p span b {
+  color: #06a6e6;
+}
+.right {
+  display: flex;
+  justify-content: end;
+}

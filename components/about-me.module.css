@@ -1,0 +1,150 @@
+.aboutMe {
+  position: relative;
+  height: 476px;
+  overflow: hidden;
+  color: #444;
+}
+
+.aboutMe a {
+  color: inherit;
+}
+
+.aboutMe a:hover,
+.aboutMe a:focus {
+  color: #000;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 1px;
+}
+
+.inner {
+  position: absolute;
+  left: 50%;
+  width: 360px;
+  height: 200px;
+  margin-left: -217px;
+  padding: 88px 859px 188px 37px;
+  line-height: 1.2;
+  background: url(/images/hand_with_card_horizontal.png) no-repeat;
+  background-image: image-set(
+    url(/images/hand_with_card_horizontal.png) 1x,
+    url(/images/hand_with_card_horizontal@2x.png) 2x
+  );
+  will-change: transform;
+}
+
+.inner.transparent {
+  opacity: 0;
+}
+
+.inner.handAnimation {
+  opacity: 1;
+  transform-origin: 150% 110%;
+  animation: hand-slide-in 0.8s ease-out backwards;
+  animation-delay: 0.05s;
+  backface-visibility: hidden;
+}
+
+@keyframes hand-slide-in {
+  0% {
+    z-index: 10000;
+    transform: translate3d(0, 60px, 0) rotateZ(-30deg);
+  }
+  100% {
+    z-index: 10000;
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 15px 0 15px 15px;
+  width: inherit;
+  height: inherit;
+}
+
+.content .avatar {
+  vertical-align: middle;
+}
+
+.content .textWrapper {
+  margin-left: 15px;
+}
+
+.content h1 {
+  font-size: 34px;
+  font-weight: 400;
+  margin: 10px 0 25px;
+  color: #555;
+}
+
+.content ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.content li {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.content .icon {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 440px) {
+  .aboutMe {
+    height: 444px;
+  }
+
+  .inner {
+    width: 200px;
+    height: 360px;
+    margin-left: -124px;
+    padding: 8px 276px 76px 24px;
+    background: url(/images/hand_with_card_vertical.png) no-repeat;
+    background-image: image-set(
+      url(/images/hand_with_card_vertical.png) 1x,
+      url(/images/hand_with_card_vertical@2x.png) 2x
+    );
+  }
+
+  .inner.handAnimation {
+    transform-origin: 110% 150%;
+  }
+
+  @keyframes hand-slide-in {
+    0% {
+      z-index: 10000;
+      transform: translate3d(0, 140px, 0) rotateZ(-40deg);
+    }
+    100% {
+      z-index: 10000;
+    }
+  }
+
+  .content {
+    flex-direction: column;
+    padding: 15px 15px 0;
+  }
+
+  .content .textWrapper {
+    writing-mode: vertical-rl;
+    margin: 15px 0 0;
+  }
+
+  .content h1 {
+    margin: 0 10px 0 25px;
+  }
+
+  .content li {
+    margin: 0 10px;
+  }
+
+  .content li .icon {
+    margin: 0 0 10px;
+  }
+}

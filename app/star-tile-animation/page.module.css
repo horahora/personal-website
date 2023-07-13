@@ -1,0 +1,105 @@
+.container {
+  height: 100vh;
+  background-size: 300px;
+  animation: animate-bg 13s linear infinite;
+  display: flow-root;
+}
+
+.container.spade {
+  background-color: #fffabf;
+  background-image: url(/images/tile-spade.svg);
+}
+
+.container.heart {
+  background-color: #a7f7fc;
+  background-image: url(/images/tile-heart.svg);
+}
+
+.container.diamond {
+  background-color: #b8f0b1;
+  background-image: url(/images/tile-diamond.svg);
+}
+
+.container.club {
+  background-color: #f8d8f8;
+  background-image: url(/images/tile-club.svg);
+}
+
+@keyframes animate-bg {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -300px 300px;
+  }
+}
+
+@media (max-width: 720px) {
+  @keyframes animate-bg {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -210px 210px;
+    }
+  }
+  .container {
+    background-size: 210px;
+    animation-duration: 10s;
+  }
+}
+
+.title {
+  margin: 26px 0 0 26px;
+  line-height: 1;
+  font-size: 80px;
+  font-weight: 800;
+  -webkit-text-stroke: 6px #000;
+  /* letter-spacing: 0.1em; */
+}
+
+.title::before {
+  content: attr(data-title);
+  position: absolute;
+  color: transparent;
+  background: linear-gradient(#f8f848 25%, #e89800 75%);
+  background-clip: text;
+  -webkit-text-stroke: 0;
+}
+
+.toggleWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.toggleBtn {
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+
+  /* background-color: hsl(208deg 91% 71%); */
+  background: linear-gradient(hsl(208deg 91% 71%), hsl(208deg 91% 71%))
+      padding-box,
+    linear-gradient(to right bottom, hsl(236deg 57% 50%), hsl(244deg 90% 30%))
+      border-box;
+  border: 4px solid transparent;
+  border-radius: 9999px;
+  /* box-shadow: 4px 4px 15px hsl(0deg 0% 0% / 35%); */
+}
+
+.toggleBtn:nth-child(1) {
+  margin-left: -50px;
+}
+.toggleBtn:nth-child(2) {
+  margin-left: 50px;
+}
+.toggleBtn:nth-child(3) {
+  margin-left: 150px;
+}
+.toggleBtn:nth-child(4) {
+  margin-left: 250px;
+}
