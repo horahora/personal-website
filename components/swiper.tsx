@@ -119,11 +119,11 @@ export default function Swiper({
           ))}
         </div>
         <nav className={styles.pagination} ref={paginationRef}>
-          {[...new Array(slideLength)].map((v, i: number) => (
+          {Array.from({ length: slideLength }, (element, index) => (
             <a
-              className={classNames({ [styles.active]: i === activeIndex })}
-              onClick={() => handlePaginationClick(i)}
-              key={i}
+              className={classNames({ [styles.active]: index === activeIndex })}
+              onClick={() => handlePaginationClick(index)}
+              key={index}
             ></a>
           ))}
         </nav>

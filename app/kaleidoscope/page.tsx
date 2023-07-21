@@ -67,9 +67,9 @@ export default function Kaleidoscope() {
     <>
       <div className={styles.page} ref={pageRef}>
         <div className={styles.kaleidoscope}>
-          {[...new Array(19)].map((v, i) => (
+          {Array.from({ length: 19 }, (_, i) => (
             <div className={styles.container} key={i}>
-              {[...new Array(6)].map((w, j) => (
+              {Array.from({ length: 6 }).map((_, j) => (
                 <div className={styles.tile} key={j}>
                   <div className={styles.texture}></div>
                 </div>

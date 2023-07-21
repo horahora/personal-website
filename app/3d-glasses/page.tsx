@@ -72,7 +72,7 @@ class TiltFx {
   translations: { x: number; y: number }[];
   requestId!: number | null;
   constructor(el: HTMLElement, options?: TileFxOptions) {
-    this.DOM = { el: el, moving: [...el.children] as HTMLElement[] };
+    this.DOM = { el: el, moving: Array.from(el.children) as HTMLElement[] };
     this.options = {
       valuesFromTo: [-50, 50],
       lerpFactorOuter: 0.25,
@@ -81,7 +81,7 @@ class TiltFx {
     };
     this.movingTotal = this.DOM.moving.length;
     this.mousePos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    this.translations = [...new Array(this.movingTotal)].map(() => ({
+    this.translations = Array.from({ length: this.movingTotal }, () => ({
       x: 0,
       y: 0,
     }));
