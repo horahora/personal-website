@@ -3,7 +3,9 @@
 import { useEffect, useRef } from "react";
 import styles from "./about-me.module.css";
 import utilStyles from "@/app/utils.module.css";
-import { Briefcase, Envelope, Placemark } from "framework7-icons/react";
+import Briefcase from "framework7-icons/svg/Briefcase.svg";
+import Placemark from "framework7-icons/svg/Placemark.svg";
+import Envelope from "framework7-icons/svg/Envelope.svg";
 
 export default function AboutMe() {
   const handRef = useRef<HTMLDivElement>(null!);
@@ -69,15 +71,35 @@ export default function AboutMe() {
             <h1>仇俊斌</h1>
             <ul>
               <li>
-                <Briefcase aria-labelledby="职业" className={styles.icon} />
+                <Briefcase
+                  aria-labelledby="职业"
+                  className={styles.icon}
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 56 56"
+                  fill="currentcolor"
+                />
                 Web开发/摄影师
               </li>
               <li>
-                <Placemark aria-label="现居" className={styles.icon} />
+                <Placemark
+                  viewBox="0 0 56 56"
+                  width="1em"
+                  height="1em"
+                  fill="currentcolor"
+                  aria-label="现居"
+                  className={styles.icon}
+                />
                 中国 上海
               </li>
               <li>
-                <Envelope className={styles.icon} />
+                <Envelope
+                  viewBox="0 0 56 56"
+                  width="1em"
+                  height="1em"
+                  fill="currentcolor"
+                  className={styles.icon}
+                />
                 <a href="mailto:contact@horahora.com">contact@horahora.com</a>
               </li>
               {/*<li>
