@@ -1,6 +1,7 @@
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import classNames from "classnames";
-import { ChevronLeft, ChevronRight } from "framework7-icons/react";
+import ChevronLeft from "framework7-icons/svg/chevron_left.svg";
+import ChevronRight from "framework7-icons/svg/chevron_right.svg";
 import styles from "./swiper.module.css";
 // import { gsap } from "gsap";
 // import { Observer } from "gsap/dist/Observer";
@@ -132,14 +133,24 @@ export default function Swiper({
           className={styles.swiperButtonPrev}
           onClick={handlePrevClick}
         >
-          <ChevronLeft />
+          <ChevronLeft
+            viewBox="0 0 56 56"
+            fill="currentcolor"
+            width="1em"
+            height="1em"
+          />
         </button>
         <button
           type="button"
           className={styles.swiperButtonNext}
           onClick={handleNextClick}
         >
-          <ChevronRight />
+          <ChevronRight
+            viewBox="0 0 56 56"
+            fill="currentcolor"
+            width="1em"
+            height="1em"
+          />
         </button>
       </div>
 

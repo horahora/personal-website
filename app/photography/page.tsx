@@ -10,7 +10,7 @@ import "swiper/css/zoom";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide, type SwiperClass } from "swiper/react";
 import { Zoom, Navigation, Keyboard } from "swiper/modules";
-import { Xmark } from "framework7-icons/react";
+import Xmark from "framework7-icons/svg/xmark.svg";
 import classNames from "classnames";
 
 export default function Photography() {
@@ -106,7 +106,12 @@ export default function Photography() {
             }`}</div>
           )}
           <a className={styles.dialogClose} onClick={handleDialogClose}>
-            <Xmark width="20" height="20" />
+            <Xmark
+              width="20"
+              height="20"
+              viewBox="0 0 56 56"
+              fill="currentcolor"
+            />
           </a>
         </div>
         {activeIndex !== null && (

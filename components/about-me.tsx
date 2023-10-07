@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 import styles from "./about-me.module.css";
 import utilStyles from "@/app/utils.module.css";
-import Briefcase from "framework7-icons/svg/Briefcase.svg";
-import Placemark from "framework7-icons/svg/Placemark.svg";
-import Envelope from "framework7-icons/svg/Envelope.svg";
+import Briefcase from "framework7-icons/svg/briefcase.svg";
+import Placemark from "framework7-icons/svg/placemark.svg";
+import Envelope from "framework7-icons/svg/envelope.svg";
 
 export default function AboutMe() {
   const handRef = useRef<HTMLDivElement>(null!);
