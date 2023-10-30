@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
+import type { Viewport } from "next";
 import Card from "@/components/card";
 import AboutMe from "@/components/about-me";
 import AppFooter from "@/components/app-footer";
@@ -9,7 +9,7 @@ import styles from "./page.module.css";
 // TODO: 币圈分析图表、svg交互（包含路径移动画出字）、漫画作品、插画作品、跟随指针移动方向的3D物体、万花筒、3列逆向滚动、高斯模糊径向渐变的UI
 // 一些元素： 7. 下拉滚动逐帧动画（动画元素要自己重新画）. 小游戏. webgl ？， 6. 用p5.js做动态眼睛，live2D
 
-export const metadata: Metadata = {
+export const viewport: Viewport = {
   themeColor: "hsl(0deg 0% 91%)",
 };
 

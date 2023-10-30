@@ -1,9 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import styles from "./page.module.css";
+
+export const viewport: Viewport = {
+  themeColor: "hsl(79deg 19% 96%)",
+};
 
 export const metadata: Metadata = {
   title: "Waves - Hora Hora",
-  themeColor: "hsl(79deg 19% 96%)",
 };
 
 export default function Waves() {
