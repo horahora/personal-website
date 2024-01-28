@@ -65,7 +65,7 @@ export default function Kaleidoscope() {
   // };
   return (
     <>
-      <div className={styles.page} ref={pageRef}>
+      <div className={"relative select-none " + styles.page} ref={pageRef}>
         <div className={styles.kaleidoscope}>
           {Array.from({ length: 19 }, (_, i) => (
             <div className={styles.container} key={i}>

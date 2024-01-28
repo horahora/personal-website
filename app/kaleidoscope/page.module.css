@@ -11,9 +11,7 @@
   place-content: center;
   overflow: hidden;
   background: black;
-  user-select: none;
   /* overscroll-behavior: none; */
-  position: relative;
 }
 
 .page::after {

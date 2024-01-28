@@ -66,7 +66,12 @@ const portfolioListAppendEmpty = [
 export default function Home() {
   return (
     <>
-      <div className={styles.pageWrapper}>
+      <div
+        className={
+          "relative overflow-hidden select-none cursor-default bg-[hsl(0deg_0%_91%)] bg-top selection:text-[#062617] selection:bg-[rgb(145_242_194/40%)] " +
+          styles.pageWrapper
+        }
+      >
         <header className={styles.globalHeader}>
           <Link href="/">
             <h1>Hora Hora</h1>

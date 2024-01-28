@@ -4,11 +4,6 @@
   height: auto;
 }
 
-.allowSelect {
-  cursor: auto;
-  user-select: text;
-}
-
 .disableHover {
   pointer-events: none;
 }

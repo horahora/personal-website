@@ -1,20 +1,16 @@
 .pageWrapper {
   --color-accent: #00b85e;
-  position: relative;
-  overflow: hidden;
-  background: hsl(0deg 0% 91%) url(/images/noise.png) 50% 0;
+  /* background: url(/images/noise.png); */
   background-image: image-set(
     url(/images/noise.png) 1x,
     url(/images/noise@2x.png) 2x,
     url(/images/noise@3x.png) 3x
   );
-  cursor: default;
-  user-select: none;
 }
 
 .pageWrapper ::selection {
-  color: #062617;
-  background: rgba(145, 242, 194, 0.4);
+  /* color: #062617; */
+  /* background: rgb(145 242 194 / 40%); */
   text-shadow: none;
 }
 
