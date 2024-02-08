@@ -81,7 +81,9 @@ export default function Photography() {
 
   return (
     <>
-      <div className={`${styles.photographyList} ${styles.container}`}>
+      <div
+        className={`mx-auto px-4 2xl:container ${styles.photographyList} ${styles.container}`}
+      >
         {photoListData.map((photo, index) => (
           <div className={styles.photoItem} key={photo.thumbnail}>
             <a

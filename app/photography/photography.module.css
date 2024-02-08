@@ -5,11 +5,10 @@
 }
 
 .container {
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  /* max-width: 1440px; */
+
+  /* padding-left: 15px;
+  padding-right: 15px; */
 }
 
 @supports (padding: max(0px)) {

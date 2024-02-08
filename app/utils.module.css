@@ -1,13 +1,3 @@
-.imgResponsive {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.disableHover {
-  pointer-events: none;
-}
-
 .textCarved {
   text-shadow: 0 1px rgba(255, 255, 255, 0.8);
 }

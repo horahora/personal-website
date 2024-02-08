@@ -3,30 +3,37 @@ import Link from "next/link";
 // import Tilt from "react-parallax-tilt";
 import styles from "./card.module.css";
 
-export default function Card({
-  href,
-  src,
-  srcset,
-  alt,
-  placeholder,
-}: {
+type Props = {
   href: string;
   src: string;
   srcset: string;
   alt: string;
   placeholder?: boolean;
-}) {
-  return placeholder ? (
+};
+
+export default function Card({ href, src, srcset, alt, placeholder }: Props) {
+  const paperClassName =
+    "block aspect-square bg-white rounded-[1px] active:after:absolute active:after:inset-0 active:after:bg-black/20 active:after:rounded-[inherit] active:after:pointer-events-none";
+
+  return (
     <li className={styles.item}>
-      <a className={styles.paper}></a>
-      <div className={styles.shadow}></div>
-    </li>
-  ) : (
-    <li className={styles.item}>
-      <Link href={href} className={styles.paper}>
-        <img src={src} srcSet={srcset} width="300" height="300" alt={alt} />
-      </Link>
-      {/*<Tilt
+      {placeholder ? (
+        <>
+          <a className={`${paperClassName} ${styles.paper}`} />
+        </>
+      ) : (
+        <>
+          <Link href={href} className={`${paperClassName} ${styles.paper}`}>
+            <img
+              src={src}
+              srcSet={srcset}
+              width="300"
+              height="300"
+              className="p-2.5 w-full"
+              alt={alt}
+            />
+          </Link>
+          {/*<Tilt
         tiltMaxAngleX={5}
         tiltMaxAngleY={0}
         glareEnable={true}
@@ -34,7 +41,14 @@ export default function Card({
         perspective={1000}
       >
       </Tilt>*/}
-      <div className={styles.shadow}></div>
+        </>
+      )}
+      <div
+        className={
+          "absolute -z-10 inset-0 rounded-[1px] bg-black/35 shadow-sm shadow-black/25 " +
+          styles.shadow
+        }
+      />
     </li>
   );
 }

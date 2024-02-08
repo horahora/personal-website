@@ -1,5 +1,5 @@
 .item {
-  position: relative;
+  /* position: relative; */
   perspective: 1000px;
 }
 
@@ -20,30 +20,10 @@
 }
 
 .item .paper {
-  display: block;
-  /* aspect-ratio: 1 / 1; */ /* 当前兼容性还太低，先不用 */
-  padding: 10px;
-  background-color: hsl(0, 0%, 100%);
-  border-radius: 1px;
   transform-origin: 50% 0;
   animation: fall 1.1s ease-out both;
   backface-visibility: hidden;
   will-change: transform;
-}
-
-.item .paper::before {
-  content: "";
-  display: block;
-  padding-top: 100%;
-}
-
-.item .paper:active::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: inherit;
-  pointer-events: none;
 }
 
 .item .paper:empty::after {
@@ -70,23 +50,8 @@
 }
 */
 
-.item img {
-  vertical-align: top;
-  position: absolute;
-  width: 100%;
-  height: auto;
-  inset: 0;
-  box-sizing: border-box;
-  padding: 10px;
-}
-
 .item .shadow {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  border-radius: 1px;
-  background: rgba(0, 0, 0, 0.35);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); */
   transform-origin: 50% 0;
   animation: fall-shadow 1.2s ease-out backwards;
   backface-visibility: hidden;

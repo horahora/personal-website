@@ -31,21 +31,10 @@ html {
 }
 
 body {
-  font-family: "PingFangSC", sans-serif;
-  font-size: 15px;
-  /* line-height: 1.5; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   color: #444;
-}
-
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
-  font-size: inherit;
 }
 
 input[type="checkbox"],
@@ -66,14 +55,7 @@ body.jp textarea {
   font-family: "Hiragino Kaku Gothic Pro", "Meiryo UI", "MS PGothic", sans-serif;
 } */
 
-/* h1,
-h2,
-h3 {
-  font-family: "PingFangSC", "Microsoft YaHei", "SimHei", sans-serif;
-} */
-
 a {
-  text-decoration: none;
   color: var(--color-link);
 }
 

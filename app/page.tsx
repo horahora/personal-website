@@ -68,17 +68,19 @@ export default function Home() {
     <>
       <div
         className={
-          "relative overflow-hidden select-none cursor-default bg-[hsl(0deg_0%_91%)] bg-top selection:text-[#062617] selection:bg-[rgb(145_242_194/40%)] " +
+          "relative overflow-hidden select-none cursor-default bg-[hsl(0deg_0%_91%)] bg-top selection:text-[#062617] selection:bg-[rgb(145_242_194/40%)] selection:[text-shadow:none] " +
           styles.pageWrapper
         }
       >
         <header className={styles.globalHeader}>
-          <Link href="/">
-            <h1>Hora Hora</h1>
+          <Link href="/" className="block mx-auto max-w-[888px]">
+            <h1 className="aspect-[888/250]">Hora Hora</h1>
           </Link>
         </header>
-        <main className={styles.portfolio}>
-          <ul className={styles.container}>
+        <main className={`pb-[60px] ${styles.portfolio}`}>
+          <ul
+            className={"mx-auto px-[15px] max-w-[1080px] " + styles.container}
+          >
             {portfolioListAppendEmpty.map((item, i) => (
               <Card
                 href={item.href}
