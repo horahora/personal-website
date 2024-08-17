@@ -52,7 +52,7 @@ export default function Kaleidoscope() {
         ease: "power4.out",
       });
 
-      const handleTouchMove = (e) => {
+      const handleTouchMove = (e: TouchEvent) => {
         e.preventDefault();
       };
 
@@ -65,7 +65,7 @@ export default function Kaleidoscope() {
     { scope: pageRef }
   );
 
-  // const handleMouseMove = (e) => {
+  // const handleTouchMovehandleTouchMove = (e) => {
   //   console.log(e.movementX, e.movementY);
   //   setRotation(
   //     // (prevRotation) => (prevRotation += e.movementX)
