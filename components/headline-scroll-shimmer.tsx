@@ -1,12 +1,10 @@
 import { useState, useRef } from "react";
-import { useIsomorphicLayoutEffect } from "@/utils/isomorphic-fffect";
 
-import { gsap } from "gsap";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./headline-scroll-shimmer.module.css";
 import classNames from "classnames";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function HeadlineScrollShimmer({
   children,
@@ -16,8 +14,8 @@ export default function HeadlineScrollShimmer({
   const [progress, setProgress] = useState(0);
   const scrollTriggerRef = useRef<HTMLDivElement>(null!);
 
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
       ScrollTrigger.create({
         trigger: scrollTriggerRef.current,
         start: "center center",
@@ -29,10 +27,9 @@ export default function HeadlineScrollShimmer({
           setProgress(self.progress);
         },
       });
-    }, scrollTriggerRef);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: scrollTriggerRef }
+  );
 
   return (
     <div

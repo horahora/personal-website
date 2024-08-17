@@ -1,16 +1,14 @@
 import { useRef } from "react";
-import { useIsomorphicLayoutEffect } from "@/utils/isomorphic-fffect";
-import { gsap } from "gsap";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./text-spread.module.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function TextSpread({ text }: { text: string }) {
   const textRef = useRef<HTMLSpanElement>(null!);
 
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context((self) => {
+  useGSAP(
+    (self) => {
       (self.selector?.(".letter") as HTMLElement[]).forEach((letter, i, a) => {
         // TODO: 小屏断点水平位移小一点
         gsap.to(letter, {
@@ -22,10 +20,9 @@ export default function TextSpread({ text }: { text: string }) {
           },
         });
       });
-    }, textRef);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: textRef }
+  );
 
   return (
     <div className={styles.component}>

@@ -1,18 +1,15 @@
 import { useRef } from "react";
-import { gsap } from "gsap";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useIsomorphicLayoutEffect } from "@/utils/isomorphic-fffect";
-
 import styles from "./text-scale.module.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function TextScale() {
   const pinContainerRef = useRef<HTMLDivElement>(null!);
   const textScrollRef = useRef<HTMLDivElement>(null!);
 
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
       gsap
         .timeline({
           scrollTrigger: {
@@ -51,10 +48,9 @@ export default function TextScale() {
           },
           "<"
         );
-    }, pinContainerRef);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: pinContainerRef }
+  );
 
   return (
     <div className={styles.component}>

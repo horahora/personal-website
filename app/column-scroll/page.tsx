@@ -2,10 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import styles from "./page.module.css";
-import { gsap } from "gsap";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function ColumnScroll() {
   const cubeRef = useRef<HTMLDivElement>(null!);

@@ -6,12 +6,13 @@ import TextSpread from "@/components/text-spread";
 import TextScale from "@/components/text-scale";
 import ScrollBanner from "@/components/scroll-banner";
 import SlideToCenter from "@/components/slide-to-center";
-import { gsap } from "gsap";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./scroll-parallax.module.css";
 import { todo } from "node:test";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 // TODO: 增加 滚动时物件沿着 svg path 移动的效果
 

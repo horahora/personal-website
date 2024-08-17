@@ -1,17 +1,14 @@
 import { useRef } from "react";
-import { useIsomorphicLayoutEffect } from "@/utils/isomorphic-fffect";
-
-import { gsap } from "gsap";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./slide-to-center.module.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function SlideToCenter() {
   const slideContainerRef = useRef<HTMLDivElement>(null!);
 
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context((self) => {
+  useGSAP(
+    (self) => {
       self.selector?.(".slider").forEach((item: HTMLElement) => {
         gsap.fromTo(
           item,
@@ -37,10 +34,9 @@ export default function SlideToCenter() {
           }
         );
       });
-    }, slideContainerRef);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: slideContainerRef }
+  );
 
   return (
     <div className={styles.component}>

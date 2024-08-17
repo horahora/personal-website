@@ -1,17 +1,15 @@
 import { useRef } from "react";
-import { useIsomorphicLayoutEffect } from "@/utils/isomorphic-fffect";
 
-import { gsap } from "gsap";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./scroll-banner.module.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function ScrollBanner() {
   const scrollTriggerRef = useRef<HTMLDivElement>(null!);
 
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context((self) => {
+  useGSAP(
+    (self) => {
       self.selector?.(".banner").forEach((item: HTMLElement) => {
         gsap.fromTo(
           item.querySelector(".text"),
@@ -31,10 +29,9 @@ export default function ScrollBanner() {
           }
         );
       });
-    }, scrollTriggerRef);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: scrollTriggerRef }
+  );
 
   return (
     <div className={styles.component}>
