@@ -30,7 +30,7 @@
   display: none;
 }
 
-@media screen and (min--moz-device-pixel-ratio: 0) {
+@media (min--moz-device-pixel-ratio: 0) {
   .item .paper {
     outline: 1px solid transparent;
   }
@@ -197,7 +197,7 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media (max-width: 767px) {
   .item:nth-child(3n + 1) {
     perspective-origin: 159.090909% 130%;
   }
@@ -305,7 +305,7 @@
 }
 
 /* 2列 */
-@media screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .item .paper,
   .item .shadow {
     animation: none;
@@ -313,33 +313,4 @@
   .item:nth-last-child(-n + 4) {
     display: none;
   }
-}
-
-/* 1列 */
-@media screen and (max-width: 400px) {
-  .item:nth-last-child(-n + 7) {
-    display: none;
-  }
-
-  .item:nth-child(2n + 1) {
-    perspective-origin: 105% 130%;
-  }
-
-  .item:nth-child(2n) {
-    /* margin-right: 0; */
-    perspective-origin: -5% 130%;
-  }
-
-  /*
-  .item a.paper:hover,
-  .item a.paper:focus {
-            transform: rotateX(0);
-  }
-
-  .item .paper:hover + .shadow,
-  .item .paper:focus + .shadow {
-    background: rgba(0, 0, 0, 0.35);
-            transform: scale(1);
-  }
-*/
 }

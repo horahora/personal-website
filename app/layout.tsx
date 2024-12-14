@@ -1,5 +1,5 @@
-import "./globals.css";
 import type { Viewport, Metadata } from "next";
+import "./globals.css";
 
 export const viewport: Viewport = {
   width: "device-width",

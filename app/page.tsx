@@ -74,7 +74,7 @@ export default function Home() {
       >
         <header className={styles.globalHeader}>
           <Link href="/" className="block mx-auto max-w-[888px]">
-            <h1 className="aspect-[888/250]">Hora Hora</h1>
+            <h1 className="aspect-888/250">Hora Hora</h1>
           </Link>
         </header>
         <main className={`pb-[60px] ${styles.portfolio}`}>

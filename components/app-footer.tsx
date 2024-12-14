@@ -9,7 +9,7 @@ export default function AppFooter() {
         <li><a href="/jp.html">日本語</a></li>
       </ul>
 */}
-        <p className="text-[12px] font-[Verdana,sans-serif] text-[#666] [text-shadow:0_1px_rgb(255_255_255_/_80)]">
+        <p className="text-[12px] font-[Verdana,sans-serif] text-[#666] text-carved">
           <span>© {new Date().getFullYear()} Hora Hora.</span>{" "}
           <span className="hidden min-[440px]:inline">
             All rights reserved.

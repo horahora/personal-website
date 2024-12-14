@@ -1,7 +1,5 @@
 .swiper {
   position: relative;
-  width: 300px;
-  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,6 +8,7 @@
 .swiper img {
   width: inherit;
   height: inherit;
+  object-fit: contain;
 }
 
 .swiperScroller {
@@ -31,6 +30,7 @@
 
 .swiperScroller section {
   width: inherit;
+  height: inherit;
   flex-shrink: 0;
   scroll-snap-align: center;
   scroll-snap-stop: always;

@@ -2,9 +2,9 @@
   position: relative;
   text-align: center;
   background: linear-gradient(
-    60deg,
-    rgba(84, 58, 183, 1) 0%,
-    rgba(0, 172, 193, 1) 100%
+    in oklch 60deg,
+    rgb(75, 52, 169) 0%,
+    rgb(2, 163, 184) 100%
   );
   color: hsl(79deg 19% 96%);
 }

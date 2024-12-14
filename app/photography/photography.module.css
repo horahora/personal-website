@@ -4,13 +4,6 @@
   user-select: none;
 }
 
-.container {
-  /* max-width: 1440px; */
-
-  /* padding-left: 15px;
-  padding-right: 15px; */
-}
-
 @supports (padding: max(0px)) {
   .container {
     padding-left: max(15px, env(safe-area-inset-left));
@@ -21,8 +14,6 @@
 .pageTitle {
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
-  padding-left: 0;
-  padding-right: 0;
   color: #1a1a1a;
   font-size: 28px;
   font-weight: 400;

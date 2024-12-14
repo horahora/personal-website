@@ -29,7 +29,7 @@ export default function Card({ href, src, srcset, alt, placeholder }: Props) {
               srcSet={srcset}
               width="300"
               height="300"
-              className="p-2.5 w-full"
+              className="p-[min(10px,4.166%)] w-full"
               alt={alt}
             />
           </Link>
@@ -45,7 +45,7 @@ export default function Card({ href, src, srcset, alt, placeholder }: Props) {
       )}
       <div
         className={
-          "absolute -z-10 inset-0 rounded-[1px] bg-black/35 shadow-sm shadow-black/25 " +
+          "absolute -z-10 inset-0 rounded-[1px] bg-black/35 shadow-xs shadow-black/25 " +
           styles.shadow
         }
       />

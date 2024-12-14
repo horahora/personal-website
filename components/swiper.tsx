@@ -3,7 +3,7 @@ import classNames from "classnames";
 import ChevronLeft from "framework7-icons/svg/chevron_left.svg";
 import ChevronRight from "framework7-icons/svg/chevron_right.svg";
 import styles from "./swiper.module.css";
-// import { gsap } from "gsap";
+// import gsap from "gsap";
 // import { Observer } from "gsap/dist/Observer";
 
 // gsap.registerPlugin(Observer);
@@ -92,7 +92,7 @@ export default function Swiper({
 
   return (
     <>
-      <div className={styles.swiper} ref={swiperRef}>
+      <div className={`${styles.swiper} w-full h-full`} ref={swiperRef}>
         <div
           className={styles.swiperScroller}
           onTouchMove={(event) => {
@@ -153,8 +153,6 @@ export default function Swiper({
           />
         </button>
       </div>
-
-      <p>Active Index: {activeIndex}</p>
     </>
   );
 }

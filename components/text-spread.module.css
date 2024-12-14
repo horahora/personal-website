@@ -14,13 +14,13 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-@media screen and (max-width: 734px) {
+@media (max-width: 734px) {
   .text {
     font-size: 40px;
   }
 }
 
-@media screen and (max-width: 500px) {
+@media (max-width: 500px) {
   .text {
     font-size: 30px;
   }

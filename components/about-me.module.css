@@ -30,7 +30,7 @@
   }
 }
 
-@media screen and (max-width: 440px) {
+@media (max-width: 440px) {
   .inner {
     /* width: 500px; */
     /* margin-left: -124px; */

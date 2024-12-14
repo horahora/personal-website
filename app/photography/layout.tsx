@@ -8,11 +8,13 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles.page}>
-      <div className={styles.container}>
-        <h1 className={styles.pageTitle}>仇俊斌的摄影随拍</h1>
+      <div className={`${styles.container} 2xl:container mx-auto`}>
+        <h1 className={`${styles.pageTitle} my-4`}>仇俊斌的摄影随拍</h1>
       </div>
       {children}
-      <div className={`${styles.copyright} ${styles.container}`}>
+      <div
+        className={`${styles.copyright} ${styles.container} 2xl:container mx-auto`}
+      >
         {`© ${new Date().getFullYear()} Hora Hora. All rights reserved.`}
       </div>
     </div>

@@ -42,7 +42,7 @@
   background-size: auto 100%;
 }
 
-/* @media screen and (max-width: 440px) {
+/* @media (max-width: 440px) {
   .globalHeader a h1 {
     padding-bottom: 60%;
     background-image: url(/images/horahora-vertical.png);
@@ -56,32 +56,25 @@
   /* 30 / 1000 = 0.03 */
 }
 
-@media screen and (max-width: 1050px) {
+@media (max-width: 1050px) {
   .portfolio .container {
     gap: 15px;
   }
 }
 
 /* 3列 */
-@media screen and (max-width: 767px) {
+@media (max-width: 767px) {
   .portfolio .container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 /* 2列 */
-@media screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .portfolio .container {
     grid-template-columns: repeat(2, 1fr);
     /* animation: slide-in 0.4s cubic-bezier(0.33, 1, 0.68, 1); */
     /* will-change: transform; */
-  }
-}
-
-/* 1列 */
-@media screen and (max-width: 400px) {
-  .portfolio .container {
-    grid-template-columns: 1fr;
   }
 }
 
