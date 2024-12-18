@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./headline-scroll-shimmer.module.css";
@@ -42,9 +41,11 @@ export default function HeadlineScrollShimmer({
       <div ref={scrollTriggerRef}>
         <p
           className={styles.headlineGradient}
-          style={{
-            ["--gradient-position" as any]: `${140 - (140 + 40) * progress}%`,
-          }}
+          style={
+            {
+              ["--gradient-position"]: `${140 - (140 + 40) * progress}%`,
+            } as React.CSSProperties
+          }
         >
           {children}
         </p>

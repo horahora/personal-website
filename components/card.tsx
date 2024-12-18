@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 // import Tilt from "react-parallax-tilt";
 import styles from "./card.module.css";
@@ -13,7 +13,7 @@ type Props = {
 
 export default function Card({ href, src, srcset, alt, placeholder }: Props) {
   const paperClassName =
-    "block aspect-square bg-white rounded-[1px] active:after:absolute active:after:inset-0 active:after:bg-black/20 active:after:rounded-[inherit] active:after:pointer-events-none";
+    "block aspect-square bg-white rounded-[1px] active:after:absolute active:after:inset-0 active:after:rounded-[inherit] active:after:pointer-events-none";
 
   return (
     <li className={styles.item}>
@@ -44,10 +44,7 @@ export default function Card({ href, src, srcset, alt, placeholder }: Props) {
         </>
       )}
       <div
-        className={
-          "absolute -z-10 inset-0 rounded-[1px] bg-black/35 shadow-xs shadow-black/25 " +
-          styles.shadow
-        }
+        className={"absolute -z-10 inset-0 rounded-[1px] " + styles.shadow}
       />
     </li>
   );

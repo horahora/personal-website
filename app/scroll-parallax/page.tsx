@@ -9,8 +9,6 @@ import SlideToCenter from "@/components/slide-to-center";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import styles from "./scroll-parallax.module.css";
-import { todo } from "node:test";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 

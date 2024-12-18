@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 import styles from "./page.module.css";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";

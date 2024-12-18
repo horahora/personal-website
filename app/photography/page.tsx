@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./photography.module.css";
-import Link from "next/link";
+// import Link from "next/link";
 import photoListData from "./photo-list-data";
 // import Image from "next/image";
 import "swiper/css";

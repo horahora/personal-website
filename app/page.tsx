@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import type { Viewport } from "next";
 import Card from "@/components/card";
