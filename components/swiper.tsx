@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
 import ChevronLeft from "framework7-icons/svg/chevron_left.svg";
 import ChevronRight from "framework7-icons/svg/chevron_right.svg";

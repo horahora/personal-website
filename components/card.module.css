@@ -78,7 +78,7 @@
   }
   .item:active .paper {
     transform: translateZ(5px);
-    transition-duration: 0.05s;
+    transition-duration: 0.03s;
   }
   .item:hover .shadow {
     filter: blur(2px);
@@ -86,6 +86,10 @@
     transform: translateY(4px);
     opacity: 0.9;
     /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); */
+  }
+  .item:active .shadow {
+    transform: translateY(3px);
+    transition-duration: 0.03s;
   }
 }
 
@@ -213,7 +217,7 @@
   }
   70% {
     transform: translate3d(0, 0, 0) scaleY(1.03);
-    filter: blur(1px);
+    filter: blur(2px);
   }
 }
 

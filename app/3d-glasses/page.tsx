@@ -11,14 +11,14 @@ const lineEq = (
   x1: number,
   currentVal: number
 ) => {
-  let m = (y2 - y1) / (x2 - x1);
-  let b = y1 - m * x1;
+  const m = (y2 - y1) / (x2 - x1);
+  const b = y1 - m * x1;
   return m * currentVal + b;
 };
 const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b;
 
 export default function ThreeDGlasses() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  // const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const slideTitleRef = useRef<HTMLHeadingElement>(null!);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function ThreeDGlasses() {
     const textTilt = new TiltFx(slideTitleRef.current);
 
     if (!!window.IntersectionObserver) {
-      const observer = new IntersectionObserver((entrys, observer) => {
+      const observer = new IntersectionObserver((entrys) => {
         entrys.forEach((entry) => {
           if (entry.isIntersecting) {
             textTilt.start();
@@ -95,7 +95,7 @@ class TiltFx {
   }
   render() {
     for (let i = 0; i <= this.movingTotal - 1; ++i) {
-      let lerpFactor =
+      const lerpFactor =
         i < this.movingTotal - 1
           ? this.options.lerpFactor(i)
           : this.options.lerpFactorOuter;

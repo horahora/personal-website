@@ -10,7 +10,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function ColumnScroll() {
   const cubeRef = useRef<HTMLDivElement>(null!);
-  let proxy = { rotateX: 0 };
+  const proxy = { rotateX: 0 };
   useEffect(() => {
     const clamp = gsap.utils.clamp(-60, 60);
     gsap.to(`.${styles.columnWrapper}`, {
@@ -30,7 +30,7 @@ export default function ColumnScroll() {
             "velocity",
             self.getVelocity()
           );
-          let rotateX = clamp(self.getVelocity() / 100);
+          const rotateX = clamp(self.getVelocity() / 100);
           cubeRef.current.style.transform = `translate3d(0, ${-rotateX}px, 0) perspective(1000px) rotateX(${-rotateX}deg)`;
           if (Math.abs(rotateX) > Math.abs(proxy.rotateX)) {
             proxy.rotateX = rotateX;
