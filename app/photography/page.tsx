@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./photography.module.css";
 // import Link from "next/link";
-import photoListData from "./photo-list-data";
+// import photoListData from "./photo-list-data";
+import photoListData from "./photo-list.json" with { type: "json" };
 // import Image from "next/image";
 import "swiper/css";
 import "swiper/css/zoom";
@@ -89,7 +90,7 @@ export default function Photography() {
               // href={photo.href}
               onClick={(event) => handleThumbnailClick(event, index)}
             >
-              <img src={`/images/photography/${photo.thumbnail}`} />
+              <img src={`/images/photography/${photo.thumbnail}`} alt="" />
             </a>
           </div>
         ))}
@@ -137,6 +138,7 @@ export default function Photography() {
                 <img
                   src={`/images/photography/${photo.original}`}
                   loading="lazy"
+                  alt=""
                 />
                 <div className="swiper-lazy-preloader"></div>
               </SwiperSlide>

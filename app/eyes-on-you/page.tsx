@@ -1,20 +1,19 @@
-// @ts-nocheck
-
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 
-export default function Eyes() {
+export default function EyesOnYou() {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
+  const [displayWidth, setDisplayWidth] = useState(0);
+  const [displayHeight, setDisplayHeight] = useState(0);
+  const [scale, setScale] = useState(0);
+  const [pointerX, setPointerX] = useState((displayWidth * scale) / 2);
+  const [pointerY, setPointerY] = useState((displayHeight * scale) / 2);
 
-  useLayoutEffect(() => {
-    const DISPLAY_DURATION_MILLISECOND = 10000;
+  const DISPLAY_DURATION_MILLISECOND = 10000;
 
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d")!;
-    const scale = window.devicePixelRatio;
-
+  useEffect(() => {
     const eyes = [
       { x: 0.19, y: 0.8, scale: 0.88, delay: 0.31 },
       { x: 0.1, y: 0.54, scale: 0.84, delay: 0.32 },
@@ -38,26 +37,11 @@ export default function Eyes() {
       { x: 0.5, y: 0.5, scale: 3.5, delay: 0.1 },
     ];
 
-    const mouse = { x: 0, y: 0 };
-
-    let start: DOMHighResTimeStamp | null = null;
-
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d")!;
     ctx.scale(scale, scale);
 
-    window.onresize = resize;
-
-    function resize() {
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      canvas.width = window.innerWidth * scale;
-      canvas.height = window.innerHeight * scale;
-    }
-    resize();
-
-    window.addEventListener("mousemove", (event) => {
-      mouse.x = event.clientX;
-      mouse.y = event.clientY;
-    });
+    let start: DOMHighResTimeStamp | null = null;
 
     function step(timestamp: DOMHighResTimeStamp) {
       window.requestAnimationFrame(step);
@@ -71,13 +55,14 @@ export default function Eyes() {
       render(timestamp, elapsed);
     }
 
-    window.requestAnimationFrame(step);
-
-    function render(timestamp, elapsed) {
+    function render(
+      timestamp: DOMHighResTimeStamp,
+      elapsed: DOMHighResTimeStamp
+    ) {
       eyes.forEach(({ x, y, scale, delay }) => {
         if (elapsed < delay * DISPLAY_DURATION_MILLISECOND) return;
 
-        // The speed at which the iris follows the mouse
+        // The speed at which the iris follows the pointer
         // const irisSpeed = 0.01 + (Math.random() * 0.2) / scale;
 
         // The speed at which the eye opens and closes
@@ -134,15 +119,16 @@ export default function Eyes() {
           y: eyeCenter.y - size * (0.5 + (0.5 - tiredness) * exposure.current),
         };
 
-        // Offset the iris depending on mouse position
+        // Offset the iris depending on pointer position
         const irisOffset = {
-          x: (mouse.x - iris.x) / (canvas.width - iris.x),
-          y: mouse.y / canvas.height,
+          x: (pointerX - iris.x) / (canvas.width - iris.x),
+          y: pointerY / canvas.height,
         };
 
         // Apply the iris offset
         iris.x += irisOffset.x * 16 * Math.max(1, scale * 0.4);
         iris.y += irisOffset.y * 10 * Math.max(1, scale * 0.4);
+        const time = Date.now();
 
         if (exposure.current < 0.012) {
           exposure.target = 1;
@@ -259,114 +245,125 @@ export default function Eyes() {
       });
     }
 
+    window.requestAnimationFrame(step);
+  }, [pointerX, pointerY, scale]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    const resize = () => {
+      setDisplayWidth(window.innerWidth);
+      setDisplayHeight(window.innerHeight);
+    };
+
+    const setPointer = (event: PointerEvent) => {
+      setPointerX(event.clientX);
+      setPointerY(event.clientY);
+    };
+
+    const updatePixelRatio = () => {
+      setScale(window.devicePixelRatio);
+    };
+
+    const mqString = `(resolution: ${window.devicePixelRatio}dppx)`;
+    const media = matchMedia(mqString);
+    media.addEventListener("change", updatePixelRatio);
+    window.addEventListener("resize", resize);
+    canvas.addEventListener("pointermove", setPointer);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      canvas.removeEventListener("pointermove", setPointer);
+      media.removeEventListener("change", updatePixelRatio);
+    };
+  }, []);
+
+  useLayoutEffect(() => {
     // function Eye(canvas, x, y, scale, time) {
     //   // The time at which this eye will come alive
     //   this.activationTime = time;
-
-    //   // The speed at which the iris follows the mouse
+    //   // The speed at which the iris follows the pointer
     //   this.irisSpeed = 0.01 + (Math.random() * 0.2) / scale;
-
     //   // The speed at which the eye opens and closes
     //   this.blinkSpeed = 0.2 + Math.random() * 0.2;
     //   this.blinkInterval = 5000 + 5000 * Math.random();
-
     //   // Timestamp of the last blink
     //   this.blinkTime = Date.now();
-
     //   this.scale = scale;
     //   this.size = 70 * scale;
-
     //   this.x = x * canvas.width;
     //   this.y = y * canvas.height + this.size * 0.15;
-
     //   this.iris = {
     //     x: this.x,
     //     y: this.y - this.size * 0.1,
     //     size: this.size * 0.2,
     //   };
-
     //   this.pupil = {
     //     width: 2 * scale,
     //     height: this.iris.size * 0.75,
     //   };
-
     //   this.exposure = {
     //     top: 0.1 + Math.random() * 0.3,
     //     bottom: 0.5 + Math.random() * 0.3,
     //     current: 0,
     //     target: 1,
     //   };
-
     //   // Affects the amount of inner shadow
     //   this.tiredness = 0.5 - this.exposure.top + 0.1;
-
     //   this.isActive = false;
-
     //   this.activate = function () {
     //     this.isActive = true;
     //   };
-
-    //   this.update = function (mouse) {
+    //   this.update = function (pointer) {
     //     if (this.isActive === true) {
-    //       this.render(mouse);
+    //       this.render(pointer);
     //     }
     //   };
-
-    //   this.render = function (mouse) {
+    //   this.render = function (pointer) {
     //     const time = Date.now();
-
     //     if (this.exposure.current < 0.012) {
     //       this.exposure.target = 1;
     //     } else if (time - this.blinkTime > this.blinkInterval) {
     //       this.exposure.target = 0;
     //       this.blinkTime = time;
     //     }
-
     //     this.exposure.current +=
     //       (this.exposure.target - this.exposure.current) * this.blinkSpeed;
-
     //     // Eye left/right
     //     var el = { x: this.x - this.size * 0.8, y: this.y - this.size * 0.1 };
     //     var er = { x: this.x + this.size * 0.8, y: this.y - this.size * 0.1 };
-
     //     // Eye top/bottom
-    //     const et = {
+    //     var et = {
     //       x: this.x,
     //       y:
     //         this.y -
     //         this.size * (0.5 + this.exposure.top * this.exposure.current),
     //     };
-    //     const eb = {
+    //     var eb = {
     //       x: this.x,
     //       y:
     //         this.y -
     //         this.size * (0.5 - this.exposure.bottom * this.exposure.current),
     //     };
-
     //     // Eye inner shadow top
-    //     const eit = {
+    //     var eit = {
     //       x: this.x,
     //       y:
     //         this.y -
     //         this.size * (0.5 + (0.5 - this.tiredness) * this.exposure.current),
     //     };
-
     //     // Eye iris
-    //     const ei = { x: this.x, y: this.y - this.iris.size };
-
-    //     // Offset the iris depending on mouse position
-    //     const eio = {
-    //       x: (mouse.x - ei.x) / (canvas.width - ei.x),
-    //       y: mouse.y / canvas.height,
+    //     var ei = { x: this.x, y: this.y - this.iris.size };
+    //     // Offset the iris depending on pointer position
+    //     var eio = {
+    //       x: (pointerX - ei.x) / (canvas.width - ei.x),
+    //       y: pointerY / canvas.height,
     //     };
-
     //     // Apply the iris offset
     //     ei.x += eio.x * 16 * Math.max(1, this.scale * 0.4);
     //     ei.y += eio.y * 10 * Math.max(1, this.scale * 0.4);
-
     //     this.iris.x += (ei.x - this.iris.x) * this.irisSpeed;
     //     this.iris.y += (ei.y - this.iris.y) * this.irisSpeed;
-
     //     // Eye fill drawing
     //     ctx.fillStyle = "rgba(255,255,255,1.0)";
     //     ctx.strokeStyle = "rgba(100,100,100,1.0)";
@@ -379,7 +376,6 @@ export default function Eyes() {
     //     ctx.closePath();
     //     ctx.stroke();
     //     ctx.fill();
-
     //     // Iris
     //     ctx.save();
     //     ctx.globalCompositeOperation = "source-atop";
@@ -400,7 +396,6 @@ export default function Eyes() {
     //     ctx.fill();
     //     ctx.stroke();
     //     ctx.restore();
-
     //     // Iris inner
     //     ctx.save();
     //     ctx.shadowColor = "rgba(255,255,255,0.5)";
@@ -422,7 +417,6 @@ export default function Eyes() {
     //     );
     //     ctx.fill();
     //     ctx.restore();
-
     //     // Pupil
     //     ctx.save();
     //     ctx.globalCompositeOperation = "source-atop";
@@ -451,7 +445,6 @@ export default function Eyes() {
     //     );
     //     ctx.fill();
     //     ctx.restore();
-
     //     // highlight
     //     ctx.save();
     //     ctx.globalCompositeOperation = "source-atop";
@@ -467,13 +460,11 @@ export default function Eyes() {
     //     );
     //     ctx.fill();
     //     ctx.restore();
-
     //     ctx.save();
     //     ctx.shadowColor = "rgba(0,0,0,0.9)";
     //     ctx.shadowOffsetX = 0;
     //     ctx.shadowOffsetY = 0;
     //     ctx.shadowBlur = 10;
-
     //     // Eye top inner shadow
     //     ctx.fillStyle = "rgba(120,120,120,0.2)";
     //     ctx.beginPath();
@@ -482,11 +473,18 @@ export default function Eyes() {
     //     ctx.quadraticCurveTo(eit.x, eit.y, el.x, el.y);
     //     ctx.closePath();
     //     ctx.fill();
-
     //     ctx.restore();
     //   };
     // }
   }, []);
 
-  return <canvas className={styles.canvas} ref={canvasRef} />;
+  return (
+    <canvas
+      className={styles.canvas}
+      ref={canvasRef}
+      style={{ width: displayWidth, height: displayHeight }}
+      width={displayWidth * scale}
+      height={displayHeight * scale}
+    />
+  );
 }

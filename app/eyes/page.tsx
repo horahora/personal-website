@@ -13,11 +13,12 @@ export default function Eyes() {
       const DISPLAY_HEIGHT = window.innerHeight;
       const DISPLAY_DURATION = 10;
 
-      let mouse = { x: 0, y: 0 },
-        canvas,
-        ctx,
-        startTime,
-        eyes;
+      const mouse = { x: 0, y: 0 };
+
+      let eyes;
+      let canvas;
+      let ctx;
+      let startTime;
 
       function initialize(timestamp) {
         startTime = timestamp;
@@ -65,7 +66,7 @@ export default function Eyes() {
 
       function animate(timestamp: DOMHighResTimeStamp) {
         // The number of seconds that have passed since initialization
-        var seconds = (timestamp - startTime) / 1000;
+        const seconds = (timestamp - startTime) / 1000;
 
         // Out with the old ...
         ctx.clearRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
@@ -141,7 +142,7 @@ export default function Eyes() {
       };
 
       this.render = function (mouse) {
-        var time = Date.now();
+        const time = Date.now();
 
         if (this.exposure.current < 0.012) {
           this.exposure.target = 1;
@@ -154,17 +155,17 @@ export default function Eyes() {
           (this.exposure.target - this.exposure.current) * this.blinkSpeed;
 
         // Eye left/right
-        var el = { x: this.x - this.size * 0.8, y: this.y - this.size * 0.1 };
-        var er = { x: this.x + this.size * 0.8, y: this.y - this.size * 0.1 };
+        const el = { x: this.x - this.size * 0.8, y: this.y - this.size * 0.1 };
+        const er = { x: this.x + this.size * 0.8, y: this.y - this.size * 0.1 };
 
         // Eye top/bottom
-        var et = {
+        const et = {
           x: this.x,
           y:
             this.y -
             this.size * (0.5 + this.exposure.top * this.exposure.current),
         };
-        var eb = {
+        const eb = {
           x: this.x,
           y:
             this.y -
@@ -172,7 +173,7 @@ export default function Eyes() {
         };
 
         // Eye inner shadow top
-        var eit = {
+        const eit = {
           x: this.x,
           y:
             this.y -
@@ -180,10 +181,10 @@ export default function Eyes() {
         };
 
         // Eye iris
-        var ei = { x: this.x, y: this.y - this.iris.size };
+        const ei = { x: this.x, y: this.y - this.iris.size };
 
         // Offset the iris depending on mouse position
-        var eio = {
+        const eio = {
           x: (mouse.x - ei.x) / (window.innerWidth - ei.x),
           y: mouse.y / window.innerHeight,
         };

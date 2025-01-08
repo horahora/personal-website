@@ -115,6 +115,7 @@ export default function Swiper({
                   console.log(event);
                   event.preventDefault();
                 }}
+                alt=""
               />
             </section>
           ))}

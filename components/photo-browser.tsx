@@ -23,8 +23,9 @@ export default function PhotoBrowser() {
   const dialogRef = useRef<HTMLDialogElement>(null!);
 
   useEffect(() => {
-    dialogRef.current.showModal();
-    return () => dialogRef.current.close();
+    const current = dialogRef.current;
+    current.showModal();
+    return () => current.close();
   }, []);
 
   return (

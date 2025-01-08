@@ -17,18 +17,18 @@ export default function Stars() {
     const canvas = canvasRef.current,
       context = canvas.getContext("2d");
 
-    var scale = 1, // device pixel ratio
+    const scale = 1, // device pixel ratio
       width = 0,
       height = 0;
 
-    var stars = [];
+    const stars = [];
 
-    var pointerX = 0,
+    const pointerX = 0,
       pointerY = 0;
 
-    var velocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
+    const velocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
 
-    var touchInput = false;
+    const touchInput = false;
 
     generate();
     resize();
@@ -56,13 +56,13 @@ export default function Stars() {
     }
 
     function recycleStar(star) {
-      var direction = "z";
+      const direction = "z";
 
-      var vx = Math.abs(velocity.x),
+      const vx = Math.abs(velocity.x),
         vy = Math.abs(velocity.y);
 
       if (vx > 1 || vy > 1) {
-        var axis = 0;
+        const axis = 0;
 
         if (vx > vy) {
           axis = Math.random() < vx / (vx + vy) ? "h" : "v";
@@ -157,7 +157,7 @@ export default function Stars() {
         context.beginPath();
         context.moveTo(star.x, star.y);
 
-        var tailX = velocity.x * 2,
+        const tailX = velocity.x * 2,
           tailY = velocity.y * 2;
 
         // stroke() wont work on an invisible line
@@ -172,7 +172,7 @@ export default function Stars() {
 
     function movePointer(x, y) {
       if (typeof pointerX === "number" && typeof pointerY === "number") {
-        var ox = x - pointerX,
+        const ox = x - pointerX,
           oy = y - pointerY;
 
         velocity.tx = velocity.tx + (ox / 8) * scale * (touchInput ? 1 : -1);
@@ -197,10 +197,10 @@ export default function Stars() {
       event.preventDefault();
     }
 
-    function onMouseLeave() {
-      pointerX = null;
-      pointerY = null;
-    }
+    // function onMouseLeave() {
+    //   pointerX = null;
+    //   pointerY = null;
+    // }
   }, []);
 
   return (
