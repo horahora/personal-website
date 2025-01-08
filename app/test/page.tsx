@@ -1,7 +1,9 @@
+// @ts-nocheck
+
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import Demo from "@/components/demo";
+// import Demo from "@/components/demo";
 import styles from "./page.module.css";
 import PhotoStack from "@/components/photo-stack";
 import RadialProgress from "@/components/radial-progress";

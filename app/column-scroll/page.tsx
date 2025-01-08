@@ -10,8 +10,8 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function ColumnScroll() {
   const cubeRef = useRef<HTMLDivElement>(null!);
-  const proxy = { rotateX: 0 };
   useEffect(() => {
+    const proxy = { rotateX: 0 };
     const clamp = gsap.utils.clamp(-60, 60);
     gsap.to(`.${styles.columnWrapper}`, {
       // y: "100%",
