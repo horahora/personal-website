@@ -21,7 +21,7 @@
 
 .item .paper {
   transform-origin: 50% 0;
-  animation: fall 1.1s ease-out both;
+  animation: fall 1.1s ease-out;
   backface-visibility: hidden;
   will-change: transform;
 }
@@ -216,7 +216,7 @@
     opacity: 0.5;
   }
   70% {
-    transform: translate3d(0, 0, 0) scaleY(1.03);
+    transform: translate3d(0, 2px, 0) scaleY(1.03);
     filter: blur(2px);
   }
 }
@@ -333,7 +333,17 @@
   .item .paper,
   .item .shadow {
     animation: none;
+    transition: none;
   }
+  .item:hover .paper {
+    transform: none;
+  }
+  .item:hover .shadow {
+    transform: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    filter: none;
+  }
+
   .item:nth-last-child(-n + 4) {
     display: none;
   }
