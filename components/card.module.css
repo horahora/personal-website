@@ -68,7 +68,7 @@
   will-change: transform;
 }
 
-@media (hover: hover) {
+@media (any-hover: hover) {
   .item .paper,
   .item .shadow {
     transition: all 0.25s cubic-bezier(0, 0, 0.5, 1);
