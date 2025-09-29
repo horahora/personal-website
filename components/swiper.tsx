@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import classNames from "classnames";
+import { clsx } from "clsx";
 import ChevronLeft from "framework7-icons/svg/chevron_left.svg";
 import ChevronRight from "framework7-icons/svg/chevron_right.svg";
 import styles from "./swiper.module.css";
@@ -123,7 +123,7 @@ export default function Swiper({
         <nav className={styles.pagination} ref={paginationRef}>
           {Array.from({ length: slideLength }, (element, index) => (
             <a
-              className={classNames({ [styles.active]: index === activeIndex })}
+              className={clsx({ [styles.active]: index === activeIndex })}
               onClick={() => handlePaginationClick(index)}
               key={index}
             ></a>

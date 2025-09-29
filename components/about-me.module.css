@@ -29,30 +29,3 @@
     z-index: 10000;
   }
 }
-
-@media (max-width: 440px) {
-  .inner {
-    /* width: 500px; */
-    /* margin-left: -124px; */
-    /* padding: 8px 0 0 24px; */
-    background: url(/images/hand_with_card_vertical.png) no-repeat;
-    background-image: image-set(
-      url(/images/hand_with_card_vertical.png) 1x,
-      url(/images/hand_with_card_vertical@2x.png) 2x
-    );
-  }
-
-  .inner.handAnimation {
-    transform-origin: 110% 150%;
-  }
-
-  @keyframes hand-slide-in {
-    0% {
-      z-index: 10000;
-      transform: translate3d(0, 140px, 0) rotateZ(-40deg);
-    }
-    100% {
-      z-index: 10000;
-    }
-  }
-}

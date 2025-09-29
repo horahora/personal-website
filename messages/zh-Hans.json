@@ -1,0 +1,25 @@
+{
+  "HomePage": {
+    "name": "仇俊斌",
+    "avatar": "头像",
+    "profession": "Web开发",
+    "professionLabel": "职业",
+    "location": "中国 浙江",
+    "locationLabel": "现居",
+    "emailLabel": "邮箱",
+    "metadata": {
+      "description": "仇俊斌的个人作品集"
+    }
+  },
+  "PhotographyPage": {
+    "pageTitle": "仇俊斌的摄影随拍",
+    "metadata": {
+      "description": "仇俊斌的摄影随拍"
+    }
+  },
+  "KaleidoscopePage": {
+    "metadata": {
+      "description": "万花筒互动体验"
+    }
+  }
+}

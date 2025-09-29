@@ -1,3 +1,4 @@
+import { type PropsWithChildren } from "react";
 import type { Metadata, Viewport } from "next";
 import styles from "./layout.module.css";
 
@@ -9,6 +10,6 @@ export const viewport: Viewport = {
   themeColor: "#edf1e5",
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: PropsWithChildren) {
   return <div className={styles.pageRoot}>{children}</div>;
 }

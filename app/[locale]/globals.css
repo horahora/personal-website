@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
   --font-sans: "PingFang SC", ui-sans-serif, system-ui, sans-serif,
@@ -34,13 +35,7 @@
     --color-vintage-yellow: #d3d7a3;
   }
 
-  html {
-    min-width: 320px;
-  }
-
   body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     color: #444;
   }

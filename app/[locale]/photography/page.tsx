@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide, type SwiperClass } from "swiper/react";
 import { Zoom, Navigation, Keyboard } from "swiper/modules";
 import Xmark from "framework7-icons/svg/xmark.svg";
-import classNames from "classnames";
+import { clsx } from "clsx";
 
 export default function Photography() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -97,7 +97,7 @@ export default function Photography() {
       </div>
       <div ref={dialogRef} className={styles.dialog}>
         <div
-          className={classNames(styles.dialogToolbar, {
+          className={clsx(styles.dialogToolbar, {
             [styles.dialogToolbarHidden]: !isToolbarVisible,
           })}
         >

@@ -5,9 +5,11 @@ import styles from "./about-me.module.css";
 import Briefcase from "framework7-icons/svg/briefcase.svg";
 import Placemark from "framework7-icons/svg/placemark.svg";
 import Envelope from "framework7-icons/svg/envelope.svg";
+import { useTranslations } from "next-intl";
 
 export default function AboutMe() {
   const handRef = useRef<HTMLDivElement>(null!);
+  const t = useTranslations("HomePage");
 
   useEffect(() => {
     // console.log(handRef.current);
@@ -47,63 +49,51 @@ export default function AboutMe() {
   }, []);
 
   return (
-    <section className="relative h-[444px] min-[440px]:h-[476px] overflow-hidden text-[#444]">
+    <section className="relative h-[476px] overflow-hidden text-[#444]">
       <div
-        className={`absolute left-1/2 h-[inherit] w-[500px] pt-[8px] pl-[24px] -ml-[124px] min-[440px]:w-[1256px] min-[440px]:pt-[88px] min-[440px]:pl-[37px] min-[440px]:-ml-[217px]  ${styles.inner}`}
+        className={`absolute left-1/2 h-[inherit] w-[1256px] pt-[88px] pl-[37px] -ml-[217px] ${styles.inner}`}
         ref={handRef}
       >
-        <div className="flex items-center ps-[15px] [block-size:200px] [inline-size:360px] [writing-mode:vertical-rl] min-[440px]:[writing-mode:horizontal-tb] select-text cursor-auto">
-          <picture>
-            <source
-              src="/images/avatar-portrait.jpg"
-              srcSet="/images/avatar-portrait@2x.jpg 2x, /images/avatar-portrait@3x.jpg"
-              media="(min-width: 440px)"
-              width="100"
-              height="150"
-            />
-            <img
-              srcSet="/images/avatar-landscape.jpg, /images/avatar-landscape@2x.jpg 2x, /images/avatar-landscape@3x.jpg 3x"
-              width="150"
-              height="100"
-              alt="头像"
-              className="me-[15px] [block-size:150px] [inline-size:100px]"
-            />
-          </picture>
+        <div className="flex items-center w-[360px] h-[200px] pl-[15px] select-text cursor-auto">
+          <img
+            srcSet="/images/avatar-portrait.jpg, /images/avatar-portrait@2x.jpg 2x, /images/avatar-portrait@3x.jpg 3x"
+            width="100"
+            height="150"
+            alt={t("avatar")}
+            className="mr-[15px]"
+          />
           <div>
-            <h1 className="text-[34px] text-[#555] [margin-block:10px_25px]">
-              仇俊斌
+            <h1 className="text-[34px] text-[#555] mt-[10px] mb-[25px]">
+              {t("name")}
             </h1>
             <ul className="text-[16px]">
-              <li className="flex items-center [margin-block:10px]">
+              <li className="flex items-center gap-2.5 my-2.5">
                 <Briefcase
-                  aria-label="职业"
+                  aria-label={t("professionLabel")}
                   width="1em"
                   height="1em"
                   viewBox="0 0 56 56"
                   fill="currentcolor"
-                  className="me-2.5"
                 />
-                Web开发/摄影师
+                {t("profession")}
               </li>
-              <li className="flex items-center [margin-block:10px]">
+              <li className="flex items-center gap-2.5 my-2.5">
                 <Placemark
-                  aria-label="现居"
+                  aria-label={t("locationLabel")}
                   viewBox="0 0 56 56"
                   width="1em"
                   height="1em"
                   fill="currentcolor"
-                  className="me-2.5"
                 />
-                中国 上海
+                {t("location")}
               </li>
-              <li className="flex items-center [margin-block:10px]">
+              <li className="flex items-center gap-2.5 my-2.5">
                 <Envelope
-                  aria-label="邮箱"
+                  aria-label={t("emailLabel")}
                   viewBox="0 0 56 56"
                   width="1em"
                   height="1em"
                   fill="currentcolor"
-                  className="me-2.5"
                 />
                 <a
                   href="mailto:contact@horahora.com"

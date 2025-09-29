@@ -7,6 +7,7 @@ import { useLayoutEffect, useRef } from "react";
 import styles from "./page.module.css";
 import PhotoStack from "@/components/photo-stack";
 import RadialProgress from "@/components/radial-progress";
+import { motion } from "motion/react";
 
 export default function Test() {
   const divRef = useRef<HTMLDivElement>(null!);
@@ -30,6 +31,11 @@ export default function Test() {
       //   e.preventDefault();
       // }}
     >
+      <motion.ul
+        className="size-25 bg-blue-300"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1 }}
+      />
       <PhotoStack />
       <RadialProgress />
       <svg viewBox="0 0 250 50">

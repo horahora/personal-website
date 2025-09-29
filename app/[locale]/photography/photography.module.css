@@ -178,6 +178,17 @@
   height: 50px;
   border-radius: 50%;
   transition: 0.3s;
+  svg {
+    height: 20px;
+  }
+}
+
+.photoSwiper :global(.swiper-button-prev) {
+  left: 10px !important;
+}
+
+.photoSwiper :global(.swiper-button-next) {
+  right: 10px !important;
 }
 
 @media (hover: none) and (pointer: coarse) {
@@ -185,9 +196,4 @@
   .photoSwiper :global(.swiper-button-next) {
     display: none;
   }
-}
-
-.photoSwiper :global(.swiper-button-prev)::after,
-.photoSwiper :global(.swiper-button-next)::after {
-  font-size: 20px;
 }

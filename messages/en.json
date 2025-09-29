@@ -1,0 +1,25 @@
+{
+  "HomePage": {
+    "name": "Junbin Qiu",
+    "avatar": "Avatar",
+    "profession": "Web Developer",
+    "professionLabel": "Profession",
+    "location": "Zhejiang, China",
+    "locationLabel": "Location",
+    "emailLabel": "Email",
+    "metadata": {
+      "description": "Junbin Qiu's personal portfolio"
+    }
+  },
+  "PhotographyPage": {
+    "pageTitle": "Junbin Qiu's Photography Portfolio",
+    "metadata": {
+      "description": "Junbin Qiu's photography portfolio"
+    }
+  },
+  "KaleidoscopePage": {
+    "metadata": {
+      "description": "Interactive kaleidoscope experience"
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "./headline-scroll-shimmer.module.css";
-import classNames from "classnames";
+import { clsx } from "clsx";
 
 export default function HeadlineScrollShimmer({
   children,
@@ -32,7 +32,7 @@ export default function HeadlineScrollShimmer({
 
   return (
     <div
-      className={classNames(
+      className={clsx(
         styles.typographyHeadlineStandalone,
         styles.enhanceXp
       )}

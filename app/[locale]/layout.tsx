@@ -1,4 +1,5 @@
 import type { Viewport, Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -12,14 +13,19 @@ export const metadata: Metadata = {
   description: "这里是 仇俊斌 的个人作品集",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   return (
-    <html lang="zh-cmn-Hans">
-      <body>{children}</body>
+    <html lang={locale}>
+      <body className="antialiased min-w-[320px]">
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      </body>
     </html>
   );
 }
