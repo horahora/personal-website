@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { clsx } from "clsx";
 import ChevronLeft from "framework7-icons/svg/chevron_left.svg";
 import ChevronRight from "framework7-icons/svg/chevron_right.svg";
-import styles from "./swiper.module.css";
+import styles from "./Swiper.module.css";
 // import gsap from "gsap";
 // import { Observer } from "gsap/dist/Observer";
 

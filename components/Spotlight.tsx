@@ -1,4 +1,4 @@
-import styles from "./spotlight.module.css";
+import styles from "./Spotlight.module.css";
 
 export default function Spotlight() {
   return (
