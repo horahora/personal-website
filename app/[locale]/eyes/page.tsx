@@ -2,7 +2,6 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import styles from "./page.module.css";
 
 export default function Eyes() {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
@@ -317,5 +316,5 @@ export default function Eyes() {
     }
   }, []);
 
-  return <canvas className={styles.canvas} ref={canvasRef} />;
+  return <canvas className="h-screen bg-black" ref={canvasRef} />;
 }
