@@ -1,11 +1,13 @@
 import { type PropsWithChildren } from "react";
 import type { Metadata, Viewport } from "next";
 import { getTranslations } from "next-intl/server";
+import { SITE_NAME } from "@/constants";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("ScrollParallaxPage");
 
   return {
+    title: `${t("metadata.title")} - ${SITE_NAME}`,
     description: t("metadata.description"),
   };
 }

@@ -14,18 +14,33 @@
   "PhotographyPage": {
     "pageTitle": "仇俊斌的摄影随拍",
     "metadata": {
+      "title": "摄影随拍",
       "description": "仇俊斌的摄影随拍"
     }
   },
   "KaleidoscopePage": {
     "metadata": {
+      "title": "万花筒",
       "description": "万花筒互动体验"
     }
   },
   "ScrollParallaxPage": {
     "shinyText": "滚动\n闪烁文字",
     "metadata": {
-      "description": "滚动视差效果展示"
+      "title": "视差滚动",
+      "description": "视差滚动效果展示"
+    }
+  },
+  "EyesOnYouPage": {
+    "metadata": {
+      "title": "注视着你",
+      "description": "与眼睛互动的体验，眼睛会跟随光标移动"
+    }
+  },
+  "WavesPage": {
+    "metadata": {
+      "title": "波浪动画",
+      "description": "流体波浪动画效果"
     }
   }
 }

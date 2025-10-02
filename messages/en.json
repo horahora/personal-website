@@ -14,18 +14,33 @@
   "PhotographyPage": {
     "pageTitle": "Junbin Qiu's Photography Portfolio",
     "metadata": {
+      "title": "Photography",
       "description": "Junbin Qiu's photography portfolio"
     }
   },
   "KaleidoscopePage": {
     "metadata": {
+      "title": "Kaleidoscope",
       "description": "Interactive kaleidoscope experience"
     }
   },
   "ScrollParallaxPage": {
     "shinyText": "Scroll\nShiny Text",
     "metadata": {
+      "title": "Scroll Parallax",
       "description": "Scroll parallax effects showcase"
+    }
+  },
+  "EyesOnYouPage": {
+    "metadata": {
+      "title": "Eyes On You",
+      "description": "An interactive experience where eyes follow the cursor"
+    }
+  },
+  "WavesPage": {
+    "metadata": {
+      "title": "Waves",
+      "description": "Fluid wave animation effects"
     }
   }
 }

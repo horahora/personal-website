@@ -14,13 +14,8 @@ export const viewport: Viewport = {
   themeColor: "hsl(0deg 0% 91%)",
 };
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "HomePage" });
+export async function generateMetadata() {
+  const t = await getTranslations("HomePage");
 
   return {
     description: t("metadata.description"),
@@ -33,39 +28,40 @@ export default async function Home({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations();
 
   const portfolioList = [
     {
       href: "/photography",
       src: `/images/work-photography-${locale}.jpg`,
       srcset: `/images/work-photography-${locale}@2x.jpg 2x, /images/work-photography-${locale}@3x.jpg 3x`,
-      alt: "摄影作品",
+      alt: t("PhotographyPage.metadata.title"),
     },
     {
       href: "/scroll-parallax",
       src: "/images/work-scroll-parallax.png",
       srcset:
         "/images/work-scroll-parallax@2x.png 2x, /images/work-scroll-parallax@3x.png 3x",
-      alt: "视差滚动",
+      alt: t("ScrollParallaxPage.metadata.title"),
     },
     {
       href: "/kaleidoscope",
       src: "/images/work-kaleidoscope.jpg",
       srcset:
         "/images/work-kaleidoscope@2x.jpg 2x, /images/work-kaleidoscope@3x.jpg 3x",
-      alt: "万花筒",
+      alt: t("KaleidoscopePage.metadata.title"),
     },
     {
       href: "/waves",
       src: "/images/work-waves.png",
       srcset: "/images/work-waves@2x.png 2x, /images/work-waves@3x.png 3x",
-      alt: "波浪动画",
+      alt: t("WavesPage.metadata.title"),
     },
     {
-      href: "/eyes",
+      href: "/eyes-on-you",
       src: "/images/work-eyes.png",
       srcset: "/images/work-eyes@2x.png 2x, /images/work-eyes@3x.png 3x",
-      alt: "眼睛",
+      alt: t("EyesOnYouPage.metadata.title"),
     },
 
     // {

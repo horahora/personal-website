@@ -1,5 +1,6 @@
 import type { Viewport, Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
+import { SITE_NAME } from "@/constants";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -9,7 +10,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Hora Hora",
+  title: SITE_NAME,
 };
 
 export default async function RootLayout({

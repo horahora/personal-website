@@ -1,9 +1,16 @@
 import { type PropsWithChildren } from "react";
 import type { Metadata, Viewport } from "next";
+import { getTranslations } from "next-intl/server";
+import { SITE_NAME } from "@/constants";
 
-export const metadata: Metadata = {
-  title: "Kaleidoscope - Hora Hora",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("KaleidoscopePage");
+
+  return {
+    title: `${t("metadata.title")} - ${SITE_NAME}`,
+    description: t("metadata.description"),
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#000",

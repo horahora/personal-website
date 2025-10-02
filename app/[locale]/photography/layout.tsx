@@ -2,16 +2,13 @@ import { type PropsWithChildren } from "react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import styles from "./photography.module.css";
+import { SITE_NAME } from "@/constants";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "PhotographyPage" });
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("PhotographyPage");
 
   return {
+    title: `${t("metadata.title")} - ${SITE_NAME}`,
     description: t("metadata.description"),
   };
 }
