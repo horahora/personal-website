@@ -5,8 +5,8 @@
 import { useLayoutEffect, useRef } from "react";
 // import Demo from "@/components/demo";
 import styles from "./page.module.css";
-import PhotoStack from "@/components/photo-stack";
-import RadialProgress from "@/components/radial-progress";
+import PhotoStack from "@/components/PhotoStack";
+import RadialProgress from "@/components/RadialProgress";
 import { motion } from "motion/react";
 
 export default function Test() {
