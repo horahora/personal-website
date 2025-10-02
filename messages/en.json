@@ -21,5 +21,11 @@
     "metadata": {
       "description": "Interactive kaleidoscope experience"
     }
+  },
+  "ScrollParallaxPage": {
+    "shinyText": "Scroll\nShiny Text",
+    "metadata": {
+      "description": "Scroll parallax effects showcase"
+    }
   }
 }

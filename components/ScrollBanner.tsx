@@ -2,7 +2,6 @@ import { useRef } from "react";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import styles from "./scroll-banner.module.css";
 
 export default function ScrollBanner() {
   const scrollTriggerRef = useRef<HTMLDivElement>(null!);
@@ -33,72 +32,47 @@ export default function ScrollBanner() {
   );
 
   return (
-    <div className={styles.component}>
-      <div className={styles.bannersWrapper} ref={scrollTriggerRef}>
-        <div
-          className={`${styles.banner} banner`}
-          style={{
-            marginBottom: "10vmax",
-            transform: "translateX(-50vw) rotate(26deg)",
-          }}
-        >
+    <div>
+      <div ref={scrollTriggerRef}>
+        <div className="banner mb-[10vmax] translate-x-[-50vw] rotate-[26deg]">
           <div
-            className={`${styles.text} text`}
+            className="text bg-[var(--primary-color)] text-[#edf1e5] px-5 text-[10vmax] font-semibold leading-none w-max"
             data-from-x-percent="50"
             data-to-x-percent="-50"
           >
             {"CAUTION!!".repeat(6)}
           </div>
         </div>
-        <div
-          className={`${styles.banner} banner`}
-          style={{ marginBottom: "6vmax" }}
-        >
+        <div className="banner mb-[6vmax]">
           <div
-            className={`${styles.text} text`}
+            className="text bg-[var(--primary-color)] text-[#edf1e5] px-5 text-[10vmax] font-semibold leading-none w-max"
             data-from-x-percent="-100"
             data-to-x-percent="0"
           >
             {"CAUTION!!".repeat(3)}
           </div>
         </div>
-        <div
-          className={`${styles.banner} banner`}
-          style={{
-            marginBottom: "4vmax",
-            transform: "rotate(9deg)",
-          }}
-        >
+        <div className="banner mb-[4vmax] rotate-[9deg]">
           <div
-            className={`${styles.text} text`}
+            className="text bg-[var(--primary-color)] text-[#edf1e5] px-5 text-[10vmax] font-semibold leading-none w-max"
             data-from-x-percent="50"
             data-to-x-percent="-50"
           >
             {"CAUTION!!".repeat(5)}
           </div>
         </div>
-        <div
-          className={`${styles.banner} banner`}
-          style={{
-            transform: "translateX(-50vmax) rotate(-19deg)",
-          }}
-        >
+        <div className="banner translate-x-[-50vmax] rotate-[-19deg]">
           <div
-            className={`${styles.text} text`}
+            className="text bg-[var(--primary-color)] text-[#edf1e5] px-5 text-[10vmax] font-semibold leading-none w-max"
             data-from-x-percent="-100"
             data-to-x-percent="0"
           >
             {"CAUTION!!".repeat(6)}
           </div>
         </div>
-        <div
-          className={`${styles.banner} banner`}
-          style={{
-            transform: "translateX(-10vmax) rotate(3deg)",
-          }}
-        >
+        <div className="banner translate-x-[-10vmax] rotate-[3deg]">
           <div
-            className={`${styles.text} text`}
+            className="text bg-[var(--primary-color)] text-[#edf1e5] px-5 text-[10vmax] font-semibold leading-none w-max"
             data-from-x-percent="50"
             data-to-x-percent="-90"
           >

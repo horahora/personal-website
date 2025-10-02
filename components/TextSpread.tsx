@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import styles from "./text-spread.module.css";
 
 export default function TextSpread({ text }: { text: string }) {
   const textRef = useRef<HTMLSpanElement>(null!);
@@ -24,10 +23,13 @@ export default function TextSpread({ text }: { text: string }) {
   );
 
   return (
-    <div className={styles.component}>
-      <span className={styles.text} ref={textRef}>
+    <div className="flex justify-center items-center h-[50vh]">
+      <span
+        className="text-3xl sm:text-5xl md:text-7xl font-medium text-center uppercase text-[var(--primary-color)] text-shadow-[0_2px_4px_rgba(0,0,0,0.15)]"
+        ref={textRef}
+      >
         {text.split("").map((letter, i) => (
-          <span key={i} className={`${styles.letter} letter`}>
+          <span key={i} className="inline-block letter">
             {letter}
           </span>
         ))}

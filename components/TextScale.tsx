@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import styles from "./text-scale.module.css";
+import styles from "./TextScale.module.css";
 
 export default function TextScale() {
   const pinContainerRef = useRef<HTMLDivElement>(null!);

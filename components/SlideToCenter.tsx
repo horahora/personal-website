@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import styles from "./slide-to-center.module.css";
 
 export default function SlideToCenter() {
   const slideContainerRef = useRef<HTMLDivElement>(null!);
@@ -38,8 +37,11 @@ export default function SlideToCenter() {
   );
 
   return (
-    <div className={styles.component}>
-      <div className={styles.slideWrapper} ref={slideContainerRef}>
+    <div className="min-h-[75vh]">
+      <div
+        className="grid grid-cols-[repeat(2,min(300px,calc(50%-5px)))] justify-center gap-[10px] px-[10px]"
+        ref={slideContainerRef}
+      >
         <div className="slider" data-from-x="-200" data-from-y="50">
           <img
             src="/images/media-cover/zero-degree.jpg"
@@ -54,7 +56,7 @@ export default function SlideToCenter() {
             height="450"
           />
         </div>
-        <div className={`${styles.bottom} slider`} data-from-y="200">
+        <div className="col-span-2 slider" data-from-y="200">
           <img
             src="/images/media-cover/a-brighter-summer-day.jpg"
             width="610"

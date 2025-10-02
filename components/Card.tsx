@@ -1,7 +1,7 @@
 // import Image from "next/image";
 import Link from "next/link";
 // import Tilt from "react-parallax-tilt";
-import styles from "./card.module.css";
+import styles from "./Card.module.css";
 
 type Props = {
   href: string;

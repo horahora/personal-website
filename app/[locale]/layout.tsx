@@ -10,7 +10,6 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Hora Hora",
-  description: "这里是 仇俊斌 的个人作品集",
 };
 
 export default async function RootLayout({

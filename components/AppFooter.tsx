@@ -9,13 +9,13 @@ export default async function AppFooter() {
       className={`absolute w-full bottom-[20px] min-[440px]:bottom-[24px] leading-tight`}
     >
       <div className="mx-auto px-[15px] max-w-[1080px] text-[#666]">
-        <ul className="mb-[14px] text-xs">
-          <li className="inline mr-[5px]">
+        <ul className="flex mb-[14px] text-xs gap-[5px]">
+          <li className="">
             <Link
               href="/"
               locale="en"
               className={cn(
-                "px-[12px] py-[3px] rounded-[4px] hover:text-[#222] hover:no-underline",
+                "px-[12px] py-1 rounded-[4px] hover:text-[#222] hover:no-underline",
                 locale === "en"
                   ? "text-[#555] bg-[hsl(0deg_0%_83%)]/70 inset-shadow-[0_1px_2px_rgba(0,0,0,0.2)] shadow-[0_1px_rgba(255,255,255,0.7)]"
                   : ""
@@ -24,12 +24,12 @@ export default async function AppFooter() {
               English
             </Link>
           </li>
-          <li className="inline mr-[5px]">
+          <li className="">
             <Link
               href="/"
               locale="zh-Hans"
               className={cn(
-                "px-[12px] py-[3px] rounded-[4px] hover:text-[#222] hover:no-underline",
+                "px-[12px] py-1 rounded-[4px] hover:text-[#222] hover:no-underline",
                 locale === "zh-Hans"
                   ? "text-[#555] bg-[hsl(0deg_0%_83%)]/70 inset-shadow-[0_1px_2px_rgba(0,0,0,0.2)] shadow-[0_1px_rgba(255,255,255,0.7)]"
                   : ""

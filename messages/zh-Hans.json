@@ -21,5 +21,11 @@
     "metadata": {
       "description": "万花筒互动体验"
     }
+  },
+  "ScrollParallaxPage": {
+    "shinyText": "滚动\n闪烁文字",
+    "metadata": {
+      "description": "滚动视差效果展示"
+    }
   }
 }

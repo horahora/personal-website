@@ -1,15 +1,23 @@
 import { type PropsWithChildren } from "react";
 import type { Metadata, Viewport } from "next";
-import styles from "./layout.module.css";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "视差滚动 - Hora Hora",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("ScrollParallaxPage");
+
+  return {
+    description: t("metadata.description"),
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#edf1e5",
 };
 
 export default function Layout({ children }: PropsWithChildren) {
-  return <div className={styles.pageRoot}>{children}</div>;
+  return (
+    <div className="overflow-hidden bg-[#edf1e5] [--primary-color:#cf5012]">
+      {children}
+    </div>
+  );
 }
