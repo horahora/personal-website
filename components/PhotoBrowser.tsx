@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import Swiper from "./swiper";
+import Swiper from "./Swiper";
 import Xmark from "framework7-icons/svg/xmark.svg";
 
 const baseUrl = "/images/photography";

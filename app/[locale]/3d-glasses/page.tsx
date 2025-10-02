@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import styles from "./page.module.css";
-import Glass3d from "@/components/glass3d";
+import Glass3d from "@/components/Glass3d";
 
 const lineEq = (
   y2: number,

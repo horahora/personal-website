@@ -1,4 +1,4 @@
-import styles from "./photo-stack.module.css";
+import styles from "./PhotoStack.module.css";
 
 export default function PhotoStack() {
   return (
