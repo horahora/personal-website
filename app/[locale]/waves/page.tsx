@@ -1,9 +1,4 @@
-import type { Viewport } from "next";
 import styles from "./page.module.css";
-
-export const viewport: Viewport = {
-  themeColor: "hsl(79deg 19% 96%)",
-};
 
 export default function Waves() {
   return (

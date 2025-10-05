@@ -82,15 +82,19 @@ export default function Photography() {
 
   return (
     <>
-      <div className={`2xl:container mx-auto px-4 ${styles.photographyList}`}>
+      <div className="2xl:container mx-auto grid gap-1 md:gap-[15px] px-0 md:px-4 grid-cols-3 md:grid-cols-[repeat(auto-fill,minmax(230px,1fr))]">
         {photoListData.map((photo, index) => (
-          <div className={styles.photoItem} key={photo.thumbnail}>
+          <div className="aspect-square" key={photo.thumbnail}>
             <a
               href={`/images/photography/${photo.original}`}
               // href={photo.href}
               onClick={(event) => handleThumbnailClick(event, index)}
             >
-              <img src={`/images/photography/${photo.thumbnail}`} alt="" />
+              <img
+                src={`/images/photography/${photo.thumbnail}`}
+                alt=""
+                className="object-cover md:object-contain w-full h-full align-middle"
+              />
             </a>
           </div>
         ))}

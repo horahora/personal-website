@@ -1,6 +1,6 @@
 // import Image from "next/image";
 import Link from "next/link";
-import type { Viewport } from "next";
+import type { Metadata } from "next";
 import Card from "@/components/Card";
 import AboutMe from "@/components/AboutMe";
 import AppFooter from "@/components/AppFooter";
@@ -10,11 +10,7 @@ import { getTranslations } from "next-intl/server";
 // TODO: 币圈分析图表、svg交互（包含路径移动画出字）、漫画作品、插画作品、跟随指针移动方向的3D物体、万花筒、3列逆向滚动、高斯模糊径向渐变的UI
 // 一些元素： 7. 下拉滚动逐帧动画（动画元素要自己重新画）. 小游戏. webgl ？， 6. 用p5.js做动态眼睛，live2D
 
-export const viewport: Viewport = {
-  themeColor: "hsl(0deg 0% 91%)",
-};
-
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("HomePage");
 
   return {
@@ -81,6 +77,13 @@ export default async function Home({
 
   return (
     <>
+      <style>
+        {`
+          body {
+            --background: hsl(0deg 0% 91%);
+          }
+        `}
+      </style>
       <div
         className={
           "relative overflow-hidden select-none cursor-default bg-[hsl(0deg_0%_91%)] bg-top selection:text-[#062617] selection:bg-[rgb(145_242_194/40%)] selection:[text-shadow:none] " +

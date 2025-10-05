@@ -1,5 +1,5 @@
 import { type PropsWithChildren } from "react";
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { SITE_NAME } from "@/constants";
 
@@ -12,10 +12,17 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const viewport: Viewport = {
-  themeColor: "#000",
-};
-
 export default function Layout({ children }: PropsWithChildren) {
-  return children;
+  return (
+    <>
+      <style>
+        {`
+          body {
+            --background: black;
+          }
+        `}
+      </style>
+      {children}
+    </>
+  );
 }
