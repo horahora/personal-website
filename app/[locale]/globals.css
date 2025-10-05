@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "tailwindcss-safe-area";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -37,6 +38,7 @@
   body {
     text-rendering: optimizeLegibility;
     color: #444;
+    @apply bg-background text-foreground;
   }
 
   input[type="checkbox"],
@@ -132,7 +134,8 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  /* for home */
+  --background: hsl(0deg 0% 91%);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -197,13 +200,4 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }
