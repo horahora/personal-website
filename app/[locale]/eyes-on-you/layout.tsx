@@ -1,14 +1,28 @@
 import { type PropsWithChildren } from "react";
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { SITE_NAME } from "@/constants";
 
-export const metadata: Metadata = {
-  title: "Eyes On You - Hora Hora",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("EyesOnYouPage");
 
-export const viewport: Viewport = {
-  themeColor: "#000",
-};
+  return {
+    title: `${t("metadata.title")} - ${SITE_NAME}`,
+    description: t("metadata.description"),
+  };
+}
 
 export default function Layout({ children }: PropsWithChildren) {
-  return children;
+  return (
+    <>
+      <style>
+        {`
+          body {
+            --background: black;
+          }
+        `}
+      </style>
+      {children}
+    </>
+  );
 }

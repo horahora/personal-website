@@ -1,490 +1,726 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import styles from "./page.module.css";
+import { useLayoutEffect, useRef } from "react";
 
-export default function EyesOnYou() {
+interface Point {
+  x: number;
+  y: number;
+}
+
+interface IrisState extends Point {
+  size: number;
+}
+
+interface PupilState {
+  width: number;
+  height: number;
+}
+
+interface ExposureState {
+  top: number;
+  bottom: number;
+  current: number;
+  target: number;
+}
+
+interface EyeInstance {
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+  activationTime: number;
+  irisSpeed: number;
+  blinkSpeed: number;
+  blinkInterval: number;
+  blinkTime: number;
+  scale: number;
+  size: number;
+  x: number;
+  y: number;
+  iris: IrisState;
+  pupil: PupilState;
+  exposure: ExposureState;
+  tiredness: number;
+  isActive: boolean;
+  // Lifecycle properties
+  lifespan: number; // How long this eye will live (in seconds)
+  birthTime: number; // When this eye was created
+  isDying: boolean; // Whether this eye is in dying process
+  shouldRemove: boolean; // Whether this eye should be removed
+  activate: () => void;
+  update: (pointer: Point) => void;
+  render: (pointer: Point) => void;
+  checkLifecycle: (currentTime: number) => void;
+}
+
+export default function Eyes() {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
-  const [displayWidth, setDisplayWidth] = useState(0);
-  const [displayHeight, setDisplayHeight] = useState(0);
-  const [scale, setScale] = useState(0);
-  const [pointerX, setPointerX] = useState((displayWidth * scale) / 2);
-  const [pointerY, setPointerY] = useState((displayHeight * scale) / 2);
 
-  const DISPLAY_DURATION_MILLISECOND = 10000;
+  useLayoutEffect(() => {
+    // Animation constants
+    const DISPLAY_DURATION = 10;
+    const TWO_PI = Math.PI * 2;
+    const REFERENCE_DISTANCE = 300;
+    const FALLOFF_POWER = 0.7;
 
-  useEffect(() => {
-    const eyes = [
-      { x: 0.19, y: 0.8, scale: 0.88, delay: 0.31 },
-      { x: 0.1, y: 0.54, scale: 0.84, delay: 0.32 },
-      { x: 0.81, y: 0.13, scale: 0.63, delay: 0.33 },
-      { x: 0.89, y: 0.19, scale: 0.58, delay: 0.34 },
-      { x: 0.4, y: 0.08, scale: 0.97, delay: 0.35 },
-      { x: 0.64, y: 0.74, scale: 0.57, delay: 0.36 },
-      { x: 0.41, y: 0.89, scale: 0.56, delay: 0.37 },
-      { x: 0.92, y: 0.89, scale: 0.75, delay: 0.38 },
-      { x: 0.27, y: 0.2, scale: 0.87, delay: 0.39 },
-      { x: 0.17, y: 0.46, scale: 0.68, delay: 0.41 },
-      { x: 0.71, y: 0.29, scale: 0.93, delay: 0.42 },
-      { x: 0.84, y: 0.46, scale: 0.54, delay: 0.43 },
-      { x: 0.93, y: 0.35, scale: 0.63, delay: 0.44 },
-      { x: 0.77, y: 0.82, scale: 0.85, delay: 0.45 },
-      { x: 0.36, y: 0.74, scale: 0.9, delay: 0.46 },
-      { x: 0.13, y: 0.24, scale: 0.85, delay: 0.47 },
-      { x: 0.58, y: 0.2, scale: 0.77, delay: 0.48 },
-      { x: 0.55, y: 0.84, scale: 0.87, delay: 0.5 },
+    // Eye geometry constants
+    const EYE_BASE_SIZE = 70;
+    const EYE_HORIZONTAL_OFFSET = 0.8;
+    const EYE_VERTICAL_OFFSET = 0.1;
+    const EYE_POSITION_OFFSET = 0.15;
+    const IRIS_SIZE_RATIO = 0.2;
+    const IRIS_POSITION_OFFSET = 0.1;
+    const PUPIL_SIZE_RATIO = 0.2;
+    const MAX_MOVEMENT_RATIO = 0.15;
+    const HIGHLIGHT_OFFSET = 0.114;
+    const HIGHLIGHT_SIZE_RATIO = 0.1;
 
-      { x: 0.5, y: 0.5, scale: 3.5, delay: 0.1 },
-    ];
+    const pointer: Point = {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    };
+    let isPointerInViewport = false; // Track if pointer is in viewport
 
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d")!;
-    ctx.scale(scale, scale);
+    let eyes: EyeInstance[];
+    let canvas: HTMLCanvasElement;
+    let ctx: CanvasRenderingContext2D;
+    let startTime: number;
+    let currentWidth = window.innerWidth;
+    let currentHeight = window.innerHeight;
 
-    let start: DOMHighResTimeStamp | null = null;
+    function updateCanvasSize() {
+      currentWidth = window.innerWidth;
+      currentHeight = window.innerHeight;
 
-    function step(timestamp: DOMHighResTimeStamp) {
-      window.requestAnimationFrame(step);
+      canvas = canvasRef.current;
+      canvas.style.width = currentWidth + "px";
+      canvas.style.height = currentHeight + "px";
+      canvas.width = Math.floor(currentWidth * window.devicePixelRatio);
+      canvas.height = Math.floor(currentHeight * window.devicePixelRatio);
 
-      start ??= timestamp;
-      // The number of seconds that have passed since initialization
-      const elapsed = timestamp - start;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      render(timestamp, elapsed);
+      ctx = canvas.getContext("2d")!;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     }
 
-    function render(
-      timestamp: DOMHighResTimeStamp,
-      elapsed: DOMHighResTimeStamp
-    ) {
-      eyes.forEach(({ x, y, scale, delay }) => {
-        if (elapsed < delay * DISPLAY_DURATION_MILLISECOND) return;
+    const handlePointerMove = (event: PointerEvent) => {
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+      isPointerInViewport = true;
+    };
 
-        // The speed at which the iris follows the pointer
-        // const irisSpeed = 0.01 + (Math.random() * 0.2) / scale;
+    const handlePointerEnter = () => {
+      isPointerInViewport = true;
+    };
 
-        // The speed at which the eye opens and closes
-        const blinkSpeed = 0.2 + Math.random() * 0.2;
-        const blinkInterval = 5000 + 5000 * Math.random();
+    const handlePointerLeave = () => {
+      isPointerInViewport = false;
+    };
 
-        // Timestamp of the last blink
-        let blinkTime = Date.now();
+    const handleMouseOut = (event: MouseEvent) => {
+      // Check if mouse is leaving the document (going outside the browser window)
+      // relatedTarget is null when leaving the document entirely
+      if (!event.relatedTarget || event.relatedTarget === null) {
+        isPointerInViewport = false;
+      }
+    };
 
-        const size = 70 * scale;
-        const eyeCenter = {
-          x: x * canvas.width,
-          y: y * canvas.height + size * 0.15,
-        };
-        const iris = {
-          x: eyeCenter.x,
-          y: eyeCenter.y - size * 0.1,
-          size: size * 0.2,
-        };
+    const handleTouchMove = (event: TouchEvent) => {
+      event.preventDefault(); // Prevent page scrolling
+      if (event.touches.length > 0) {
+        const touch = event.touches[0];
+        pointer.x = touch.clientX;
+        pointer.y = touch.clientY;
+        isPointerInViewport = true;
+      }
+    };
 
-        // const pupil = {
-        //   width: 2 * scale,
-        //   height: iris.size * 0.75,
-        // };
-        const exposure = {
+    const handleTouchEnd = () => {
+      isPointerInViewport = false;
+    };
+
+    const handleWindowBlur = () => {
+      isPointerInViewport = false;
+    };
+
+    function Eye(
+      canvas: HTMLCanvasElement,
+      x: number,
+      y: number,
+      scale: number,
+      time: number
+    ): EyeInstance {
+      const ctx = canvas.getContext("2d")!;
+      const size = EYE_BASE_SIZE * scale;
+      const eyeX = (x * canvas.width) / window.devicePixelRatio;
+      const eyeY =
+        (y * canvas.height) / window.devicePixelRatio +
+        size * EYE_POSITION_OFFSET;
+
+      const currentTime = Date.now();
+
+      const eye: EyeInstance = {
+        canvas,
+        ctx,
+        activationTime: time,
+        irisSpeed: 0.01 + (Math.random() * 0.2) / scale,
+        blinkSpeed: 0.15 + Math.random() * 0.2, // 0.15-0.35 faster blinking
+        blinkInterval: 5000 + 5000 * Math.random(),
+        blinkTime: currentTime,
+        scale,
+        size,
+        x: eyeX,
+        y: eyeY,
+        iris: {
+          x: eyeX,
+          y: eyeY - size * IRIS_POSITION_OFFSET,
+          size: size * IRIS_SIZE_RATIO,
+        },
+        pupil: {
+          width: 2 * scale,
+          height: size * IRIS_SIZE_RATIO * 0.75,
+        },
+        exposure: {
           top: 0.1 + Math.random() * 0.3,
           bottom: 0.5 + Math.random() * 0.3,
           current: 0,
           target: 1,
-        };
-        // Affects the amount of inner shadow
-        const tiredness = 0.5 - exposure.top + 0.1;
+        },
+        tiredness: 0.5 - (0.1 + Math.random() * 0.3) + 0.1,
+        isActive: false,
+        // Lifecycle properties
+        lifespan: 15 + Math.random() * 30, // 15-45 seconds lifespan (wider range)
+        birthTime: currentTime + (Math.random() - 0.5) * 20000, // ±10 seconds random offset
+        isDying: false,
+        shouldRemove: false,
+        activate() {
+          this.isActive = true;
+        },
+        update(pointer: Point) {
+          if (this.isActive) {
+            this.render(pointer);
+          }
+        },
+        checkLifecycle(currentTime: number) {
+          const age = (currentTime - this.birthTime) / 1000; // Convert to seconds
 
-        const eyeLeft = {
-          x: eyeCenter.x - size * 0.8,
-          y: eyeCenter.y - size * 0.1,
-        };
-        const eyeRight = {
-          x: eyeCenter.x + size * 0.8,
-          y: eyeCenter.y - size * 0.1,
-        };
-        const eyeTop = {
-          x: eyeCenter.x,
-          y: eyeCenter.y - size * (0.5 + exposure.top * exposure.current),
-        };
-        const eyeBottom = {
-          x: eyeCenter.x,
-          y: eyeCenter.y + size * (0.5 - exposure.bottom * exposure.current),
-        };
+          if (age > this.lifespan && !this.isDying) {
+            // Start dying process - begin closing eyes permanently
+            this.isDying = true;
+            this.exposure.target = 0;
+            this.blinkSpeed = 0.2; // Faster death, but still noticeable
+          }
 
-        // Eye inner shadow top
-        const eyeInnerTop = {
-          x: eyeCenter.x,
-          y: eyeCenter.y - size * (0.5 + (0.5 - tiredness) * exposure.current),
-        };
+          if (this.isDying && this.exposure.current < 0.01) {
+            // Eye is fully closed, mark for removal
+            this.shouldRemove = true;
+          }
+        },
+        render(pointer: Point) {
+          const time = Date.now();
 
-        // Offset the iris depending on pointer position
-        const irisOffset = {
-          x: (pointerX - iris.x) / (canvas.width - iris.x),
-          y: pointerY / canvas.height,
-        };
+          // Normal blinking behavior (unless dying)
+          if (!this.isDying) {
+            if (this.exposure.current < 0.012) {
+              this.exposure.target = 1;
+            } else if (time - this.blinkTime > this.blinkInterval) {
+              this.exposure.target = 0;
+              this.blinkTime = time;
+            }
+          }
 
-        // Apply the iris offset
-        iris.x += irisOffset.x * 16 * Math.max(1, scale * 0.4);
-        iris.y += irisOffset.y * 10 * Math.max(1, scale * 0.4);
-        const time = Date.now();
+          // Use faster easing for blinking - accelerate towards the target
+          const diff = this.exposure.target - this.exposure.current;
+          const easedSpeed =
+            Math.abs(diff) < 0.5 ? this.blinkSpeed * 2 : this.blinkSpeed;
+          this.exposure.current += diff * easedSpeed;
 
-        if (exposure.current < 0.012) {
-          exposure.target = 1;
-        } else if (time - blinkTime > blinkInterval) {
-          exposure.target = 0;
-          blinkTime = time;
-        }
+          // Eye left/right corners
+          const eyeLeft: Point = {
+            x: this.x - this.size * EYE_HORIZONTAL_OFFSET,
+            y: this.y - this.size * EYE_VERTICAL_OFFSET,
+          };
+          const eyeRight: Point = {
+            x: this.x + this.size * EYE_HORIZONTAL_OFFSET,
+            y: this.y - this.size * EYE_VERTICAL_OFFSET,
+          };
 
-        exposure.current += (exposure.target - exposure.current) * blinkSpeed;
+          // Eye top/bottom points
+          const eyeTop: Point = {
+            x: this.x,
+            y:
+              this.y -
+              this.size * (0.5 + this.exposure.top * this.exposure.current),
+          };
+          const eyeBottom: Point = {
+            x: this.x,
+            y:
+              this.y -
+              this.size * (0.5 - this.exposure.bottom * this.exposure.current),
+          };
 
-        // Eye fill drawing
-        ctx.save();
-        ctx.fillStyle = "rgba(255,255,255,1.0)";
-        ctx.strokeStyle = "rgba(100,100,100,1.0)";
-        ctx.beginPath();
-        ctx.lineWidth = 3;
-        ctx.lineJoin = "round";
-        ctx.moveTo(eyeLeft.x, eyeLeft.y);
-        ctx.moveTo(eyeLeft.x, eyeLeft.y);
-        ctx.quadraticCurveTo(eyeTop.x, eyeTop.y, eyeRight.x, eyeRight.y);
-        ctx.quadraticCurveTo(eyeBottom.x, eyeBottom.y, eyeLeft.x, eyeLeft.y);
-        ctx.stroke();
-        ctx.fill();
-        ctx.restore();
+          // Eye inner shadow top
+          const eyeInnerShadowTop: Point = {
+            x: this.x,
+            y:
+              this.y -
+              this.size *
+                (0.5 + (0.5 - this.tiredness) * this.exposure.current),
+          };
 
-        // Iris
-        ctx.save();
-        ctx.globalCompositeOperation = "source-atop";
-        ctx.translate(iris.x * 0.1, 0);
-        ctx.scale(0.9, 1);
-        ctx.strokeStyle = "rgba(0,0,0,0.9)";
-        ctx.fillStyle = "hsl(354deg 59% 24%)";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(iris.x, iris.y, iris.size * 0.9, 0, Math.PI * 2, true);
-        ctx.fill();
-        ctx.stroke();
-        ctx.restore();
+          // Eye iris target position - default center (looking at infinity/forward)
+          const irisTarget: Point = { x: this.x, y: this.y - this.iris.size };
 
-        // Iris inner
-        ctx.save();
-        ctx.shadowColor = "rgba(255,255,255,0.5)";
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-        ctx.shadowBlur = 2 * scale;
-        ctx.globalCompositeOperation = "source-atop";
-        ctx.translate(iris.x * 0.1, 0);
-        ctx.scale(0.9, 1);
-        ctx.fillStyle = "rgba(255,255,255,0.1)";
-        ctx.beginPath();
-        ctx.arc(iris.x, iris.y, iris.size * 0.6, 0, Math.PI * 2, true);
-        ctx.fill();
-        ctx.restore();
+          if (isPointerInViewport) {
+            // Follow pointer when in viewport
+            const deltaX = pointer.x - irisTarget.x;
+            const deltaY = pointer.y - irisTarget.y;
+            const pointerDistance = Math.sqrt(
+              deltaX * deltaX + deltaY * deltaY
+            );
+            const pointerAngle = Math.atan2(deltaY, deltaX);
 
-        // Pupil
-        ctx.save();
-        ctx.globalCompositeOperation = "source-atop";
-        ctx.fillStyle = "rgba(0,0,0,0.9)";
-        ctx.beginPath();
-        // ctx.moveTo(iris.x, iris.y - pupil.height * 0.5);
-        // ctx.quadraticCurveTo(
-        //   iris.x + pupil.width * 0.5,
-        //   iris.y,
-        //   iris.x,
-        //   iris.y + pupil.height * 0.5
-        // );
-        // ctx.quadraticCurveTo(
-        //   iris.x - pupil.width * 0.5,
-        //   iris.y,
-        //   iris.x,
-        //   iris.y - pupil.height * 0.5
-        // );
-        ctx.arc(iris.x, iris.y, iris.size * 0.2, 0, Math.PI * 2, true);
-        ctx.fill();
-        ctx.restore();
+            // Limit maximum iris movement based on eye size
+            const maxIrisMovement = this.size * MAX_MOVEMENT_RATIO;
 
-        // highlight
-        ctx.save();
-        ctx.globalCompositeOperation = "source-atop";
-        ctx.fillStyle = "rgba(255,255,255,1)";
-        ctx.beginPath();
-        ctx.arc(
-          iris.x - size * 0.114,
-          iris.y - size * 0.114,
-          iris.size * 0.1,
-          0,
-          Math.PI * 2,
-          true
-        );
-        ctx.fill();
-        ctx.restore();
+            // Use a smoother falloff function for distance-based movement
+            const normalizedDistance = Math.min(
+              pointerDistance / REFERENCE_DISTANCE,
+              1
+            );
+            const actualMovement =
+              maxIrisMovement * Math.pow(normalizedDistance, FALLOFF_POWER);
 
-        ctx.save();
-        ctx.shadowColor = "rgba(0,0,0,0.9)";
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-        ctx.shadowBlur = 10;
+            // Apply the iris offset using polar coordinates
+            irisTarget.x += Math.cos(pointerAngle) * actualMovement;
+            irisTarget.y += Math.sin(pointerAngle) * actualMovement;
+          }
+          // When pointer not in viewport, irisTarget remains at center (looking forward/infinity)
 
-        // Eye top inner shadow
-        ctx.fillStyle = "rgba(120,120,120,0.2)";
-        ctx.beginPath();
-        ctx.moveTo(eyeLeft.x, eyeLeft.y);
-        ctx.quadraticCurveTo(eyeTop.x, eyeTop.y, eyeRight.x, eyeRight.y);
-        ctx.quadraticCurveTo(
-          eyeInnerTop.x,
-          eyeInnerTop.y,
-          eyeLeft.x,
-          eyeLeft.y
-        );
-        ctx.closePath();
-        ctx.fill();
+          this.iris.x += (irisTarget.x - this.iris.x) * this.irisSpeed;
+          this.iris.y += (irisTarget.y - this.iris.y) * this.irisSpeed;
 
-        ctx.restore();
-      });
+          // Eye fill drawing
+          this.ctx.fillStyle = "rgba(255,255,255,1.0)";
+          this.ctx.strokeStyle = "rgba(100,100,100,1.0)";
+          this.ctx.beginPath();
+          this.ctx.lineWidth = 3;
+          this.ctx.lineJoin = "round";
+          this.ctx.moveTo(eyeLeft.x, eyeLeft.y);
+          this.ctx.quadraticCurveTo(eyeTop.x, eyeTop.y, eyeRight.x, eyeRight.y);
+          this.ctx.quadraticCurveTo(
+            eyeBottom.x,
+            eyeBottom.y,
+            eyeLeft.x,
+            eyeLeft.y
+          );
+          this.ctx.closePath();
+          this.ctx.stroke();
+          this.ctx.fill();
+
+          // Iris components - batch rendering with single transform
+          this.ctx.save();
+          this.ctx.globalCompositeOperation = "source-atop";
+          this.ctx.translate(this.iris.x * 0.1, 0);
+          this.ctx.scale(0.9, 1);
+
+          // Main iris
+          this.ctx.fillStyle = "hsl(354deg 59% 24%)";
+          this.ctx.strokeStyle = "rgba(0,0,0,0.9)";
+          this.ctx.lineWidth = 2;
+          this.ctx.beginPath();
+          this.ctx.arc(
+            this.iris.x,
+            this.iris.y,
+            this.iris.size * 0.9,
+            0,
+            TWO_PI
+          );
+          this.ctx.fill();
+          this.ctx.stroke();
+
+          // Iris inner glow
+          this.ctx.shadowColor = "rgba(255,255,255,0.5)";
+          this.ctx.shadowBlur = 2 * this.scale;
+          this.ctx.fillStyle = "rgba(255,255,255,0.1)";
+          this.ctx.beginPath();
+          this.ctx.arc(
+            this.iris.x,
+            this.iris.y,
+            this.iris.size * 0.6,
+            0,
+            TWO_PI
+          );
+          this.ctx.fill();
+
+          this.ctx.restore();
+
+          // Pupil and highlight - no transform needed
+          this.ctx.save();
+          this.ctx.globalCompositeOperation = "source-atop";
+
+          // Pupil
+          this.ctx.fillStyle = "rgba(0,0,0,0.9)";
+          this.ctx.beginPath();
+          this.ctx.arc(
+            this.iris.x,
+            this.iris.y,
+            this.iris.size * PUPIL_SIZE_RATIO,
+            0,
+            TWO_PI
+          );
+          this.ctx.fill();
+
+          // Highlight
+          this.ctx.fillStyle = "rgba(255,255,255,1)";
+          this.ctx.beginPath();
+          this.ctx.arc(
+            this.iris.x - this.size * HIGHLIGHT_OFFSET,
+            this.iris.y - this.size * HIGHLIGHT_OFFSET,
+            this.iris.size * HIGHLIGHT_SIZE_RATIO,
+            0,
+            TWO_PI
+          );
+          this.ctx.fill();
+          this.ctx.restore();
+
+          // Eye top inner shadow
+          this.ctx.save();
+          this.ctx.shadowColor = "rgba(0,0,0,0.9)";
+          this.ctx.shadowBlur = 10;
+          this.ctx.fillStyle = "rgba(120,120,120,0.2)";
+          this.ctx.beginPath();
+          this.ctx.moveTo(eyeLeft.x, eyeLeft.y);
+          this.ctx.quadraticCurveTo(eyeTop.x, eyeTop.y, eyeRight.x, eyeRight.y);
+          this.ctx.quadraticCurveTo(
+            eyeInnerShadowTop.x,
+            eyeInnerShadowTop.y,
+            eyeLeft.x,
+            eyeLeft.y
+          );
+          this.ctx.closePath();
+          this.ctx.fill();
+          this.ctx.restore();
+        },
+      };
+
+      return eye;
     }
 
-    window.requestAnimationFrame(step);
-  }, [pointerX, pointerY, scale]);
+    function createNewEye(existingEyes: EyeInstance[]): EyeInstance | null {
+      const maxAttempts = 50;
+      let attempts = 0;
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
+      while (attempts < maxAttempts) {
+        const config = {
+          x: 0.05 + Math.random() * 0.9,
+          y: 0.05 + Math.random() * 0.9,
+          scale: 0.4 + Math.random() * 0.8,
+          time: Math.random() * 0.5, // 0-0.5 seconds random appearance delay
+        };
 
-    const resize = () => {
-      setDisplayWidth(window.innerWidth);
-      setDisplayHeight(window.innerHeight);
+        // Check collision with existing eyes (including central eye)
+        let hasCollision = false;
+        for (const existingEye of existingEyes) {
+          if (!existingEye.shouldRemove) {
+            // Convert both to same coordinate system (normalized 0-1)
+            const existingX = existingEye.x / currentWidth;
+            const existingY = existingEye.y / currentHeight;
+
+            const dx = Math.abs(config.x - existingX) * currentWidth;
+            const dy = Math.abs(config.y - existingY) * currentHeight;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            const radius1 = (EYE_BASE_SIZE * config.scale) / 2;
+            const radius2 = existingEye.size / 2;
+            const minDistance = (radius1 + radius2) * 1.5; // Restore original spacing
+
+            if (distance < minDistance) {
+              hasCollision = true;
+              break;
+            }
+          }
+        }
+
+        if (!hasCollision) {
+          const newEye = Eye(
+            canvas,
+            config.x,
+            config.y,
+            config.scale,
+            config.time
+          );
+          // New eyes start with closed exposure and slowly open
+          newEye.exposure.current = 0;
+          newEye.exposure.target = 1;
+          newEye.blinkSpeed = 0.1; // Slow opening
+          newEye.activate();
+          return newEye;
+        }
+        attempts++;
+      }
+
+      return null; // Failed to find a valid position
+    }
+
+    function createEyes() {
+      // Calculate responsive eye count based on screen size
+      const screenArea = currentWidth * currentHeight;
+      const isMobile = currentWidth < 768;
+
+      // Calculate base eye count from screen area (higher density)
+      const baseEyeCount = Math.floor(screenArea / 40000);
+
+      let eyeCount: number;
+      if (isMobile) {
+        // Mobile: keep good density for better visual effect
+        eyeCount = Math.max(12, Math.min(20, baseEyeCount));
+      } else {
+        // Desktop: full eye count based on screen area
+        eyeCount = Math.max(15, Math.min(35, baseEyeCount));
+      }
+
+      // Generate random eye configurations with collision detection
+      const eyes: EyeInstance[] = [];
+      const eyeConfigs: Array<{
+        x: number;
+        y: number;
+        scale: number;
+        time: number;
+      }> = [];
+
+      // Helper function to check if two eyes overlap
+      const isOverlapping = (
+        x1: number,
+        y1: number,
+        scale1: number,
+        x2: number,
+        y2: number,
+        scale2: number
+      ) => {
+        const radius1 = (EYE_BASE_SIZE * scale1) / 2;
+        const radius2 = (EYE_BASE_SIZE * scale2) / 2;
+        const minDistance = (radius1 + radius2) * 1.5; // 1.5x buffer for spacing
+
+        const dx = Math.abs(x1 - x2) * currentWidth;
+        const dy = Math.abs(y1 - y2) * currentHeight;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        return distance < minDistance;
+      };
+
+      // Calculate central eye scale based on screen size
+      let centralScale: number;
+      if (isMobile) {
+        centralScale = 1.5 + Math.random() * 0.5; // 1.5-2.0 for mobile
+      } else if (screenArea < 800000) {
+        centralScale = 2.0 + Math.random() * 0.8; // 2.0-2.8 for small screens
+      } else {
+        centralScale = 2.5 + Math.random() * 1.0; // 2.5-3.5 for large screens
+      }
+
+      // Reserve space for central eye
+      const centralEyeConfig = {
+        x: 0.5,
+        y: 0.5,
+        scale: centralScale,
+        time: 0.1,
+      };
+
+      // Create random background eyes with collision detection
+      let attempts = 0;
+      const maxAttempts = eyeCount * 10; // Prevent infinite loops
+
+      while (eyeConfigs.length < eyeCount && attempts < maxAttempts) {
+        const config = {
+          x: 0.05 + Math.random() * 0.9,
+          y: 0.05 + Math.random() * 0.9,
+          scale: 0.4 + Math.random() * 0.8,
+          time: 0.3 + Math.random() * 0.4,
+        };
+
+        // Check collision with central eye
+        if (
+          isOverlapping(
+            config.x,
+            config.y,
+            config.scale,
+            centralEyeConfig.x,
+            centralEyeConfig.y,
+            centralEyeConfig.scale
+          )
+        ) {
+          attempts++;
+          continue;
+        }
+
+        // Check collision with existing eyes
+        let hasCollision = false;
+        for (const existingConfig of eyeConfigs) {
+          if (
+            isOverlapping(
+              config.x,
+              config.y,
+              config.scale,
+              existingConfig.x,
+              existingConfig.y,
+              existingConfig.scale
+            )
+          ) {
+            hasCollision = true;
+            break;
+          }
+        }
+
+        if (!hasCollision) {
+          eyeConfigs.push(config);
+        }
+        attempts++;
+      }
+
+      // Create eye instances from valid configurations with additional lifecycle spreading
+      for (let i = 0; i < eyeConfigs.length; i++) {
+        const config = eyeConfigs[i];
+        const eye = Eye(canvas, config.x, config.y, config.scale, config.time);
+
+        // Additional lifecycle spreading for initial eyes to prevent mass extinction
+        const spreadFactor = (i / eyeConfigs.length) * 15000; // 0-15 second spread
+        eye.birthTime += spreadFactor;
+
+        eyes.push(eye);
+      }
+
+      // Always add the central large eye last (appears on top)
+      const centralEye = Eye(
+        canvas,
+        centralEyeConfig.x,
+        centralEyeConfig.y,
+        centralEyeConfig.scale,
+        centralEyeConfig.time
+      );
+      centralEye.lifespan = Infinity; // Central eye never dies
+      eyes.push(centralEye);
+
+      return eyes;
+    }
+
+    let resizeTimeout: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        updateCanvasSize();
+        // Recreate eyes with new positions
+        eyes = createEyes();
+      }, 100);
     };
 
-    const setPointer = (event: PointerEvent) => {
-      setPointerX(event.clientX);
-      setPointerY(event.clientY);
-    };
+    function initialize(timestamp: DOMHighResTimeStamp) {
+      startTime = timestamp;
 
-    const updatePixelRatio = () => {
-      setScale(window.devicePixelRatio);
-    };
+      updateCanvasSize();
 
-    const mqString = `(resolution: ${window.devicePixelRatio}dppx)`;
-    const media = matchMedia(mqString);
-    media.addEventListener("change", updatePixelRatio);
-    window.addEventListener("resize", resize);
-    canvas.addEventListener("pointermove", setPointer);
+      // Use document to catch pointer events reliably
+      document.addEventListener("pointermove", handlePointerMove);
+      document.addEventListener("pointerenter", handlePointerEnter);
+      document.addEventListener("pointerleave", handlePointerLeave);
+      document.addEventListener("mouseout", handleMouseOut); // Detect when mouse leaves document
 
+      // Touch events - prevent scrolling
+      document.addEventListener("touchmove", handleTouchMove, {
+        passive: false,
+      });
+      document.addEventListener("touchend", handleTouchEnd);
+      document.addEventListener("touchcancel", handleTouchEnd);
+
+      window.addEventListener("blur", handleWindowBlur);
+      window.addEventListener("resize", handleResize);
+
+      eyes = createEyes();
+
+      animate(timestamp);
+    }
+
+    let lastNewEyeTime = 0;
+    const NEW_EYE_INTERVAL = 1500; // Try to add new eye every 1.5 seconds
+    let eyeDeathCount = 0; // Track how many eyes have died
+    let eyeBirthCount = 0; // Track how many eyes have been born
+
+    function animate(timestamp: DOMHighResTimeStamp) {
+      // The number of seconds that have passed since initialization
+      const seconds = (timestamp - startTime) / 1000;
+      const currentTime = Date.now();
+
+      // Out with the old ...
+      ctx.clearRect(0, 0, currentWidth, currentHeight);
+
+      // Check lifecycle and update existing eyes
+      eyes.forEach((eye) => {
+        if (seconds > eye.activationTime * DISPLAY_DURATION) {
+          eye.activate();
+        }
+        if (eye.isActive) {
+          eye.checkLifecycle(currentTime);
+        }
+        eye.update(pointer);
+      });
+
+      // Remove eyes that should be removed
+      for (let i = eyes.length - 1; i >= 0; i--) {
+        if (eyes[i].shouldRemove) {
+          // Don't remove central eye (usually the last one added)
+          if (i !== eyes.length - 1 || eyes[i].scale < 2) {
+            eyes.splice(i, 1);
+            eyeDeathCount++; // Track deaths
+          }
+        }
+      }
+
+      // Balance-based eye creation - prioritize maintaining death/birth balance
+      if (currentTime - lastNewEyeTime > NEW_EYE_INTERVAL) {
+        const targetEyeCount = Math.floor(
+          (currentWidth * currentHeight) / 40000
+        );
+        const currentBackgroundEyeCount = eyes.filter(
+          (eye) => eye.scale < 2
+        ).length;
+        const maxEyeCount = Math.max(12, Math.min(25, targetEyeCount));
+
+        const deathBirthGap = eyeDeathCount - eyeBirthCount; // How many more deaths than births
+
+        // Prioritize balance: if more deaths than births, be more aggressive about creating
+        const shouldCreate =
+          deathBirthGap > 0 || // Deaths exceed births - create to balance
+          currentBackgroundEyeCount < maxEyeCount * 0.7; // Or if below 70% of target
+
+        if (shouldCreate) {
+          const newEye = createNewEye(eyes);
+          if (newEye) {
+            eyes.splice(eyes.length - 1, 0, newEye); // Insert before central eye
+            eyeBirthCount++; // Track births
+            lastNewEyeTime = currentTime;
+          } else {
+            // If we can't find space, reduce the interval to try more frequently
+            lastNewEyeTime = currentTime - NEW_EYE_INTERVAL / 2;
+          }
+        }
+      }
+
+      window.requestAnimationFrame(animate);
+    }
+
+    window.requestAnimationFrame(initialize);
+
+    // Cleanup function
     return () => {
-      window.removeEventListener("resize", resize);
-      canvas.removeEventListener("pointermove", setPointer);
-      media.removeEventListener("change", updatePixelRatio);
+      clearTimeout(resizeTimeout);
+      document.removeEventListener("pointermove", handlePointerMove);
+      document.removeEventListener("pointerenter", handlePointerEnter);
+      document.removeEventListener("pointerleave", handlePointerLeave);
+      document.removeEventListener("mouseout", handleMouseOut);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+      document.removeEventListener("touchcancel", handleTouchEnd);
+      window.removeEventListener("blur", handleWindowBlur);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  useLayoutEffect(() => {
-    // function Eye(canvas, x, y, scale, time) {
-    //   // The time at which this eye will come alive
-    //   this.activationTime = time;
-    //   // The speed at which the iris follows the pointer
-    //   this.irisSpeed = 0.01 + (Math.random() * 0.2) / scale;
-    //   // The speed at which the eye opens and closes
-    //   this.blinkSpeed = 0.2 + Math.random() * 0.2;
-    //   this.blinkInterval = 5000 + 5000 * Math.random();
-    //   // Timestamp of the last blink
-    //   this.blinkTime = Date.now();
-    //   this.scale = scale;
-    //   this.size = 70 * scale;
-    //   this.x = x * canvas.width;
-    //   this.y = y * canvas.height + this.size * 0.15;
-    //   this.iris = {
-    //     x: this.x,
-    //     y: this.y - this.size * 0.1,
-    //     size: this.size * 0.2,
-    //   };
-    //   this.pupil = {
-    //     width: 2 * scale,
-    //     height: this.iris.size * 0.75,
-    //   };
-    //   this.exposure = {
-    //     top: 0.1 + Math.random() * 0.3,
-    //     bottom: 0.5 + Math.random() * 0.3,
-    //     current: 0,
-    //     target: 1,
-    //   };
-    //   // Affects the amount of inner shadow
-    //   this.tiredness = 0.5 - this.exposure.top + 0.1;
-    //   this.isActive = false;
-    //   this.activate = function () {
-    //     this.isActive = true;
-    //   };
-    //   this.update = function (pointer) {
-    //     if (this.isActive === true) {
-    //       this.render(pointer);
-    //     }
-    //   };
-    //   this.render = function (pointer) {
-    //     const time = Date.now();
-    //     if (this.exposure.current < 0.012) {
-    //       this.exposure.target = 1;
-    //     } else if (time - this.blinkTime > this.blinkInterval) {
-    //       this.exposure.target = 0;
-    //       this.blinkTime = time;
-    //     }
-    //     this.exposure.current +=
-    //       (this.exposure.target - this.exposure.current) * this.blinkSpeed;
-    //     // Eye left/right
-    //     var el = { x: this.x - this.size * 0.8, y: this.y - this.size * 0.1 };
-    //     var er = { x: this.x + this.size * 0.8, y: this.y - this.size * 0.1 };
-    //     // Eye top/bottom
-    //     var et = {
-    //       x: this.x,
-    //       y:
-    //         this.y -
-    //         this.size * (0.5 + this.exposure.top * this.exposure.current),
-    //     };
-    //     var eb = {
-    //       x: this.x,
-    //       y:
-    //         this.y -
-    //         this.size * (0.5 - this.exposure.bottom * this.exposure.current),
-    //     };
-    //     // Eye inner shadow top
-    //     var eit = {
-    //       x: this.x,
-    //       y:
-    //         this.y -
-    //         this.size * (0.5 + (0.5 - this.tiredness) * this.exposure.current),
-    //     };
-    //     // Eye iris
-    //     var ei = { x: this.x, y: this.y - this.iris.size };
-    //     // Offset the iris depending on pointer position
-    //     var eio = {
-    //       x: (pointerX - ei.x) / (canvas.width - ei.x),
-    //       y: pointerY / canvas.height,
-    //     };
-    //     // Apply the iris offset
-    //     ei.x += eio.x * 16 * Math.max(1, this.scale * 0.4);
-    //     ei.y += eio.y * 10 * Math.max(1, this.scale * 0.4);
-    //     this.iris.x += (ei.x - this.iris.x) * this.irisSpeed;
-    //     this.iris.y += (ei.y - this.iris.y) * this.irisSpeed;
-    //     // Eye fill drawing
-    //     ctx.fillStyle = "rgba(255,255,255,1.0)";
-    //     ctx.strokeStyle = "rgba(100,100,100,1.0)";
-    //     ctx.beginPath();
-    //     ctx.lineWidth = 3;
-    //     ctx.lineJoin = "round";
-    //     ctx.moveTo(el.x, el.y);
-    //     ctx.quadraticCurveTo(et.x, et.y, er.x, er.y);
-    //     ctx.quadraticCurveTo(eb.x, eb.y, el.x, el.y);
-    //     ctx.closePath();
-    //     ctx.stroke();
-    //     ctx.fill();
-    //     // Iris
-    //     ctx.save();
-    //     ctx.globalCompositeOperation = "source-atop";
-    //     ctx.translate(this.iris.x * 0.1, 0);
-    //     ctx.scale(0.9, 1);
-    //     ctx.strokeStyle = "rgba(0,0,0,0.9)";
-    //     ctx.fillStyle = "hsl(354deg 59% 24%)";
-    //     ctx.lineWidth = 2;
-    //     ctx.beginPath();
-    //     ctx.arc(
-    //       this.iris.x,
-    //       this.iris.y,
-    //       this.iris.size * 0.9,
-    //       0,
-    //       Math.PI * 2,
-    //       true
-    //     );
-    //     ctx.fill();
-    //     ctx.stroke();
-    //     ctx.restore();
-    //     // Iris inner
-    //     ctx.save();
-    //     ctx.shadowColor = "rgba(255,255,255,0.5)";
-    //     ctx.shadowOffsetX = 0;
-    //     ctx.shadowOffsetY = 0;
-    //     ctx.shadowBlur = 2 * this.scale;
-    //     ctx.globalCompositeOperation = "source-atop";
-    //     ctx.translate(this.iris.x * 0.1, 0);
-    //     ctx.scale(0.9, 1);
-    //     ctx.fillStyle = "rgba(255,255,255,0.1)";
-    //     ctx.beginPath();
-    //     ctx.arc(
-    //       this.iris.x,
-    //       this.iris.y,
-    //       this.iris.size * 0.6,
-    //       0,
-    //       Math.PI * 2,
-    //       true
-    //     );
-    //     ctx.fill();
-    //     ctx.restore();
-    //     // Pupil
-    //     ctx.save();
-    //     ctx.globalCompositeOperation = "source-atop";
-    //     ctx.fillStyle = "rgba(0,0,0,0.9)";
-    //     ctx.beginPath();
-    //     // ctx.moveTo(this.iris.x, this.iris.y - this.pupil.height * 0.5);
-    //     // ctx.quadraticCurveTo(
-    //     //   this.iris.x + this.pupil.width * 0.5,
-    //     //   this.iris.y,
-    //     //   this.iris.x,
-    //     //   this.iris.y + this.pupil.height * 0.5
-    //     // );
-    //     // ctx.quadraticCurveTo(
-    //     //   this.iris.x - this.pupil.width * 0.5,
-    //     //   this.iris.y,
-    //     //   this.iris.x,
-    //     //   this.iris.y - this.pupil.height * 0.5
-    //     // );
-    //     ctx.arc(
-    //       this.iris.x,
-    //       this.iris.y,
-    //       this.iris.size * 0.2,
-    //       0,
-    //       Math.PI * 2,
-    //       true
-    //     );
-    //     ctx.fill();
-    //     ctx.restore();
-    //     // highlight
-    //     ctx.save();
-    //     ctx.globalCompositeOperation = "source-atop";
-    //     ctx.fillStyle = "rgba(255,255,255,1)";
-    //     ctx.beginPath();
-    //     ctx.arc(
-    //       this.iris.x - this.size * 0.114,
-    //       this.iris.y - this.size * 0.114,
-    //       this.iris.size * 0.1,
-    //       0,
-    //       Math.PI * 2,
-    //       true
-    //     );
-    //     ctx.fill();
-    //     ctx.restore();
-    //     ctx.save();
-    //     ctx.shadowColor = "rgba(0,0,0,0.9)";
-    //     ctx.shadowOffsetX = 0;
-    //     ctx.shadowOffsetY = 0;
-    //     ctx.shadowBlur = 10;
-    //     // Eye top inner shadow
-    //     ctx.fillStyle = "rgba(120,120,120,0.2)";
-    //     ctx.beginPath();
-    //     ctx.moveTo(el.x, el.y);
-    //     ctx.quadraticCurveTo(et.x, et.y, er.x, er.y);
-    //     ctx.quadraticCurveTo(eit.x, eit.y, el.x, el.y);
-    //     ctx.closePath();
-    //     ctx.fill();
-    //     ctx.restore();
-    //   };
-    // }
-  }, []);
-
-  return (
-    <canvas
-      className={styles.canvas}
-      ref={canvasRef}
-      style={{ width: displayWidth, height: displayHeight }}
-      width={displayWidth * scale}
-      height={displayHeight * scale}
-    />
-  );
+  return <canvas className="h-screen bg-black" ref={canvasRef} />;
 }
