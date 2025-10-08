@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./photography.module.css";
 // import Link from "next/link";
-// import photoListData from "./photo-list-data";
-import photoListData from "./photo-list.json" with { type: "json" };
+import photoListData from "./photo-list.json";
+// import photoListData from "./photo-list.json" with { type: "json" };
 // import Image from "next/image";
 import "swiper/css";
 import "swiper/css/zoom";
@@ -30,6 +30,7 @@ export default function Photography() {
     setIsToolbarVisible(true);
     document.body.style.overflow = "hidden";
     dialogRef.current.classList.add(styles.in);
+    // document.body.style.setProperty("--background", "black");
   };
 
   const handleActiveIndexChange = (swiper: SwiperClass) => {
@@ -52,6 +53,7 @@ export default function Photography() {
     dialogRef.current.classList.remove(styles.in);
     dialogRef.current.classList.add(styles.out);
     document.body.style.overflow = "unset";
+    // document.body.style.removeProperty("--background");
   }, []);
 
   const handleSwiperClick = (swiper: SwiperClass) => {
@@ -99,7 +101,10 @@ export default function Photography() {
           </div>
         ))}
       </div>
-      <div ref={dialogRef} className={styles.dialog}>
+      <div
+        ref={dialogRef}
+        className={`${styles.dialog} fixed inset-0 hidden select-none bg-black`}
+      >
         <div
           className={clsx(styles.dialogToolbar, {
             [styles.dialogToolbarHidden]: !isToolbarVisible,
@@ -110,14 +115,14 @@ export default function Photography() {
               photoListData.length
             }`}</div>
           )}
-          <a className={styles.dialogClose} onClick={handleDialogClose}>
+          <button className={styles.dialogClose} onClick={handleDialogClose}>
             <Xmark
               width="20"
               height="20"
               viewBox="0 0 56 56"
               fill="currentcolor"
             />
-          </a>
+          </button>
         </div>
         {activeIndex !== null && (
           <Swiper

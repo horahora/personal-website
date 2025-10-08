@@ -1,22 +1,8 @@
-.pageWrapper {
-  --color-accent: #00b85e;
-  /* background: url(/images/noise.png); */
-  background-image: image-set(
-    url(/images/noise.png) 1x,
-    url(/images/noise@2x.png) 2x,
-    url(/images/noise@3x.png) 3x
-  );
-}
-
 .pageWrapper a:hover,
 .pageWrapper a:focus {
   /* color: #078c4b; */
   color: #000;
 }
-
-/* .container {
-  max-width: 1080px;
-} */
 
 @supports (padding: max(0px)) {
   .container {
@@ -25,53 +11,12 @@
   }
 }
 
-.globalHeader a h1 {
-  text-indent: -9999px;
-  color: transparent;
-  background: url(/images/horahora.png) center no-repeat;
-  background-image: image-set(
-    url(/images/horahora.png) 1x,
-    url(/images/horahora@2x.png) 2x,
-    url(/images/horahora@3x.png) 2x
-  );
-  background-size: auto 100%;
-}
-
 /* @media (max-width: 440px) {
   .globalHeader a h1 {
     padding-bottom: 60%;
     background-image: url(/images/horahora-vertical.png);
   }
 } */
-
-.portfolio .container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  /* 30 / 1000 = 0.03 */
-}
-
-@media (max-width: 1050px) {
-  .portfolio .container {
-    gap: 15px;
-  }
-}
-
-/* 3列 */
-@media (max-width: 767px) {
-  .portfolio .container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* 2列 */
-@media (max-width: 600px) {
-  .portfolio .container {
-    grid-template-columns: repeat(2, 1fr);
-    /* animation: slide-in 0.4s cubic-bezier(0.33, 1, 0.68, 1); */
-    /* will-change: transform; */
-  }
-}
 
 @keyframes slide-in {
   0% {

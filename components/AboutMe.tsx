@@ -51,7 +51,7 @@ export default function AboutMe() {
   return (
     <section className="relative h-[476px] overflow-hidden text-[#444]">
       <div
-        className={`absolute left-1/2 h-[inherit] w-[1256px] pt-[88px] pl-[37px] -ml-[217px] ${styles.inner}`}
+        className={`absolute left-1/2 h-[inherit] w-[1256px] pt-[88px] pl-[37px] -ml-[217px] leading-[1.2] will-change-transform ${styles.inner} bg-[image-set(url(/images/hand_with_card_horizontal.png)_1x,url(/images/hand_with_card_horizontal@2x.png)_2x)] bg-no-repeat`}
         ref={handRef}
       >
         <div className="flex items-center w-[360px] h-[200px] pl-[15px] select-text cursor-auto">

@@ -81,23 +81,34 @@ export default async function Home({
         {`
           body {
             --background: hsl(0deg 0% 91%);
+            background-image: image-set(
+              url(/images/noise.png) 1x,
+              url(/images/noise@2x.png) 2x,
+              url(/images/noise@3x.png) 3x
+            );
+            background-position: center top;
           }
         `}
       </style>
       <div
         className={
-          "relative overflow-hidden select-none cursor-default bg-[hsl(0deg_0%_91%)] bg-top selection:text-[#062617] selection:bg-[rgb(145_242_194/40%)] selection:[text-shadow:none] " +
+          "relative overflow-hidden select-none [--color-accent:#00b85e] cursor-default bg-top selection:text-[#062617] selection:bg-[rgb(145_242_194/40%)] selection:[text-shadow:none] " +
           styles.pageWrapper
         }
       >
         <header className={styles.globalHeader}>
           <Link href="/" className="block mx-auto max-w-[888px]">
-            <h1 className="aspect-888/250">Hora Hora</h1>
+            <h1 className="aspect-888/250 indent-[-9999px] text-transparent bg-center bg-no-repeat bg-size-[auto_100%] bg-[image-set(url(/images/horahora.png)_1x,url(/images/horahora@2x.png)_2x,url(/images/horahora@3x.png)_3x)]">
+              Hora Hora
+            </h1>
           </Link>
         </header>
         <main className={`pb-[60px] ${styles.portfolio}`}>
           <ul
-            className={"mx-auto px-[15px] max-w-[1080px] " + styles.container}
+            className={
+              "mx-auto px-[15px] max-w-[1080px] grid gap-[15px] min-[1050px]:gap-[30px] grid-cols-2 min-[600px]:grid-cols-3 md:grid-cols-4 " +
+              styles.container
+            }
           >
             {portfolioListAppendEmpty.map((item, i) => (
               <Card

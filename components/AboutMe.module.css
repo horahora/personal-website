@@ -1,13 +1,3 @@
-.inner {
-  line-height: 1.2;
-  background: url(/images/hand_with_card_horizontal.png) no-repeat;
-  background-image: image-set(
-    url(/images/hand_with_card_horizontal.png) 1x,
-    url(/images/hand_with_card_horizontal@2x.png) 2x
-  );
-  will-change: transform;
-}
-
 .inner.transparent {
   opacity: 0;
 }
