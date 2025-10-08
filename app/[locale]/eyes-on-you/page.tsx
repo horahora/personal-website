@@ -87,6 +87,8 @@ export default function Eyes() {
     let currentHeight = window.innerHeight;
 
     function updateCanvasSize() {
+      if (!canvasRef.current) return;
+
       currentWidth = window.innerWidth;
       currentHeight = window.innerHeight;
 
