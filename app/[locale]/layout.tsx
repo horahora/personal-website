@@ -1,6 +1,7 @@
 import type { Viewport, Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { SITE_NAME } from "@/constants";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -25,6 +26,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className="antialiased min-w-[320px]">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
