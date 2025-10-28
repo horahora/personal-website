@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -17,18 +15,18 @@ export default function Stars() {
     const canvas = canvasRef.current,
       context = canvas.getContext("2d");
 
-    const scale = 1, // device pixel ratio
+    let scale = 1, // device pixel ratio
       width = 0,
       height = 0;
 
-    const stars = [];
+    const stars: Array<{ x: number; y: number; z: number }> = [];
 
-    const pointerX = 0,
+    let pointerX = 0,
       pointerY = 0;
 
     const velocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
 
-    const touchInput = false;
+    let touchInput = false;
 
     generate();
     resize();
@@ -50,19 +48,19 @@ export default function Stars() {
       }
     }
 
-    function placeStar(star) {
+    function placeStar(star: { x: number; y: number; z: number }) {
       star.x = Math.random() * width;
       star.y = Math.random() * height;
     }
 
-    function recycleStar(star) {
-      const direction = "z";
+    function recycleStar(star: { x: number; y: number; z: number }) {
+      let direction = "z";
 
       const vx = Math.abs(velocity.x),
         vy = Math.abs(velocity.y);
 
       if (vx > 1 || vy > 1) {
-        const axis = 0;
+        let axis: string | number = 0;
 
         if (vx > vy) {
           axis = Math.random() < vx / (vx + vy) ? "h" : "v";
@@ -113,7 +111,7 @@ export default function Stars() {
     function step() {
       window.requestAnimationFrame(step);
 
-      context.clearRect(0, 0, width, height);
+      context?.clearRect(0, 0, width, height);
 
       update();
       render();
@@ -148,29 +146,30 @@ export default function Stars() {
 
     function render() {
       stars.forEach(function (star) {
-        context.beginPath();
-        context.lineCap = "round";
-        context.lineWidth = STAR_SIZE * star.z * scale;
-        context.strokeStyle =
-          "rgba(255,255,255," + (0.5 + 0.5 * Math.random()) + ")";
+        context?.beginPath();
+        if (context) context.lineCap = "round";
+        if (context) context.lineWidth = STAR_SIZE * star.z * scale;
+        if (context)
+          context.strokeStyle =
+            "rgba(255,255,255," + (0.5 + 0.5 * Math.random()) + ")";
 
-        context.beginPath();
-        context.moveTo(star.x, star.y);
+        context?.beginPath();
+        context?.moveTo(star.x, star.y);
 
-        const tailX = velocity.x * 2,
+        let tailX = velocity.x * 2,
           tailY = velocity.y * 2;
 
         // stroke() wont work on an invisible line
         if (Math.abs(tailX) < 0.1) tailX = 0.5;
         if (Math.abs(tailY) < 0.1) tailY = 0.5;
 
-        context.lineTo(star.x + tailX, star.y + tailY);
+        context?.lineTo(star.x + tailX, star.y + tailY);
 
-        context.stroke();
+        context?.stroke();
       });
     }
 
-    function movePointer(x, y) {
+    function movePointer(x: number, y: number) {
       if (typeof pointerX === "number" && typeof pointerY === "number") {
         const ox = x - pointerX,
           oy = y - pointerY;
@@ -183,16 +182,16 @@ export default function Stars() {
       pointerY = y;
     }
 
-    function onMouseMove(event) {
+    function onMouseMove(event: MouseEvent) {
       touchInput = false;
 
       movePointer(event.clientX, event.clientY);
     }
 
-    function onTouchMove(event) {
+    function onTouchMove(event: TouchEvent) {
       touchInput = true;
 
-      movePointer(event.touches[0].clientX, event.touches[0].clientY, true);
+      movePointer(event.touches[0].clientX, event.touches[0].clientY);
 
       event.preventDefault();
     }
